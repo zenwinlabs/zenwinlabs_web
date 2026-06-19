@@ -3,46 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZenWinLabs — Apps in the open</title>
-<meta name="description" content="ZenWinLabs is a small lab building focused apps, one at a time. Browse what's live and what's coming next.">
+<title>ZenWinLabs — Luxury Product Lab</title>
+<meta name="description" content="ZenWinLabs is a minimalist independent studio engineering focused apps and razor-sharp mobile architectures.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="ambient-glow"></div>
+
 <nav class="nav">
-  <div class="nav-inner">
+  <div class="wrap nav-inner">
     <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;"></span>Build log</span>
-    <h1>A small lab, building one focused app at a time.</h1>
-    <p class="lede">ZenWinLabs is where each idea gets shipped as its own small, sharp tool — no bloat, no bundling. This page is the registry of everything that's live, in progress, or next.</p>
-    <div class="hero-meta">
-      <span><strong>Bengaluru</strong> · India</span>
-      <span><strong>Independent</strong> build</span>
-      <span><strong>Est.</strong> 2026</span>
-    </div>
+    <span class="eyebrow">Studio Manifesto</span>
+    <h1>We build apps where <span>Zen simplicity</span> meets <span>winning builds.</span></h1>
+    <p class="lede">No code bloat, no bundles. ZenWinLabs is a modern development studio crafting highly focused, standalone software tools built to last.</p>
   </div>
 </header>
 
-<section class="registry">
-  <div class="wrap">
-    <div class="registry-head">
-      <h2>App registry</h2>
-      <span class="registry-count" id="app-count">Loading…</span>
+<main class="wrap">
+  <section class="bento-showcase">
+    <div class="bento-card span-8">
+      <span class="label">[ Architectural Focus ]</span>
+      <h2>Engineered with offline-first local state engines, high frame-rate rendering distributions, and modular clean logic structures.</h2>
     </div>
-    <div class="app-list" id="app-list">
-      <div class="app-row is-disabled"><div class="app-info"><h3>Loading apps…</h3></div></div>
+    <div class="bento-card span-4">
+      <span class="label">[ Core Stack ]</span>
+      <h2>Kotlin, Jetpack Compose, Astro & Node systems.</h2>
     </div>
-  </div>
-</section>
+
+    <div class="span-12" style="margin-top: 24px;">
+      <div class="registry-head" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <span class="label" style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">ACTIVE APP REGISTRY</span>
+        <span class="registry-count" id="app-count" style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">Loading...</span>
+      </div>
+      <div class="app-list" id="app-list">
+        <div class="app-row is-disabled"><div class="app-info"><h3>Syncing pipeline...</h3></div></div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <span>© 2026 ZenWinLabs</span>
+    <span style="color:var(--border);">// RECORD 02</span>
   </div>
 </footer>
 
