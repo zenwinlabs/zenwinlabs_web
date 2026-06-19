@@ -1,10 +1,56 @@
 [
   {
-    "id": "techiegotfit",
-    "name": "TechieGotFit",
-    "tagline": "Fitness routines built for corporate tech schedules \u2014 morning and evening reels for people who sit at a desk all day.",
+    "id": "habbits",
+    "name": "Habbits",
+    "tagline": "Build powerful daily habits with streaks, smart reminders, and analytics that keep you consistent — one day at a time.",
+    "category": "Productivity",
+    "platform": "Android",
     "status": "live",
-    "tag": "Instagram \u00b7 Content",
-    "url": "techiegotfit.html"
+    "rating": 4.8,
+    "reviews": 1240,
+    "url": "habbits.html",
+    "playStoreUrl": "#",
+    "icon": "H",
+    "accent": "#3DDC97"
+  },
+  {
+    "id": "focusflow",
+    "name": "FocusFlow",
+    "tagline": "Deep work timer with intelligent break scheduling and focus-session analytics for peak productivity.",
+    "category": "Focus",
+    "platform": "Android",
+    "status": "coming_soon",
+    "icon": "F",
+    "accent": "#7B6EF6"
+  },
+  {
+    "id": "mindjot",
+    "name": "MindJot",
+    "tagline": "Smart journaling with AI-powered mood tracking and daily reflection prompts for mental clarity.",
+    "category": "Wellness",
+    "platform": "Android",
+    "status": "coming_soon",
+    "icon": "M",
+    "accent": "#FF6B6B"
+  },
+  {
+    "id": "spendsmart",
+    "name": "SpendSmart",
+    "tagline": "Effortless daily expense tracking with visual breakdowns and smart spending insights.",
+    "category": "Finance",
+    "platform": "Android",
+    "status": "coming_soon",
+    "icon": "S",
+    "accent": "#FFB84D"
+  },
+  {
+    "id": "sleepsync",
+    "name": "SleepSync",
+    "tagline": "Optimize your sleep schedule with smart alarms, sleep-debt tracking, and quality analytics.",
+    "category": "Health",
+    "platform": "Android",
+    "status": "coming_soon",
+    "icon": "Z",
+    "accent": "#4DACF7"
   }
 ]

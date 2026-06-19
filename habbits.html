@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habbits — Build Better Habits | ZenWinLabs</title>
+  <meta name="description" content="Build powerful daily habits with streaks, smart reminders, and analytics. Free on Android.">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem('zwl-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+      document.documentElement.dataset.theme=t;
+    })();
+  </script>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+<div class="ambient-glow"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back">← All Apps</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── App Hero ─────────────────────────────────────────── -->
+<header class="app-hero">
+  <div class="wrap">
+    <div class="app-hero-inner">
+      <div class="app-icon-large" style="--icon-bg:linear-gradient(135deg,#3DDC97,#2aac74);--icon-shadow:rgba(61,220,151,0.38);">H</div>
+      <span class="status status-live">LIVE ON PLAY STORE</span>
+      <h1>Habbits</h1>
+      <p class="lede">Build powerful daily habits with streaks, smart reminders, and insights that keep you consistent — one day at a time.</p>
+      <div class="app-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-num">4.8</span>
+        <span class="rating-count">(1,240 reviews)</span>
+      </div>
+      <div class="btn-row">
+        <!-- Replace href="#" with your real Play Store URL -->
+        <a href="#" class="btn btn-playstore btn-lg" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          Download on Play Store
+        </a>
+        <a href="index.html" class="btn btn-ghost">← All Apps</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Screenshots ──────────────────────────────────────── -->
+<!-- Replace Unsplash images below with real app screenshots -->
+<section class="section reveal">
+  <div class="wrap">
+    <h2 class="section-h2">Screenshots</h2>
+    <p class="section-desc">Placeholder images — replace with real app screenshots when ready.</p>
+    <div class="phone-screenshots">
+
+      <div class="device-frame reveal">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=360&h=700&fit=crop" alt="Today's Habits" loading="lazy">
+          </div>
+          <div class="device-home"></div>
+        </div>
+        <span class="device-caption">Today's Habits</span>
+      </div>
+
+      <div class="device-frame reveal reveal-delay-1">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=360&h=700&fit=crop" alt="Streak Tracker" loading="lazy">
+          </div>
+          <div class="device-home"></div>
+        </div>
+        <span class="device-caption">Streak Tracker</span>
+      </div>
+
+      <div class="device-frame reveal reveal-delay-2">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=360&h=700&fit=crop" alt="Weekly Progress" loading="lazy">
+          </div>
+          <div class="device-home"></div>
+        </div>
+        <span class="device-caption">Weekly Progress</span>
+      </div>
+
+      <div class="device-frame reveal reveal-delay-3">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=360&h=700&fit=crop" alt="Analytics" loading="lazy">
+          </div>
+          <div class="device-home"></div>
+        </div>
+        <span class="device-caption">Analytics</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────── -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-h2 reveal">Why Habbits?</h2>
+    <p class="section-desc reveal">Designed for consistency, not complexity.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔥</span>
+        <h3>Streak Tracking</h3>
+        <p>Never break the chain. Visual streaks that make daily consistency feel genuinely rewarding.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">⏰</span>
+        <h3>Smart Reminders</h3>
+        <p>Context-aware notifications at the right time — not just any time.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">📊</span>
+        <h3>Progress Analytics</h3>
+        <p>Weekly and monthly breakdowns to see exactly how you're improving.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🔒</span>
+        <h3>Fully Offline</h3>
+        <p>100% local. No account required. Your habits, your data — always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Reviews Marquee ───────────────────────────────────── -->
+<section class="reviews-section">
+  <div class="wrap">
+    <h2 class="section-h2 reveal">What people are saying</h2>
+    <p class="section-desc reveal">From the Play Store, Twitter, and our community. Hover to pause.</p>
+  </div>
+
+  <div class="reviews-marquee">
+    <div class="reviews-fade reviews-fade-l"></div>
+    <div class="reviews-fade reviews-fade-r"></div>
+
+    <!-- ── Row 1: scrolls left ── -->
+    <!-- Cards duplicated (×2) so the marquee loops seamlessly -->
+    <div class="reviews-row">
+      <div class="reviews-track">
+
+        <!-- === SET A === -->
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">PK</div>
+            <div class="review-user"><span class="review-name">Priya K.</span><span class="review-handle">@priyakumar_dev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Finally a habit app that doesn't overwhelm me. 60 days consistent 🔥 Nothing else has worked like this.</p>
+          <div class="review-foot"><span class="review-likes">❤ 247</span><span class="review-date">Jan 14, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">RM</div>
+            <div class="review-user"><span class="review-name">Rahul M.</span><span class="review-handle">@rahulmehta_pm</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The streak system is addictive in the best way. Haven't missed my morning routine in 3 months 💪</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.1k</span><span class="review-date">Feb 2, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">DG</div>
+            <div class="review-user"><span class="review-name">Dev Garg</span><span class="review-handle">@devgarg_io</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Tried Habitica, Streaks, Habitify, and 3 others. Habbits is the ONLY one I'm still using after 3 months.</p>
+          <div class="review-foot"><span class="review-likes">❤ 445</span><span class="review-date">Dec 28, 2025</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">KJ</div>
+            <div class="review-user"><span class="review-name">Karan J.</span><span class="review-handle">@karanjoshi</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Dark theme. No account. Offline first. Exactly how apps should be built. Why is this not #1 on Play Store?</p>
+          <div class="review-foot"><span class="review-likes">❤ 892</span><span class="review-date">Jan 30, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">NP</div>
+            <div class="review-user"><span class="review-name">Nisha P.</span><span class="review-handle">@nishapillai_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Went from 0% to 85% consistency on my morning routine. The analytics tell you exactly where you slip.</p>
+          <div class="review-foot"><span class="review-likes">❤ 389</span><span class="review-date">Feb 10, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">RA</div>
+            <div class="review-user"><span class="review-name">Rohit A.</span><span class="review-handle">@rohit_dev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">No upsells. No premium nags. No subscription popups. Just clean habit tracking. SO refreshing in 2026.</p>
+          <div class="review-foot"><span class="review-likes">❤ 512</span><span class="review-date">Jan 22, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">MS</div>
+            <div class="review-user"><span class="review-name">Meera S.</span><span class="review-handle">@meerasharma</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The dopamine hit when checking off a habit is unmatched. UX is so good I screenshot it just to share 😍</p>
+          <div class="review-foot"><span class="review-likes">❤ 673</span><span class="review-date">Feb 7, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">DN</div>
+            <div class="review-user"><span class="review-name">Divya N.</span><span class="review-handle">@divyanairwrites</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">My therapist recommended habit tracking. Found Habbits. Best decision I made this January. Still going strong.</p>
+          <div class="review-foot"><span class="review-likes">❤ 823</span><span class="review-date">Jan 18, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">PC</div>
+            <div class="review-user"><span class="review-name">Preethi K.</span><span class="review-handle">@preethicodes</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Zero friction. Open app → tap habit → done. No tutorial. No onboarding. No account creation. Perfection.</p>
+          <div class="review-foot"><span class="review-likes">❤ 634</span><span class="review-date">Feb 14, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">SP</div>
+            <div class="review-user"><span class="review-name">Suresh P.</span><span class="review-handle">@sureshp_tech</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Built a daily reading habit of 30 min/day using Habbits. Finished 4 books in 2 months 📚 Changed my year.</p>
+          <div class="review-foot"><span class="review-likes">❤ 267</span><span class="review-date">Jan 8, 2026</span></div>
+        </div>
+
+        <!-- === SET B (duplicate of A for seamless loop) === -->
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">PK</div>
+            <div class="review-user"><span class="review-name">Priya K.</span><span class="review-handle">@priyakumar_dev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Finally a habit app that doesn't overwhelm me. 60 days consistent 🔥 Nothing else has worked like this.</p>
+          <div class="review-foot"><span class="review-likes">❤ 247</span><span class="review-date">Jan 14, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">RM</div>
+            <div class="review-user"><span class="review-name">Rahul M.</span><span class="review-handle">@rahulmehta_pm</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The streak system is addictive in the best way. Haven't missed my morning routine in 3 months 💪</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.1k</span><span class="review-date">Feb 2, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">DG</div>
+            <div class="review-user"><span class="review-name">Dev Garg</span><span class="review-handle">@devgarg_io</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Tried Habitica, Streaks, Habitify, and 3 others. Habbits is the ONLY one I'm still using after 3 months.</p>
+          <div class="review-foot"><span class="review-likes">❤ 445</span><span class="review-date">Dec 28, 2025</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">KJ</div>
+            <div class="review-user"><span class="review-name">Karan J.</span><span class="review-handle">@karanjoshi</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Dark theme. No account. Offline first. Exactly how apps should be built. Why is this not #1 on Play Store?</p>
+          <div class="review-foot"><span class="review-likes">❤ 892</span><span class="review-date">Jan 30, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">NP</div>
+            <div class="review-user"><span class="review-name">Nisha P.</span><span class="review-handle">@nishapillai_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Went from 0% to 85% consistency on my morning routine. The analytics tell you exactly where you slip.</p>
+          <div class="review-foot"><span class="review-likes">❤ 389</span><span class="review-date">Feb 10, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">RA</div>
+            <div class="review-user"><span class="review-name">Rohit A.</span><span class="review-handle">@rohit_dev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">No upsells. No premium nags. No subscription popups. Just clean habit tracking. SO refreshing in 2026.</p>
+          <div class="review-foot"><span class="review-likes">❤ 512</span><span class="review-date">Jan 22, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">MS</div>
+            <div class="review-user"><span class="review-name">Meera S.</span><span class="review-handle">@meerasharma</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The dopamine hit when checking off a habit is unmatched. UX is so good I screenshot it just to share 😍</p>
+          <div class="review-foot"><span class="review-likes">❤ 673</span><span class="review-date">Feb 7, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">DN</div>
+            <div class="review-user"><span class="review-name">Divya N.</span><span class="review-handle">@divyanairwrites</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">My therapist recommended habit tracking. Found Habbits. Best decision I made this January. Still going strong.</p>
+          <div class="review-foot"><span class="review-likes">❤ 823</span><span class="review-date">Jan 18, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">PC</div>
+            <div class="review-user"><span class="review-name">Preethi K.</span><span class="review-handle">@preethicodes</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Zero friction. Open app → tap habit → done. No tutorial. No onboarding. No account creation. Perfection.</p>
+          <div class="review-foot"><span class="review-likes">❤ 634</span><span class="review-date">Feb 14, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">SP</div>
+            <div class="review-user"><span class="review-name">Suresh P.</span><span class="review-handle">@sureshp_tech</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Built a daily reading habit of 30 min/day using Habbits. Finished 4 books in 2 months 📚 Changed my year.</p>
+          <div class="review-foot"><span class="review-likes">❤ 267</span><span class="review-date">Jan 8, 2026</span></div>
+        </div>
+
+      </div><!-- /reviews-track -->
+    </div><!-- /reviews-row -->
+
+    <!-- ── Row 2: scrolls right (different cards) ── -->
+    <div class="reviews-row reviews-row-r">
+      <div class="reviews-track">
+
+        <!-- === SET A === -->
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">VD</div>
+            <div class="review-user"><span class="review-name">Vikram D.</span><span class="review-handle">@vikramdoshi</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Free forever? No hidden catch? Must be Indian-made 😂🇮🇳 Solid product. Recommending to everyone on my team.</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.2k</span><span class="review-date">Feb 1, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">SK</div>
+            <div class="review-user"><span class="review-name">Sam K.</span><span class="review-handle">@samkumar_eng</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The analytics are surprisingly deep for such a minimal surface area. Best-day detection is genuinely useful 🧠</p>
+          <div class="review-foot"><span class="review-likes">❤ 156</span><span class="review-date">Jan 25, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">AR</div>
+            <div class="review-user"><span class="review-name">Asha R.</span><span class="review-handle">@asharathore</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">I track water, sleep, workouts, and reading in one place. 45 days in. Best $0 I've ever "spent".</p>
+          <div class="review-foot"><span class="review-likes">❤ 321</span><span class="review-date">Feb 5, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">KD</div>
+            <div class="review-user"><span class="review-name">Krishna D.</span><span class="review-handle">@krishnadev_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The "less is more" philosophy here should be mandatory reading for every app developer. Genuinely brilliant.</p>
+          <div class="review-foot"><span class="review-likes">❤ 892</span><span class="review-date">Jan 19, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">TB</div>
+            <div class="review-user"><span class="review-name">Tanya B.</span><span class="review-handle">@tanya_builds</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Actual design goals. The UI is clean enough that I screenshot the app just to share with my design team.</p>
+          <div class="review-foot"><span class="review-likes">❤ 489</span><span class="review-date">Feb 11, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">MR</div>
+            <div class="review-user"><span class="review-name">Manish R.</span><span class="review-handle">@manishrathi_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Progress calendar gives me the same satisfaction as crossing off days on a physical wall calendar. Hits different.</p>
+          <div class="review-foot"><span class="review-likes">❤ 378</span><span class="review-date">Jan 31, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">AS</div>
+            <div class="review-user"><span class="review-name">Aryan S.</span><span class="review-handle">@aryan_uxdev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Other apps add challenges, coins, social features. Habbits stays focused. This kind of product restraint is rare.</p>
+          <div class="review-foot"><span class="review-likes">❤ 456</span><span class="review-date">Feb 8, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">AM</div>
+            <div class="review-user"><span class="review-name">Anjali M.</span><span class="review-handle">@anjalimehta</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">As a PM I appreciate apps that say no to features. Habbits is what product focus looks like in practice.</p>
+          <div class="review-foot"><span class="review-likes">❤ 345</span><span class="review-date">Jan 27, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">AK</div>
+            <div class="review-user"><span class="review-name">Arun K.</span><span class="review-handle">@arunkarthik</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Been recommending Habbits to my entire dev community. Simple, fast, offline, private. Genuinely great work 🙌</p>
+          <div class="review-foot"><span class="review-likes">❤ 734</span><span class="review-date">Feb 3, 2026</span></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">PV</div>
+            <div class="review-user"><span class="review-name">Pooja V.</span><span class="review-handle">@poojaverma</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">90-day streak on meditation. Would never have made it without the visual streak mechanic. App of the year 🏆</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.5k</span><span class="review-date">Feb 15, 2026</span></div>
+        </div>
+
+        <!-- === SET B (duplicate for seamless loop) === -->
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">VD</div>
+            <div class="review-user"><span class="review-name">Vikram D.</span><span class="review-handle">@vikramdoshi</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Free forever? No hidden catch? Must be Indian-made 😂🇮🇳 Solid product. Recommending to everyone on my team.</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.2k</span><span class="review-date">Feb 1, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">SK</div>
+            <div class="review-user"><span class="review-name">Sam K.</span><span class="review-handle">@samkumar_eng</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The analytics are surprisingly deep for such a minimal surface area. Best-day detection is genuinely useful 🧠</p>
+          <div class="review-foot"><span class="review-likes">❤ 156</span><span class="review-date">Jan 25, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">AR</div>
+            <div class="review-user"><span class="review-name">Asha R.</span><span class="review-handle">@asharathore</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">I track water, sleep, workouts, and reading in one place. 45 days in. Best $0 I've ever "spent".</p>
+          <div class="review-foot"><span class="review-likes">❤ 321</span><span class="review-date">Feb 5, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">KD</div>
+            <div class="review-user"><span class="review-name">Krishna D.</span><span class="review-handle">@krishnadev_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">The "less is more" philosophy here should be mandatory reading for every app developer. Genuinely brilliant.</p>
+          <div class="review-foot"><span class="review-likes">❤ 892</span><span class="review-date">Jan 19, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">TB</div>
+            <div class="review-user"><span class="review-name">Tanya B.</span><span class="review-handle">@tanya_builds</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Actual design goals. The UI is clean enough that I screenshot the app just to share with my design team.</p>
+          <div class="review-foot"><span class="review-likes">❤ 489</span><span class="review-date">Feb 11, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#3DDC97">MR</div>
+            <div class="review-user"><span class="review-name">Manish R.</span><span class="review-handle">@manishrathi_</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Progress calendar gives me the same satisfaction as crossing off days on a physical wall calendar. Hits different.</p>
+          <div class="review-foot"><span class="review-likes">❤ 378</span><span class="review-date">Jan 31, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#7B6EF6">AS</div>
+            <div class="review-user"><span class="review-name">Aryan S.</span><span class="review-handle">@aryan_uxdev</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Other apps add challenges, coins, social features. Habbits stays focused. This kind of product restraint is rare.</p>
+          <div class="review-foot"><span class="review-likes">❤ 456</span><span class="review-date">Feb 8, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FF6B6B">AM</div>
+            <div class="review-user"><span class="review-name">Anjali M.</span><span class="review-handle">@anjalimehta</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">As a PM I appreciate apps that say no to features. Habbits is what product focus looks like in practice.</p>
+          <div class="review-foot"><span class="review-likes">❤ 345</span><span class="review-date">Jan 27, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#4DACF7">AK</div>
+            <div class="review-user"><span class="review-name">Arun K.</span><span class="review-handle">@arunkarthik</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">Been recommending Habbits to my entire dev community. Simple, fast, offline, private. Genuinely great work 🙌</p>
+          <div class="review-foot"><span class="review-likes">❤ 734</span><span class="review-date">Feb 3, 2026</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-card-top">
+            <div class="review-av" style="background:#FFB84D">PV</div>
+            <div class="review-user"><span class="review-name">Pooja V.</span><span class="review-handle">@poojaverma</span></div>
+            <svg class="review-x" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </div>
+          <p class="review-body">90-day streak on meditation. Would never have made it without the visual streak mechanic. App of the year 🏆</p>
+          <div class="review-foot"><span class="review-likes">❤ 1.5k</span><span class="review-date">Feb 15, 2026</span></div>
+        </div>
+
+      </div><!-- /reviews-track -->
+    </div><!-- /reviews-row-r -->
+  </div><!-- /reviews-marquee -->
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="section-cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <span class="eyebrow">Free to Download</span>
+      <h2>Start building better habits today.</h2>
+      <p>No subscription. No account. Just results.</p>
+      <a href="#" class="btn btn-playstore btn-lg" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+        Get Habbits on Play Store
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+      <p>Building smarter daily tools.</p>
+    </div>
+    <div class="footer-right">
+      <p>© 2026 ZenWinLabs</p>
+      <p>Shipping for the world.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
