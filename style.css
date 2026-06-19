@@ -774,6 +774,15 @@ a.app-card:hover .app-card-cta { gap: 14px; }
   animation: gradShift 5s ease infinite;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
+.type-cursor {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 700;
+  animation: blink 0.7s step-end infinite;
+  margin-left: 1px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.type-inline { white-space: nowrap; display: inline; }
 
 /* ════════════════════════════════════════════════════════════
    TWITTER / X REVIEW MARQUEE

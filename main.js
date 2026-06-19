@@ -148,11 +148,44 @@ async function renderAppGrid() {
   initMagnetic();
 }
 
+/* ── Typewriter ─────────────────────────────────────────── */
+function initTypewriter() {
+  const el = document.getElementById('type-word');
+  if (!el) return;
+  const words = ['smarter.', 'fitter.', 'wiser.', 'sharper.', 'stronger.'];
+  let wi = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const word = words[wi];
+    if (deleting) {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+        setTimeout(tick, 320);
+      } else {
+        setTimeout(tick, 55);
+      }
+    } else {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) {
+        deleting = true;
+        setTimeout(tick, 1600);
+      } else {
+        setTimeout(tick, 95);
+      }
+    }
+  }
+
+  setTimeout(tick, 600);
+}
+
 /* ── Boot ───────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initReveal();
   initCarousel();
+  initTypewriter();
   renderAppGrid();   // tilt + magnetic wired inside after render
   // Magnetic on static buttons (hero CTA etc.)
   initMagnetic();
