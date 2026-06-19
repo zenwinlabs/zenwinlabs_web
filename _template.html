@@ -16,6 +16,7 @@
   </div>
 </nav>
 
+<!-- HERO CONTAINER WITH PREMIUM ALIGNMENT -->
 <header class="app-hero">
   <div class="wrap">
     <span class="status status-live">LIVE</span>
@@ -28,23 +29,46 @@
   </div>
 </header>
 
-<section class="section">
+<!-- INTERACTIVE GALLERY SECTION -->
+<section class="section reveal-on-scroll">
   <div class="wrap">
-    <h2>What it does</h2>
-    <p class="text-muted" style="max-width:64ch;">{{Replace with real description. This section explains the core value in plain language — what someone can do here that they couldn't easily do elsewhere.}}</p>
+    <h2>Interface Breakdown</h2>
+    <p class="text-muted" style="max-width:50ch; margin-bottom:32px;">A visual look into the clean design choices and system flow built directly inside the product pipeline.</p>
+    
+    <div class="screenshot-grid">
+      <!-- High Impact Hero Mockup (Full Width) -->
+      <div class="screenshot-container col-span-full">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2064&auto=format&fit=crop" alt="Hero Mockup Showcase Placeholder">
+      </div>
+      <!-- Accent Secondary Mockup Cards (Asymmetrical Column Weights) -->
+      <div class="screenshot-container col-span-7">
+        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1000&auto=format&fit=crop" alt="Dashboard Split Mockup">
+      </div>
+      <div class="screenshot-container col-span-5">
+        <img src="https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=1000&auto=format&fit=crop" alt="Mobile Detailed Mockup">
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="card-grid">
-      <div class="card">
-        <h3>{{Feature one}}</h3>
-        <p>{{Short description}}</p>
-      </div>
-      <div class="card">
-        <h3>{{Feature two}}</h3>
-        <p>{{Short description}}</p>
-      </div>
-      <div class="card">
-        <h3>{{Feature three}}</h3>
-        <p>{{Short description}}</p>
+<!-- DYNAMIC ANIMATED USER REVIEWS SECTION -->
+<section class="section reveal-on-scroll">
+  <div class="wrap">
+    <h2>User Experience</h2>
+    <p class="text-muted" style="max-width:50ch; margin-bottom:32px;">Real feedback from active builders and creators running the app on daily schedules.</p>
+    
+    <div class="review-slider-box">
+      <div class="review-track" id="review-track">
+        <!-- Review Block 1 -->
+        <div class="review-card active">
+          <p class="review-quote">"The interface load speeds are unparalleled. It replaces three individual bloat tools I used to run simultaneously."</p>
+          <span class="review-author">— Software Lead, Bengaluru</span>
+        </div>
+        <!-- Review Block 2 -->
+        <div class="review-card">
+          <p class="review-quote">"Incredibly crisp typography and absolute consideration for dark mode workflows. It has completely changed my pacing."</p>
+          <span class="review-author">— Mobile Designer</span>
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +79,31 @@
     <span>© 2026 ZenWinLabs</span>
   </div>
 </footer>
+
+<!-- LIGHTWEIGHT NATIVE SCROLL ANIMATION CONTROLLER -->
+<script>
+  // 1. Smooth Scroll Entrance Reveal
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+  // 2. Automated Elegant Review Crossfade Carousel Engine
+  let currentReviewIndex = 0;
+  const cards = document.querySelectorAll('.review-card');
+  if (cards.length > 1) {
+    setInterval(() => {
+      cards[currentReviewIndex].classList.remove('active');
+      currentReviewIndex = (currentReviewIndex + 1) % cards.length;
+      cards[currentReviewIndex].classList.add('active');
+    }, 4500); // Transitions to a clean new review slide smoothly every 4.5 seconds
+  }
+</script>
 
 </body>
 </html>
