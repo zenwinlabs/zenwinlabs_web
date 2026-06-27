@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Habits by ZenWinLabs</title>
+  <meta name="description" content="Habits by ZenWinLabs privacy policy. We don't collect personal data. Your habits stay on your device.">
+  <link rel="canonical" href="https://zenwinlabs.com/apps/habits/privacy/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:  #0a0818;
+      --bg-card:     #1a1828;
+      --bg-section:  #0d0b1e;
+      --accent:      #6C63FF;
+      --accent-dim:  rgba(108,99,255,0.12);
+      --accent-glow: rgba(108,99,255,0.25);
+      --accent-hover:#5a52e0;
+      --text-p:      #ffffff;
+      --text-s:      #a89fd4;
+      --border:      rgba(255,255,255,0.08);
+      --r-card:      16px;
+      --r-pill:      999px;
+      --font-d:      'Fraunces', Georgia, serif;
+      --font-b:      'Inter', system-ui, sans-serif;
+      --max-w:       1100px;
+      --content-w:   720px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg-primary); }
+    body {
+      font-family: var(--font-b);
+      color: var(--text-p);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    /* ── Nav ──────────────────────────────────────────────── */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,8,24,0.88);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+    }
+    .nav-logo {
+      font-family: var(--font-d); font-weight: 700; font-size: 18px;
+      color: var(--text-p);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 14px; color: var(--text-s); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-p); }
+    .nav-cta {
+      background: var(--accent); color: #fff;
+      font-family: var(--font-b); font-size: 13px; font-weight: 500;
+      padding: 9px 20px; border-radius: var(--r-pill);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 20px var(--accent-glow); color: #fff;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      padding: 80px 0 64px;
+      background: var(--bg-primary);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 50% 60% at 50% 0%, rgba(108,99,255,0.1), transparent);
+    }
+    .hero-inner { max-width: var(--content-w); position: relative; z-index: 1; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      font-family: var(--font-b); font-weight: 300; font-size: 13px;
+      color: var(--text-s); margin-bottom: 32px;
+    }
+    .breadcrumb a:hover { color: var(--text-p); transition: color 0.2s; }
+    .breadcrumb-sep { opacity: 0.4; }
+    .hero-title {
+      font-family: var(--font-d); font-weight: 700; font-size: 48px;
+      line-height: 1.05; letter-spacing: -0.025em;
+      color: var(--text-p); margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-family: var(--font-b); font-weight: 300; font-size: 18px;
+      color: var(--text-s); margin-bottom: 12px;
+    }
+    .hero-date {
+      font-family: var(--font-b); font-weight: 300; font-size: 14px;
+      color: var(--text-s); opacity: 0.7;
+    }
+
+    /* ── Content ──────────────────────────────────────────── */
+    .content {
+      padding: 72px 0 80px;
+      background: var(--bg-primary);
+    }
+    .content-inner { max-width: var(--content-w); }
+
+    .policy-section { padding: 40px 0; border-top: 1px solid var(--border); }
+    .policy-section:first-child { border-top: none; padding-top: 0; }
+
+    .policy-heading {
+      font-family: var(--font-d); font-weight: 700; font-size: 28px;
+      color: var(--text-p); margin-bottom: 20px; letter-spacing: -0.015em;
+    }
+    .policy-body {
+      font-family: var(--font-b); font-weight: 300; font-size: 18px;
+      color: var(--text-p); line-height: 1.8;
+    }
+    .policy-body p + p { margin-top: 18px; }
+
+    /* ── Two-col cards ────────────────────────────────────── */
+    .collect-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 4px;
+    }
+    .collect-card {
+      background: var(--bg-card); border-radius: var(--r-card);
+      padding: 24px;
+    }
+    .collect-card-yes { border: 1px solid rgba(0,201,167,0.35); }
+    .collect-card-no  { border: 1px solid rgba(255,107,107,0.35); }
+    .collect-card-heading {
+      font-family: var(--font-b); font-weight: 600; font-size: 15px;
+      color: var(--text-p); margin-bottom: 16px;
+    }
+    .collect-card-yes .collect-card-heading { color: #00c9a7; }
+    .collect-card-no  .collect-card-heading { color: #ff6b6b; }
+    .collect-list {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .collect-list li {
+      font-family: var(--font-b); font-weight: 300; font-size: 14.5px;
+      color: var(--text-s); line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    .collect-list li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--border); opacity: 0.6;
+    }
+
+    /* ── Email link ───────────────────────────────────────── */
+    .email-link {
+      color: var(--accent); border-bottom: 1px solid rgba(108,99,255,0.35);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .email-link:hover { color: #8880ff; border-color: rgba(108,99,255,0.7); }
+
+    /* ── Bottom CTA ───────────────────────────────────────── */
+    .bottom-cta {
+      padding: 64px 0;
+      background: var(--bg-primary);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--accent);
+      font-family: var(--font-b); font-weight: 500; font-size: 15px;
+      padding: 13px 28px; border-radius: var(--r-pill);
+      border: 1px solid var(--accent);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-ghost:hover {
+      background: var(--accent-dim);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 44px;
+      background: var(--bg-primary);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px;
+    }
+    .footer-logo {
+      font-family: var(--font-d); font-weight: 700; font-size: 18px;
+      color: var(--text-p);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .footer-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .footer-tagline {
+      font-family: var(--font-b); font-size: 12px; font-weight: 300;
+      color: var(--text-s); line-height: 1.7; margin-bottom: 20px;
+    }
+    .footer-social { display: flex; gap: 8px; }
+    .footer-social-link {
+      width: 34px; height: 34px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-s); transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social-link:hover { border-color: var(--accent); color: var(--accent); }
+    .footer-social-link svg { width: 15px; height: 15px; }
+    .footer-col-label {
+      font-family: var(--font-b); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-s); margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13.5px; color: var(--text-s); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-p); }
+    .footer-bottom {
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .footer-copy {
+      font-family: var(--font-b); font-size: 11px; font-weight: 300;
+      color: var(--text-s);
+    }
+    .footer-dl {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-b); font-size: 12px; color: var(--text-s);
+      border: 1px solid var(--border); padding: 8px 16px;
+      border-radius: 8px; background: var(--bg-card);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-dl:hover { border-color: var(--accent); color: var(--text-p); }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-col-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 20px; }
+      .hero-title { font-size: 36px; }
+      .collect-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────────────── -->
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="../../../index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>zenwinlabs
+    </a>
+    <div class="nav-links">
+      <a href="../../../index.html#apps">All Apps</a>
+      <a href="../index.html">Habits</a>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+       class="nav-cta" target="_blank" rel="noopener">Download Free</a>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../../index.html">ZenWinLabs</a>
+        <span class="breadcrumb-sep" aria-hidden="true">→</span>
+        <a href="../../../index.html#apps">Apps</a>
+        <span class="breadcrumb-sep" aria-hidden="true">→</span>
+        <a href="../index.html">Habits</a>
+        <span class="breadcrumb-sep" aria-hidden="true">→</span>
+        <span aria-current="page">Privacy Policy</span>
+      </nav>
+      <h1 class="hero-title">Privacy Policy</h1>
+      <p class="hero-sub">Short version: we don't know who you are.</p>
+      <p class="hero-date">Last updated: June 27, 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Content ─────────────────────────────────────────────── -->
+<main class="content">
+  <div class="wrap">
+    <div class="content-inner">
+
+      <!-- S1: The short version -->
+      <div class="policy-section">
+        <h2 class="policy-heading">The short version</h2>
+        <div class="policy-body">
+          <p>Habits does not collect your name, email, location, or any personal information. Your habit data lives entirely on your device and never leaves it.</p>
+          <p>The only data we collect is anonymous analytics events — things like which screens you visit and which features you use. Nothing that identifies you personally. Ever.</p>
+        </div>
+      </div>
+
+      <!-- S2: What we collect -->
+      <div class="policy-section">
+        <h2 class="policy-heading">What we collect</h2>
+        <div class="collect-grid">
+          <div class="collect-card collect-card-yes">
+            <div class="collect-card-heading">✓ What we collect</div>
+            <ul class="collect-list">
+              <li>Anonymous analytics events (screen views, feature usage, app open/close events)</li>
+              <li>Crash reports (anonymous, no personal data attached)</li>
+            </ul>
+          </div>
+          <div class="collect-card collect-card-no">
+            <div class="collect-card-heading">✗ What we never collect</div>
+            <ul class="collect-list">
+              <li>Your name or email</li>
+              <li>Your location</li>
+              <li>Your habit data or entries</li>
+              <li>Any information that identifies you personally</li>
+              <li>Payment information</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3: Your data stays on your device -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Your data stays on your device</h2>
+        <div class="policy-body">
+          <p>Everything you track in Habits — your habits, streaks, history, reminders — is stored locally on your device using Android's built-in database. We have no access to it. We cannot see it. We cannot delete it remotely.</p>
+          <p>If you uninstall the app, your data is gone. We don't have a copy.</p>
+        </div>
+      </div>
+
+      <!-- S4: Analytics -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Analytics</h2>
+        <div class="policy-body">
+          <p>We use anonymous analytics to understand how people use the app — which screens are visited most, which features are used, where people drop off. This helps us build a better product.</p>
+          <p>This data is fully anonymous. It cannot be traced back to you or your device.</p>
+        </div>
+      </div>
+
+      <!-- S5: Third parties -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Third parties</h2>
+        <div class="policy-body">
+          <p>We do not sell your data. We do not share your data. We do not run ads.</p>
+          <p>The only third party involved is our anonymous analytics provider. They receive the same anonymous event data described above — nothing more.</p>
+        </div>
+      </div>
+
+      <!-- S6: Children -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Children</h2>
+        <div class="policy-body">
+          <p>Habits does not knowingly collect any data from children under 13. Since we collect no personal data at all, this is straightforward.</p>
+        </div>
+      </div>
+
+      <!-- S7: Changes -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Changes</h2>
+        <div class="policy-body">
+          <p>If our privacy policy changes, we will update this page and the date at the top. Since we collect almost nothing, we don't expect this to change much.</p>
+        </div>
+      </div>
+
+      <!-- S8: Contact -->
+      <div class="policy-section">
+        <h2 class="policy-heading">Contact</h2>
+        <div class="policy-body">
+          <p>Questions? We're a small team and we actually read our emails.</p>
+          <p><a href="mailto:contact@zenwinlabs.com" class="email-link">contact@zenwinlabs.com</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ── Bottom CTA ───────────────────────────────────────────── -->
+<div class="bottom-cta">
+  <a href="../index.html" class="btn-ghost">← Back to Habits</a>
+</div>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+
+      <div class="footer-col-brand">
+        <a href="../../../index.html" class="footer-logo">
+          <span class="footer-logo-dot"></span>zenwinlabs
+        </a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+             class="footer-social-link" aria-label="Google Play" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-label">Habits</div>
+        <div class="footer-links">
+          <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+             target="_blank" rel="noopener">Download Free ↗</a>
+          <a href="../index.html#screenshots">Screenshots</a>
+          <a href="../index.html#hero">Features</a>
+          <a href="mailto:contact@zenwinlabs.com">Support</a>
+          <a href="../privacy/" aria-current="page">Privacy Policy</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-label">ZenWinLabs</div>
+        <div class="footer-links">
+          <a href="../../../index.html">All Apps</a>
+          <a href="../../../index.html#about">About</a>
+          <a href="../../../index.html#waitlist">Stay Updated</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+         class="footer-dl" target="_blank" rel="noopener">Download Habits →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

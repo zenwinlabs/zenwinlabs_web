@@ -11,7 +11,8 @@
     "url": "apps/habits/index.html",
     "playStoreUrl": "https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits",
     "icon": "H",
-    "accent": "#7B6EF6"
+    "accent": "#7B6EF6",
+    "privacy_policy_url": "/apps/habits/privacy/"
   },
   {
     "id": "focusflow",
