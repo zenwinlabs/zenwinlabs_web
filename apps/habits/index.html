@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habits — Build Good Ones. Break Bad Ones. | ZenWinLabs</title>
+  <meta name="description" content="Build good habits, break bad ones. Reminders, streaks & beautiful tracking. Free on Android.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design Tokens ─────────────────────────────────── */
+    :root {
+      --bg-primary:   #0a0818;
+      --bg-card:      #1a1828;
+      --bg-section:   #0d0b1e;
+      --bg-alt:       #0f0c1a;
+      --accent:       #6C63FF;
+      --accent-dim:   rgba(108,99,255,0.12);
+      --accent-glow:  rgba(108,99,255,0.25);
+      --accent-hover: #5a52e0;
+      --text-p:       #ffffff;
+      --text-s:       #a89fd4;
+      --border:       rgba(255,255,255,0.08);
+      --r-card:       16px;
+      --r-pill:       999px;
+      --font-d:       'Fraunces', Georgia, serif;
+      --font-b:       'Inter', system-ui, sans-serif;
+      --max-w:        1100px;
+    }
+
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg-primary); }
+    body {
+      font-family: var(--font-b);
+      color: var(--text-p);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    /* ── Image Placeholders ─────────────────────────────── */
+    .img-ph {
+      background: rgba(108,99,255,0.07);
+      border: 2px dashed rgba(108,99,255,0.22);
+      border-radius: 24px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+      color: rgba(108,99,255,0.5);
+      font-family: var(--font-b);
+      text-align: center; padding: 20px;
+    }
+    .img-ph-icon { font-size: 28px; opacity: 0.45; }
+    .img-ph-label { font-size: 12px; font-weight: 500; opacity: 0.7; }
+    .img-ph-size  { font-size: 11px; opacity: 0.45; line-height: 1.5; }
+
+    /* ── Shared Components ──────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-b);
+      font-weight: 500; font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 16px; display: block;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-p);
+      font-family: var(--font-b); font-weight: 400; font-size: 13px;
+      padding: 6px 14px; border-radius: var(--r-pill);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--accent); color: #fff;
+      font-family: var(--font-b); font-weight: 500; font-size: 15px;
+      padding: 14px 28px; border-radius: var(--r-pill);
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 32px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--accent);
+      font-family: var(--font-b); font-weight: 500; font-size: 15px;
+      padding: 13px 28px; border-radius: var(--r-pill);
+      border: 1px solid var(--accent); cursor: pointer; white-space: nowrap;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-ghost:hover {
+      background: var(--accent-dim);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* ════════════════════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════════════════════ */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,8,24,0.88);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+    }
+    .nav-logo {
+      font-family: var(--font-d); font-weight: 700; font-size: 18px;
+      color: var(--text-p);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 14px; color: var(--text-s); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-p); }
+    .nav-cta {
+      background: var(--accent); color: #fff;
+      font-family: var(--font-b); font-size: 13px; font-weight: 500;
+      padding: 9px 20px; border-radius: var(--r-pill);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 20px var(--accent-glow); color: #fff;
+    }
+
+    /* ════════════════════════════════════════════════════
+       S1 — HERO
+    ════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 80px 0 60px;
+      background: var(--bg-primary);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(108,99,255,0.13), transparent),
+        radial-gradient(ellipse 40% 40% at 10% 70%, rgba(108,99,255,0.06), transparent);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      font-family: var(--font-b); font-weight: 300; font-size: 13px;
+      color: var(--text-s); margin-bottom: 28px;
+    }
+    .breadcrumb a:hover { color: var(--text-p); }
+    .breadcrumb-sep { opacity: 0.4; }
+    .hero-app-id {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 18px;
+    }
+    .hero-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-icon .img-ph {
+      width: 48px; height: 48px; border-radius: 12px;
+      padding: 0; font-size: 9px; gap: 1px;
+    }
+    .hero-title {
+      font-family: var(--font-d); font-weight: 700; font-size: 64px;
+      line-height: 1; letter-spacing: -0.025em; color: var(--text-p);
+    }
+    .hero-tagline {
+      font-family: var(--font-b); font-weight: 300; font-size: 22px;
+      color: var(--text-s); margin-bottom: 32px; line-height: 1.4;
+    }
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .hero-proof {
+      font-family: var(--font-b); font-weight: 400; font-size: 14px;
+      color: var(--text-s);
+    }
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-visual img {
+      max-height: 520px; object-fit: contain;
+      filter: drop-shadow(0 0 60px rgba(108,99,255,0.4));
+      border-radius: 32px;
+    }
+    .hero-visual .img-ph {
+      height: 520px; width: 100%; max-width: 320px; border-radius: 32px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       S2 — HOOK
+    ════════════════════════════════════════════════════ */
+    .hook {
+      padding: 120px 40px;
+      text-align: center;
+      background: var(--bg-primary);
+    }
+    .hook-inner { max-width: 760px; margin: 0 auto; }
+    .hook-line {
+      font-family: var(--font-d); font-weight: 700; font-size: 48px;
+      line-height: 1.2; letter-spacing: -0.025em; color: var(--text-p);
+    }
+    .hook-gap { height: 24px; }
+    .hook-line.hi { color: var(--accent); }
+
+    /* ════════════════════════════════════════════════════
+       S3 — FEATURES
+    ════════════════════════════════════════════════════ */
+    .features { padding: 100px 0; background: var(--bg-primary); }
+    .feature-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      margin-bottom: 100px;
+    }
+    .feature-block:last-child { margin-bottom: 0; }
+    .feature-img { display: flex; justify-content: center; }
+    .feature-img img {
+      max-height: 480px; border-radius: 28px;
+      filter: drop-shadow(0 16px 48px rgba(0,0,0,0.5));
+    }
+    .feature-img .img-ph { height: 480px; width: 100%; max-width: 260px; border-radius: 28px; }
+    .feature-headline {
+      font-family: var(--font-d); font-weight: 700; font-size: 42px;
+      line-height: 1.1; letter-spacing: -0.02em; color: var(--text-p);
+      margin-bottom: 18px;
+    }
+    .feature-body {
+      font-family: var(--font-b); font-weight: 300; font-size: 18px;
+      color: var(--text-s); line-height: 1.7;
+    }
+    .feature-stat {
+      font-family: var(--font-b); font-weight: 500; font-size: 15px;
+      color: var(--text-p); margin-top: 18px;
+      padding-left: 14px; border-left: 2px solid var(--accent);
+    }
+
+    /* ════════════════════════════════════════════════════
+       S4 — BUILT FOR REAL LIFE
+    ════════════════════════════════════════════════════ */
+    .built { padding: 100px 0; background: var(--bg-section); }
+    .built-header { text-align: center; margin-bottom: 56px; }
+    .section-headline {
+      font-family: var(--font-d); font-weight: 700; font-size: 36px;
+      color: var(--text-p); letter-spacing: -0.02em;
+    }
+    .built-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .built-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-card); padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .built-card:hover { border-color: rgba(108,99,255,0.35); transform: translateY(-4px); }
+    .built-icon { font-size: 40px; margin-bottom: 20px; line-height: 1; }
+    .built-heading {
+      font-family: var(--font-d); font-weight: 700; font-size: 24px;
+      color: var(--text-p); margin-bottom: 12px;
+    }
+    .built-body {
+      font-family: var(--font-b); font-weight: 300; font-size: 16px;
+      color: var(--text-s); line-height: 1.65;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SOCIAL PROOF MARQUEE
+    ════════════════════════════════════════════════════ */
+    .social-proof { padding: 80px 0; background: var(--bg-primary); overflow: hidden; }
+    .sp-label {
+      text-align: center;
+      font-family: var(--font-b); font-weight: 500; font-size: 13px;
+      color: var(--text-s); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .marquee-area { position: relative; overflow: hidden; }
+    .marquee-area::before,
+    .marquee-area::after {
+      content: ''; position: absolute; top: 0; bottom: 0;
+      width: 120px; z-index: 4; pointer-events: none;
+    }
+    .marquee-area::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-primary) 0%, transparent 100%);
+    }
+    .marquee-area::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
+    }
+    .marquee-rows { display: flex; flex-direction: column; gap: 16px; }
+    .marquee-row { display: flex; overflow: visible; }
+    .marquee-track {
+      display: flex; gap: 16px; align-items: stretch;
+      width: max-content;
+      animation: mqdL 50s linear infinite;
+    }
+    .marquee-row-r .marquee-track { animation: mqdR 50s linear infinite; }
+    .marquee-row:hover .marquee-track { animation-play-state: paused; }
+    @keyframes mqdL {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes mqdR {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    /* Review card */
+    .rc {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-card); padding: 24px;
+      width: 300px; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color 0.2s; cursor: default;
+    }
+    .rc:hover { border-color: rgba(108,99,255,0.3); }
+    .rc-top {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .rc-x { color: var(--text-s); }
+    .rc-date {
+      font-family: var(--font-b); font-weight: 300; font-size: 13px;
+      color: var(--text-s);
+    }
+    .rc-text {
+      font-family: var(--font-b); font-weight: 300; font-size: 14.5px;
+      line-height: 1.6; color: var(--text-p); flex: 1;
+    }
+    .rc-author { display: flex; align-items: center; gap: 10px; }
+    .rc-av {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg-section);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-b); font-weight: 600; font-size: 12px;
+      color: var(--accent); flex-shrink: 0; overflow: hidden;
+    }
+    .rc-av img { width: 100%; height: 100%; object-fit: cover; }
+    .rc-name {
+      font-family: var(--font-b); font-weight: 600; font-size: 14px;
+      color: var(--text-p); display: block;
+    }
+    .rc-handle {
+      font-family: var(--font-b); font-weight: 300; font-size: 13px;
+      color: var(--text-s); display: block;
+    }
+
+    /* ════════════════════════════════════════════════════
+       S5 — YEAR IN DOTS
+    ════════════════════════════════════════════════════ */
+    .dotgrid {
+      padding: 100px 0; background: var(--bg-primary); text-align: center;
+    }
+    .dotgrid-headline {
+      font-family: var(--font-d); font-weight: 700; font-size: 36px;
+      color: var(--text-p); letter-spacing: -0.02em; margin-bottom: 48px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .dotgrid-img {
+      max-width: 900px; margin: 0 auto;
+    }
+    .dotgrid-img img {
+      width: 100%; border-radius: 24px;
+      filter: drop-shadow(0 0 40px rgba(108,99,255,0.3));
+    }
+    .dotgrid-img .img-ph { height: 320px; border-radius: 24px; }
+    .dotgrid-sub {
+      font-family: var(--font-b); font-weight: 300; font-size: 18px;
+      color: var(--text-s); margin-top: 48px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       S6 — BREAK BAD HABITS
+    ════════════════════════════════════════════════════ */
+    .break-section { padding: 100px 0; background: var(--bg-alt); }
+    .break-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .break-img { display: flex; justify-content: center; }
+    .break-img img {
+      max-height: 420px; border-radius: 28px;
+      filter: drop-shadow(0 16px 48px rgba(0,0,0,0.5));
+    }
+    .break-img .img-ph { height: 420px; width: 100%; max-width: 260px; border-radius: 28px; }
+
+    /* ════════════════════════════════════════════════════
+       S7 — DOWNLOAD CTA
+    ════════════════════════════════════════════════════ */
+    .dl-cta {
+      padding: 120px 40px; text-align: center;
+      background: radial-gradient(ellipse 65% 70% at 50% 50%, #1a1060 0%, var(--bg-primary) 72%);
+    }
+    .cta-q1 {
+      font-family: var(--font-d); font-style: italic; font-weight: 700;
+      font-size: 36px; line-height: 1.2; letter-spacing: -0.02em;
+      color: var(--text-p);
+    }
+    .cta-q2 {
+      font-family: var(--font-d); font-style: italic; font-weight: 700;
+      font-size: 36px; line-height: 1.2; letter-spacing: -0.02em;
+      color: var(--accent); margin-bottom: 48px;
+    }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      font-family: var(--font-d); font-weight: 500; font-size: 18px;
+      padding: 18px 48px; border-radius: var(--r-pill);
+      border: none; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-download:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 40px rgba(108,99,255,0.5);
+      transform: translateY(-2px);
+    }
+    .cta-fine {
+      font-family: var(--font-b); font-weight: 300; font-size: 14px;
+      color: var(--text-s); margin-top: 24px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       S8 — FOOTER
+    ════════════════════════════════════════════════════ */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 44px;
+      background: var(--bg-primary);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px;
+    }
+    .footer-logo {
+      font-family: var(--font-d); font-weight: 700; font-size: 18px;
+      color: var(--text-p);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .footer-logo-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+    }
+    .footer-tagline {
+      font-family: var(--font-b); font-size: 12px; font-weight: 300;
+      color: var(--text-s); line-height: 1.7; margin-bottom: 20px;
+    }
+    .footer-social { display: flex; gap: 8px; }
+    .footer-social-link {
+      width: 34px; height: 34px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-s); transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social-link:hover { border-color: var(--accent); color: var(--accent); }
+    .footer-social-link svg { width: 15px; height: 15px; }
+    .footer-col-label {
+      font-family: var(--font-b); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-s); margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13.5px; color: var(--text-s); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-p); }
+    .footer-bottom {
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .footer-copy {
+      font-family: var(--font-b); font-size: 11px; font-weight: 300;
+      color: var(--text-s);
+    }
+    .footer-dl {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-b); font-size: 12px; color: var(--text-s);
+      border: 1px solid var(--border); padding: 8px 16px;
+      border-radius: 8px; background: var(--bg-card);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-dl:hover { border-color: var(--accent); color: var(--text-p); }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .feature-block,
+      .break-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { order: -1; }
+      .hero-title { font-size: 48px; }
+      .hero-visual img, .hero-visual .img-ph { max-height: 380px; }
+      .feature-img .img-ph { max-width: 100%; }
+      .hook-line { font-size: 34px; }
+      .built-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-col-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 20px; }
+      .hook { padding: 80px 20px; }
+      .dl-cta { padding: 80px 20px; }
+      .hero-title { font-size: 40px; }
+      .feature-headline { font-size: 32px; }
+      .cta-q1, .cta-q2 { font-size: 28px; }
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ────────────────────────────────────────────────── -->
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="../../index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>zenwinlabs
+    </a>
+    <div class="nav-links">
+      <a href="../../index.html#apps">All Apps</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#faq-anchor">FAQ</a>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+       class="nav-cta" target="_blank" rel="noopener">Download Free</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     S1 — HERO
+════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+
+    <!-- LEFT -->
+    <div class="hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html">ZenWinLabs</a>
+        <span class="breadcrumb-sep" aria-hidden="true">→</span>
+        <a href="../../index.html#apps">Apps</a>
+        <span class="breadcrumb-sep" aria-hidden="true">→</span>
+        <span aria-current="page">Habits</span>
+      </nav>
+
+      <div class="hero-app-id">
+        <div class="hero-icon">
+          <img src="/assets/habits/icon.png" alt="Habits app icon">
+        </div>
+        <h1 class="hero-title">Habits</h1>
+      </div>
+
+      <p class="hero-tagline">Build good ones. Break bad ones.</p>
+
+      <div class="hero-btns">
+        <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+           class="btn-primary" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/>
+            <path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/>
+            <path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/>
+            <path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/>
+          </svg>
+          Get it on Google Play
+        </a>
+        <a href="#screenshots" class="btn-ghost">See Screenshots →</a>
+      </div>
+
+      <p class="hero-proof">★★★★★&nbsp;&nbsp;Built for focus. Not for show.</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-visual">
+      <img src="/assets/habits/hero-phone.png" alt="Habits app running on Android">
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S2 — HOOK
+════════════════════════════════════════════════════════ -->
+<section class="hook">
+  <div class="hook-inner">
+    <p class="hook-line">Most habit apps make you feel guilty</p>
+    <p class="hook-line">when you miss a day.</p>
+    <div class="hook-gap"></div>
+    <p class="hook-line hi">This one helps you get back on track.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S3 — FEATURES
+════════════════════════════════════════════════════════ -->
+<section class="features" id="screenshots">
+  <div class="wrap">
+
+    <!-- Block 1: Image LEFT · Text RIGHT -->
+    <div class="feature-block">
+      <div class="feature-img">
+        <img src="/assets/habits/screen-home.png" alt="Habits home screen — daily habit list">
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Daily Tracking</span>
+        <h2 class="feature-headline">Your day, at a glance</h2>
+        <p class="feature-body">Daily and weekly habits in one view. Progress ring shows exactly where you stand. Tap once to log. That's it.</p>
+        <div class="pills">
+          <span class="pill">Counter</span>
+          <span class="pill">Duration</span>
+          <span class="pill">Binary</span>
+          <span class="pill">Don't habits</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block 2: Text LEFT · Image RIGHT -->
+    <div class="feature-block">
+      <div class="feature-text">
+        <span class="eyebrow">History &amp; Trends</span>
+        <h2 class="feature-headline">365 days of honesty</h2>
+        <p class="feature-body">Weekly trends, per-habit breakdowns, and a full year dot grid that shows the truth about your consistency. No hiding from it.</p>
+        <p class="feature-stat">575 completions · 131-day streak</p>
+      </div>
+      <div class="feature-img">
+        <img src="/assets/habits/screen-insights.png" alt="Habits insights — trends and dot grid">
+      </div>
+    </div>
+
+    <!-- Block 3: Image LEFT · Text RIGHT -->
+    <div class="feature-block">
+      <div class="feature-img">
+        <img src="/assets/habits/screen-reminders.png" alt="Habits reminders — per-habit custom alerts">
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Reminders</span>
+        <h2 class="feature-headline">A quiet tap. At the right moment.</h2>
+        <p class="feature-body">Set reminders per habit, per day, with custom sounds. Not a flood of notifications. Just a nudge when it matters.</p>
+        <div class="pills">
+          <span class="pill">Per habit</span>
+          <span class="pill">Custom time</span>
+          <span class="pill">Custom sound</span>
+          <span class="pill">Choose days</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S4 — BUILT FOR REAL LIFE
+════════════════════════════════════════════════════════ -->
+<section class="built">
+  <div class="wrap">
+    <div class="built-header">
+      <span class="eyebrow">Built for real life</span>
+      <h2 class="section-headline">Because life isn't always routine</h2>
+    </div>
+    <div class="built-grid">
+      <div class="built-card">
+        <div class="built-icon">🏖️</div>
+        <h3 class="built-heading">Vacation Mode</h3>
+        <p class="built-body">Habits pause. Streaks don't break. Rest is part of the routine.</p>
+      </div>
+      <div class="built-card">
+        <div class="built-icon">🎨</div>
+        <h3 class="built-heading">Make it yours</h3>
+        <p class="built-body">5 themes, pure dark OLED mode, custom colors per habit.</p>
+      </div>
+      <div class="built-card">
+        <div class="built-icon">🌍</div>
+        <h3 class="built-heading">16 Languages</h3>
+        <p class="built-body">Feels native wherever you are. English to Arabic to Japanese.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SOCIAL PROOF MARQUEE
+     ────────────────────────────────────────────────────────
+     Replace placeholder reviews with real Twitter/X embed
+     data when available. Each card should link to the
+     original tweet URL on click (target: _blank).
+     Avatar images are placeholders — replace with real
+     profile picture URLs. Real tweet data should come
+     from apps.json under "reviews" for single source of truth.
+════════════════════════════════════════════════════════ -->
+<section class="social-proof">
+  <p class="sp-label">What people are saying</p>
+
+  <div class="marquee-area">
+    <div class="marquee-rows">
+
+      <!-- ROW 1 → scrolls left — avatars 1,3,5,7,9,11,13,15,17,19,21 -->
+      <div class="marquee-row">
+        <div class="marquee-track">
+          <!-- SET A -->
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Been using this for 3 weeks. The 365 dot grid alone is worth the download. You can literally see your year changing.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_1.jpg" alt="Alex M."></div><div><span class="rc-name">Alex M.</span><span class="rc-handle">@alexbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">The progress ring on the home screen hits different. I open the app just to see it fill up.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_3.jpg" alt="Jordan K."></div><div><span class="rc-name">Jordan K.</span><span class="rc-handle">@jordanlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">The reminders are the best part. One tap, exact time, done. No five-step setup like other apps.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_5.jpg" alt="Dev P."></div><div><span class="rc-name">Dev P.</span><span class="rc-handle">@devlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Quit smoking tracker works perfectly. Seeing zero violations for 30 days straight is genuinely motivating.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_7.jpg" alt="Rahul V."></div><div><span class="rc-name">Rahul V.</span><span class="rc-handle">@rahulfit</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">16 languages and it actually feels native in Hindi. Most apps just do a bad translation job.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_9.jpg" alt="Ananya B."></div><div><span class="rc-name">Ananya B.</span><span class="rc-handle">@ananyaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Simplest habit tracker I've used. No onboarding, no subscriptions, no accounts. Just open and log.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_11.jpg" alt="Maya L."></div><div><span class="rc-name">Maya L.</span><span class="rc-handle">@mayalifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Been tracking morning runs for 6 months. The bar chart makes my progress feel real, not just a number.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_13.jpg" alt="Sofia R."></div><div><span class="rc-name">Sofia R.</span><span class="rc-handle">@sofiaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Works on the flight, underground, literally anywhere. No internet needed. Exactly what I want from an app.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_15.jpg" alt="Layla K."></div><div><span class="rc-name">Layla K.</span><span class="rc-handle">@layladesigns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Started tracking phone usage as a "don't" habit. Went from 5 hours a day to 2 in under a month.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_17.jpg" alt="Neha P."></div><div><span class="rc-name">Neha P.</span><span class="rc-handle">@nehafit</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Feb 2026</span></div><p class="rc-text">Track sleep, water, and journaling in one place. Three totally different habits, one clean screen.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_19.jpg" alt="Zoe M."></div><div><span class="rc-name">Zoe M.</span><span class="rc-handle">@zoemeditates</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Using it in Japanese and the translation is perfect — not word-for-word, it actually reads naturally.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_21.jpg" alt="Yuki C."></div><div><span class="rc-name">Yuki C.</span><span class="rc-handle">@yukicreates</span></div></div></div>
+          <!-- SET B — duplicate for seamless loop -->
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Been using this for 3 weeks. The 365 dot grid alone is worth the download. You can literally see your year changing.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_1.jpg" alt="Alex M."></div><div><span class="rc-name">Alex M.</span><span class="rc-handle">@alexbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">The progress ring on the home screen hits different. I open the app just to see it fill up.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_3.jpg" alt="Jordan K."></div><div><span class="rc-name">Jordan K.</span><span class="rc-handle">@jordanlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">The reminders are the best part. One tap, exact time, done. No five-step setup like other apps.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_5.jpg" alt="Dev P."></div><div><span class="rc-name">Dev P.</span><span class="rc-handle">@devlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Quit smoking tracker works perfectly. Seeing zero violations for 30 days straight is genuinely motivating.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_7.jpg" alt="Rahul V."></div><div><span class="rc-name">Rahul V.</span><span class="rc-handle">@rahulfit</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">16 languages and it actually feels native in Hindi. Most apps just do a bad translation job.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_9.jpg" alt="Ananya B."></div><div><span class="rc-name">Ananya B.</span><span class="rc-handle">@ananyaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Simplest habit tracker I've used. No onboarding, no subscriptions, no accounts. Just open and log.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_11.jpg" alt="Maya L."></div><div><span class="rc-name">Maya L.</span><span class="rc-handle">@mayalifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Been tracking morning runs for 6 months. The bar chart makes my progress feel real, not just a number.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_13.jpg" alt="Sofia R."></div><div><span class="rc-name">Sofia R.</span><span class="rc-handle">@sofiaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Works on the flight, underground, literally anywhere. No internet needed. Exactly what I want from an app.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_15.jpg" alt="Layla K."></div><div><span class="rc-name">Layla K.</span><span class="rc-handle">@layladesigns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Started tracking phone usage as a "don't" habit. Went from 5 hours a day to 2 in under a month.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_17.jpg" alt="Neha P."></div><div><span class="rc-name">Neha P.</span><span class="rc-handle">@nehafit</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Feb 2026</span></div><p class="rc-text">Track sleep, water, and journaling in one place. Three totally different habits, one clean screen.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_19.jpg" alt="Zoe M."></div><div><span class="rc-name">Zoe M.</span><span class="rc-handle">@zoemeditates</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Using it in Japanese and the translation is perfect — not word-for-word, it actually reads naturally.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_21.jpg" alt="Yuki C."></div><div><span class="rc-name">Yuki C.</span><span class="rc-handle">@yukicreates</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- ROW 2 ← scrolls right — avatars 2,4,6,8,10,12,14,16,18,20,22 -->
+      <div class="marquee-row marquee-row-r">
+        <div class="marquee-track">
+          <!-- SET A -->
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Finally a habit app that doesn't make me feel terrible when I miss a day. The vacation mode is genius.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_2.jpg" alt="Priya S."></div><div><span class="rc-name">Priya S.</span><span class="rc-handle">@priyaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Built for people who actually want to change, not people who want to feel like they're changing.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_4.jpg" alt="Mia R."></div><div><span class="rc-name">Mia R.</span><span class="rc-handle">@miareads</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Dark theme is stunning. Pure black OLED mode at night is so clean it made me actually enjoy logging habits.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_6.jpg" alt="Sam T."></div><div><span class="rc-name">Sam T.</span><span class="rc-handle">@samdesigns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Switched from Habitica. No gamification nonsense. Just clean tracking. Best decision I made this year.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_8.jpg" alt="Lin C."></div><div><span class="rc-name">Lin C.</span><span class="rc-handle">@linbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">The widget is perfect. Glance at my home screen, know exactly what I need to do. No app open needed.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_10.jpg" alt="Chris W."></div><div><span class="rc-name">Chris W.</span><span class="rc-handle">@chriswrites</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Had a 47-day streak. Missed one day. App didn't punish me. Just kept going. That's the real win.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_12.jpg" alt="Arjun T."></div><div><span class="rc-name">Arjun T.</span><span class="rc-handle">@arjunbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">I stack 3 habits every morning. The per-habit progress ring makes it easy to see exactly what's done.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_14.jpg" alt="Kai N."></div><div><span class="rc-name">Kai N.</span><span class="rc-handle">@kainotes</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Reading habit: 20 pages a day. 84 days in. App keeps me honest without making me feel watched.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_16.jpg" alt="Tom B."></div><div><span class="rc-name">Tom B.</span><span class="rc-handle">@tomlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jan 2026</span></div><p class="rc-text">Liked the monthly calendar view. You can see patterns in yourself you didn't even know you had.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_18.jpg" alt="James H."></div><div><span class="rc-name">James H.</span><span class="rc-handle">@jameshacks</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Feb 2026</span></div><p class="rc-text">It's free with no catch. No premium tier, no ads. Can't believe more people don't know about this.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_20.jpg" alt="Rohan S."></div><div><span class="rc-name">Rohan S.</span><span class="rc-handle">@rohanbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">6 months of morning runs, all logged. The bar chart at the end of the week feels like a reward.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_22.jpg" alt="Felix R."></div><div><span class="rc-name">Felix R.</span><span class="rc-handle">@felixruns</span></div></div></div>
+          <!-- SET B — duplicate for seamless loop -->
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Finally a habit app that doesn't make me feel terrible when I miss a day. The vacation mode is genius.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_2.jpg" alt="Priya S."></div><div><span class="rc-name">Priya S.</span><span class="rc-handle">@priyaruns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">Built for people who actually want to change, not people who want to feel like they're changing.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_4.jpg" alt="Mia R."></div><div><span class="rc-name">Mia R.</span><span class="rc-handle">@miareads</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">Dark theme is stunning. Pure black OLED mode at night is so clean it made me actually enjoy logging habits.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_6.jpg" alt="Sam T."></div><div><span class="rc-name">Sam T.</span><span class="rc-handle">@samdesigns</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Switched from Habitica. No gamification nonsense. Just clean tracking. Best decision I made this year.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_8.jpg" alt="Lin C."></div><div><span class="rc-name">Lin C.</span><span class="rc-handle">@linbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">The widget is perfect. Glance at my home screen, know exactly what I need to do. No app open needed.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_10.jpg" alt="Chris W."></div><div><span class="rc-name">Chris W.</span><span class="rc-handle">@chriswrites</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jun 2026</span></div><p class="rc-text">Had a 47-day streak. Missed one day. App didn't punish me. Just kept going. That's the real win.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_12.jpg" alt="Arjun T."></div><div><span class="rc-name">Arjun T.</span><span class="rc-handle">@arjunbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Apr 2026</span></div><p class="rc-text">I stack 3 habits every morning. The per-habit progress ring makes it easy to see exactly what's done.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_14.jpg" alt="Kai N."></div><div><span class="rc-name">Kai N.</span><span class="rc-handle">@kainotes</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Mar 2026</span></div><p class="rc-text">Reading habit: 20 pages a day. 84 days in. App keeps me honest without making me feel watched.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_16.jpg" alt="Tom B."></div><div><span class="rc-name">Tom B.</span><span class="rc-handle">@tomlifts</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Jan 2026</span></div><p class="rc-text">Liked the monthly calendar view. You can see patterns in yourself you didn't even know you had.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_18.jpg" alt="James H."></div><div><span class="rc-name">James H.</span><span class="rc-handle">@jameshacks</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">Feb 2026</span></div><p class="rc-text">It's free with no catch. No premium tier, no ads. Can't believe more people don't know about this.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_20.jpg" alt="Rohan S."></div><div><span class="rc-name">Rohan S.</span><span class="rc-handle">@rohanbuilds</span></div></div></div>
+          <div class="rc"><div class="rc-top"><svg class="rc-x" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg><span class="rc-date">May 2026</span></div><p class="rc-text">6 months of morning runs, all logged. The bar chart at the end of the week feels like a reward.</p><div class="rc-author"><div class="rc-av"><img src="/assets/habits/avatars/avatar_22.jpg" alt="Felix R."></div><div><span class="rc-name">Felix R.</span><span class="rc-handle">@felixruns</span></div></div></div>
+        </div>
+      </div>
+
+    </div><!-- /marquee-rows -->
+  </div><!-- /marquee-area -->
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S5 — YEAR IN DOTS
+════════════════════════════════════════════════════════ -->
+<section class="dotgrid">
+  <div class="wrap">
+    <h2 class="dotgrid-headline">What does a year of good habits look like?</h2>
+    <div class="dotgrid-img">
+      <img src="/assets/habits/screen-dotgrid.png" alt="365-day dot grid showing a full year of habit completions">
+    </div>
+    <p class="dotgrid-sub">Start today. Check back in 365 days.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S6 — BREAK BAD HABITS
+════════════════════════════════════════════════════════ -->
+<section class="break-section">
+  <div class="wrap">
+    <div class="break-grid">
+      <!-- Text LEFT -->
+      <div class="feature-text">
+        <span class="eyebrow">Don't Habits</span>
+        <h2 class="feature-headline">Not just building. Also breaking.</h2>
+        <p class="feature-body">Set a maximum limit on habits you want to quit. Smoke fewer cigarettes. Scroll less. Order food less often. The app tracks your count — not to shame you, but to show you the trend going in the right direction.</p>
+      </div>
+      <!-- Image RIGHT -->
+      <div class="break-img">
+        <img src="/assets/habits/screen-break.png" alt="Habits — breaking bad habits with a maximum limit tracker">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S7 — DOWNLOAD CTA
+════════════════════════════════════════════════════════ -->
+<section class="dl-cta" id="faq-anchor">
+  <p class="cta-q1">One habit changed everything.</p>
+  <p class="cta-q2">It can for you too.</p>
+  <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+     class="btn-download" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/>
+      <path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/>
+      <path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/>
+      <path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/>
+    </svg>
+    Download on Google Play
+  </a>
+  <p class="cta-fine">Free to download · Android · Works offline</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     S8 — FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+
+      <div class="footer-col-brand">
+        <a href="../../index.html" class="footer-logo">
+          <span class="footer-logo-dot"></span>zenwinlabs
+        </a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+             class="footer-social-link" aria-label="Google Play" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-label">Habits</div>
+        <div class="footer-links">
+          <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+             target="_blank" rel="noopener">Download Free ↗</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#hero">Features</a>
+          <a href="mailto:contact@zenwinlabs.com">Support</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-label">ZenWinLabs</div>
+        <div class="footer-links">
+          <a href="../../index.html">All Apps</a>
+          <a href="../../index.html#about">About</a>
+          <a href="../../index.html#waitlist">Stay Updated</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <a href="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits"
+         class="footer-dl" target="_blank" rel="noopener">Download Habits →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

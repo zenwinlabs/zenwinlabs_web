@@ -102,6 +102,7 @@ async function renderAppGrid() {
     const s = STATUS[app.status] || { label: app.status.toUpperCase(), cls: '' };
     const isLive = app.status === 'live' && app.url;
     const delay  = (i * 0.08).toFixed(2);
+    const badgeLabel = app.status === 'coming_soon' && app.roadmapDate ? app.roadmapDate : s.label;
 
     const rating = app.rating
       ? `<div class="app-card-rating">
@@ -115,12 +116,12 @@ async function renderAppGrid() {
       ? `<span class="app-card-cta">View App
            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
          </span>`
-      : `<span class="app-card-soon">Coming soon →</span>`;
+      : `<span class="app-card-soon">Arriving ${app.roadmapDate || 'soon'}</span>`;
 
     const inner = `
       <div class="app-card-header">
         <div class="app-card-icon" style="--icon-bg:${c.bg};--icon-shadow:${c.shadow};">${app.icon||app.name[0]}</div>
-        <span class="status ${s.cls}">${s.label}</span>
+        <span class="status ${s.cls}">${badgeLabel}</span>
       </div>
       <div class="app-card-body">
         <span class="app-card-category">${app.category||''}</span>
@@ -180,6 +181,20 @@ function initTypewriter() {
   setTimeout(tick, 600);
 }
 
+/* ── Waitlist Form ──────────────────────────────────────── */
+function initWaitlist() {
+  const form = document.getElementById('waitlist-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    form.style.display = 'none';
+    const note = form.nextElementSibling;
+    if (note && note.classList.contains('waitlist-success')) {
+      note.style.display = 'block';
+    }
+  });
+}
+
 /* ── Boot ───────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -189,4 +204,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAppGrid();   // tilt + magnetic wired inside after render
   // Magnetic on static buttons (hero CTA etc.)
   initMagnetic();
+  initWaitlist();
 });

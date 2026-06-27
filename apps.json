@@ -1,17 +1,17 @@
 [
   {
-    "id": "habbits",
-    "name": "Habbits",
-    "tagline": "Build powerful daily habits with streaks, smart reminders, and analytics that keep you consistent — one day at a time.",
+    "id": "habits",
+    "name": "Habits",
+    "tagline": "Build good ones. Break bad ones. Streaks, reminders & 365-day tracking — free.",
     "category": "Productivity",
     "platform": "Android",
     "status": "live",
     "rating": 4.8,
     "reviews": 1240,
-    "url": "habbits.html",
-    "playStoreUrl": "#",
+    "url": "apps/habits/index.html",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.zenwinlabs.habbits",
     "icon": "H",
-    "accent": "#3DDC97"
+    "accent": "#7B6EF6"
   },
   {
     "id": "focusflow",
@@ -20,6 +20,7 @@
     "category": "Focus",
     "platform": "Android",
     "status": "coming_soon",
+    "roadmapDate": "Q3 2026",
     "icon": "F",
     "accent": "#7B6EF6"
   },
@@ -30,6 +31,7 @@
     "category": "Wellness",
     "platform": "Android",
     "status": "coming_soon",
+    "roadmapDate": "Q4 2026",
     "icon": "M",
     "accent": "#FF6B6B"
   },
@@ -40,6 +42,7 @@
     "category": "Finance",
     "platform": "Android",
     "status": "coming_soon",
+    "roadmapDate": "Q4 2026",
     "icon": "S",
     "accent": "#FFB84D"
   },
@@ -50,6 +53,7 @@
     "category": "Health",
     "platform": "Android",
     "status": "coming_soon",
+    "roadmapDate": "2027",
     "icon": "Z",
     "accent": "#4DACF7"
   }
