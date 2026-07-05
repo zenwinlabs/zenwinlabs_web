@@ -74,6 +74,7 @@ const COLORS = {
   '#FF6B6B': { bg: 'linear-gradient(135deg,#FF6B6B,#cc4444)', shadow: 'rgba(255,107,107,0.3)', glow: 'rgba(255,107,107,0.08)' },
   '#FFB84D': { bg: 'linear-gradient(135deg,#FFB84D,#cc8a1f)', shadow: 'rgba(255,184,77,0.3)',  glow: 'rgba(255,184,77,0.08)'  },
   '#4DACF7': { bg: 'linear-gradient(135deg,#4DACF7,#2278c4)', shadow: 'rgba(77,172,247,0.3)',  glow: 'rgba(77,172,247,0.08)'  },
+  '#7C6AF7': { bg: 'linear-gradient(135deg,#7C6AF7,#5A4BD1)', shadow: 'rgba(124,106,247,0.3)', glow: 'rgba(124,106,247,0.08)' },
 };
 const STATUS = {
   live:        { label: 'LIVE',        cls: 'status-live' },
@@ -100,7 +101,7 @@ async function renderAppGrid() {
   listEl.innerHTML = apps.map((app, i) => {
     const c = COLORS[app.accent] || COLORS['#3DDC97'];
     const s = STATUS[app.status] || { label: app.status.toUpperCase(), cls: '' };
-    const isLive = app.status === 'live' && app.url;
+    const hasPage = !!app.url;
     const delay  = (i * 0.08).toFixed(2);
     const badgeLabel = app.status === 'coming_soon' && app.roadmapDate ? app.roadmapDate : s.label;
 
@@ -112,7 +113,7 @@ async function renderAppGrid() {
          </div>`
       : '';
 
-    const footer = isLive
+    const footer = hasPage
       ? `<span class="app-card-cta">View App
            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
          </span>`
@@ -131,8 +132,8 @@ async function renderAppGrid() {
       </div>
       <div class="app-card-footer">${footer}</div>`;
 
-    const attrs = `class="app-card${isLive ? '' : ' app-card-disabled'} reveal" style="--delay:${delay}s;--card-glow:${c.glow};"`;
-    return isLive
+    const attrs = `class="app-card${app.status === 'live' ? '' : ' app-card-disabled'} reveal" style="--delay:${delay}s;--card-glow:${c.glow};"`;
+    return hasPage
       ? `<a href="${app.url}" ${attrs}>${inner}</a>`
       : `<div ${attrs}>${inner}</div>`;
   }).join('');

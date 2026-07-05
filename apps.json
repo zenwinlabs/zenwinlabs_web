@@ -15,6 +15,18 @@
     "privacy_policy_url": "/apps/habits/privacy/"
   },
   {
+    "id": "nudge",
+    "name": "Nudge",
+    "tagline": "The fastest todo app for Android. Natural language input, smart reminders, and a 60-second daily review.",
+    "category": "Productivity",
+    "platform": "Android",
+    "status": "coming_soon",
+    "url": "nudge.html",
+    "icon": "N",
+    "accent": "#7C6AF7",
+    "privacy_policy_url": "nudge-privacy.html"
+  },
+  {
     "id": "focusflow",
     "name": "FocusFlow",
     "tagline": "Deep work timer with intelligent break scheduling and focus-session analytics for peak productivity.",

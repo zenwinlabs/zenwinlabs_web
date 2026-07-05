@@ -1,0 +1,381 @@
+<!--
+=============================================================
+  NUDGE WEBSITE — PRE-DEPLOY CHECKLIST
+=============================================================
+
+  [ ] Replace all href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL
+      Search for: YOUR_PLAY_STORE_URL_HERE
+      Files affected: nudge.html (hero + download section + footer)
+
+  [ ] Replace placeholder images with real assets:
+      assets/nudge/icon.png             512×512 app icon
+      assets/nudge/hero-screen.png      Home screen screenshot (portrait)
+      assets/nudge/add-task.png         Add task sheet screenshot
+      assets/nudge/focus.png            Focus mode screenshot
+      assets/nudge/stats.png            Insights/stats screenshot
+      assets/nudge/feature-nlp.png      NLP input demo screenshot
+      assets/google-play-badge.png      Google Play badge artwork (shared asset, does not exist yet)
+
+  [ ] If app is live on Play Store, update apps.json ("nudge" entry): set status
+      to "live" and add rating/reviews fields, so the homepage card drops the
+      "Coming Soon" badge.
+
+  [ ] Test all internal links between nudge.html, nudge-privacy.html, index.html
+  [ ] Verify footer Privacy Policy link on nudge.html points to nudge-privacy.html
+=============================================================
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nudge — Add it. Do it. Done. | ZenWinLabs</title>
+  <meta name="description" content="The fastest todo app for Android. Natural language input, smart reminders, focus mode, and daily review. No cloud. No account. Just done.">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem('zwl-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+      document.documentElement.dataset.theme=t;
+    })();
+  </script>
+  <style>
+    /* ── Nudge accent tokens — scoped, does not touch style.css globals ── */
+    :root {
+      --nudge-primary:       #7C6AF7;
+      --nudge-primary-light: #B8A9FF;
+      --nudge-primary-faint: #1E1B3A;
+      --nudge-primary-dim:   rgba(124,106,247,0.1);
+      --nudge-primary-glow:  rgba(124,106,247,0.28);
+    }
+
+    /* ── Violet re-skin, scoped to this page only ── */
+    body.nudge-page .eyebrow {
+      color: var(--nudge-primary-light);
+      background: var(--nudge-primary-dim);
+      border-color: rgba(124,106,247,0.25);
+    }
+    body.nudge-page .eyebrow-dot { background: var(--nudge-primary); }
+    body.nudge-page .hero.nudge-hero,
+    body.nudge-page .app-hero {
+      background: radial-gradient(ellipse 50% 60% at 50% 0%, var(--nudge-primary-dim), transparent);
+    }
+    body.nudge-page .btn:not(.btn-ghost):not(.btn-playstore):not(.play-store-btn):hover {
+      background: var(--nudge-primary);
+      box-shadow: 0 8px 28px var(--nudge-primary-glow);
+    }
+    body.nudge-page .about-attr,
+    body.nudge-page .social-proof-link a,
+    body.nudge-page .app-card-cta { color: var(--nudge-primary-light); }
+
+    /* ── Hero (reuses homepage .hero/.hero-wrap split layout) ── */
+    .hero.nudge-hero { min-height: auto; padding: 96px 0 56px; }
+    .trust-badges {
+      display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 30px;
+    }
+    .trust-badges span {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+    }
+    .nudge-hero-playstore { display: inline-block; margin-top: 26px; }
+    .play-store-btn { display: inline-block; line-height: 0; }
+    .play-store-btn img { height: 54px; width: auto; }
+
+    /* ── Social proof bar ── */
+    .nudge-proof-bar {
+      padding: 26px 0; text-align: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .nudge-proof-bar p {
+      font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+    }
+
+    /* ── Features (reuses .features-grid / .feature-card, 2-col override) ── */
+    .nudge-features-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .nudge-features-grid { grid-template-columns: 1fr; } }
+
+    /* ── How it works ── */
+    .nudge-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px;
+    }
+    .nudge-step {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 28px;
+    }
+    .nudge-step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--nudge-primary-faint); color: var(--nudge-primary-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      margin-bottom: 18px;
+    }
+    .nudge-step h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .nudge-step p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+    @media (max-width: 760px) { .nudge-steps { grid-template-columns: 1fr; } }
+
+    /* ── Privacy callout ── */
+    .nudge-privacy-callout {
+      background: var(--panel);
+      background-image: radial-gradient(ellipse 60% 70% at 50% -10%, rgba(124,106,247,0.14), transparent);
+      border: 1px solid rgba(124,106,247,0.22); border-radius: var(--r-lg);
+      padding: 72px 56px; text-align: center;
+    }
+    .nudge-privacy-callout h2 {
+      font-family: var(--font-display); font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .nudge-privacy-callout p {
+      color: var(--text-muted); font-size: 15.5px; font-weight: 300;
+      line-height: 1.75; max-width: 56ch; margin: 0 auto 14px;
+    }
+    .nudge-privacy-link {
+      display: inline-block; margin-top: 14px;
+      font-family: var(--font-mono); font-size: 13px; color: var(--nudge-primary-light);
+      border-bottom: 1px solid rgba(124,106,247,0.4); padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .nudge-privacy-link:hover { border-color: var(--nudge-primary-light); }
+
+    /* ── Download section ── */
+    .nudge-cta-card {
+      background-image: radial-gradient(ellipse 60% 70% at 50% -10%, rgba(124,106,247,0.14), transparent) !important;
+      border-color: rgba(124,106,247,0.24) !important;
+    }
+    .nudge-pills {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px;
+    }
+    .nudge-pill {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+      border: 1px solid var(--border); background: var(--panel-hi);
+      padding: 6px 14px; border-radius: 20px;
+    }
+  </style>
+</head>
+<body class="nudge-page">
+
+<div class="noise-overlay"></div>
+<div class="ambient-glow"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it Works</a>
+        <a href="#download">Download</a>
+      </div>
+      <a href="index.html" class="nav-back">← All Apps</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<header class="hero nudge-hero">
+  <div class="wrap hero-wrap">
+
+    <!-- Left: Text -->
+    <div class="hero-content">
+      <span class="eyebrow hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        ZenWinLabs · Free · Android
+      </span>
+      <h1 class="hero-title">Add it.<br>Do it.<br>Done.</h1>
+      <p class="lede hero-lede">
+        Most todo apps make you spend more time organising than doing.
+        Nudge gets out of the way. Type naturally, get reminded smartly,
+        close your day in 60 seconds.
+      </p>
+      <div class="hero-cta">
+        <a href="#download" class="btn">Get Nudge Free →</a>
+        <a href="#features" class="btn btn-ghost">See Features ↓</a>
+      </div>
+      <div class="trust-badges">
+        <span>✓ 100% offline — your data never leaves your phone</span>
+        <span>✓ No account needed</span>
+        <span>✓ Free forever</span>
+      </div>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" once app is published -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn nudge-hero-playstore">
+        <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+        <img src="assets/google-play-badge.png" alt="Get it on Google Play" />
+      </a>
+    </div>
+
+    <!-- Right: Phone Mockup -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="device-frame">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+            <img src="assets/nudge/hero-screen.png" alt="Nudge home screen showing today's tasks grouped by Morning, Afternoon, and Evening, with one pinned Most Important Task">
+          </div>
+          <div class="device-home"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ── Social Proof Bar ──────────────────────────────────── -->
+<section class="nudge-proof-bar">
+  <div class="wrap">
+    <p>Built for people who think fast and move fast.</p>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <span class="eyebrow">What makes Nudge different</span>
+      <h2>Built for the way fast people actually work</h2>
+    </div>
+    <div class="features-grid nudge-features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">⚡</span>
+        <h3>Type anything. We figure out the rest.</h3>
+        <p>"gym at 7:30pm" adds Gym to today at 7:30 PM. "dentist 23rd july 9am" sets the date and time automatically. No tapping through date pickers. No dropdowns. Just type and go.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🏷</span>
+        <h3>Tags that learn from you.</h3>
+        <p>Type "gym" and Nudge already knows you tag it as Personal. Suggestions get smarter with every task you add — shown as one-tap chips above the keyboard.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">📋</span>
+        <h3>Your whole day, at a glance.</h3>
+        <p>Tasks grouped by Morning, Afternoon, and Evening. One pinned Most Important Task at the top. Swipe right to complete. Swipe left to mark missed. Nothing else on screen.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🎯</span>
+        <h3>One task at a time. Nothing else.</h3>
+        <p>When the list feels overwhelming, Focus Mode shows you exactly one task. Tap done, the next one appears. That's it.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🌙</span>
+        <h3>Close your day in 60 seconds.</h3>
+        <p>A fast evening swipe session — done, missed, or carry to tomorrow. Takes under a minute. Tells you exactly where your day went.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">📊</span>
+        <h3>See where you keep failing — and why.</h3>
+        <p>Not a dashboard. A mirror. Nudge tells you things like "You miss 70% of tasks scheduled after 8 PM" so you can actually fix the pattern.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ──────────────────────────────────────── -->
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <h2>Three steps. Every day.</h2>
+    </div>
+    <div class="nudge-steps">
+      <div class="nudge-step reveal">
+        <div class="nudge-step-num">1</div>
+        <h3>Add</h3>
+        <p>Type "gym at 7:30pm". Nudge reads the date, time, and suggests a tag. Takes 3 seconds.</p>
+      </div>
+      <div class="nudge-step reveal reveal-delay-1">
+        <div class="nudge-step-num">2</div>
+        <h3>Do</h3>
+        <p>Your day's tasks grouped by time block. One Most Important Task pinned at the top. Swipe right when done.</p>
+      </div>
+      <div class="nudge-step reveal reveal-delay-2">
+        <div class="nudge-step-num">3</div>
+        <h3>Review</h3>
+        <p>At 9 PM, a 60-second swipe session closes the day. Done, missed, or carry to tomorrow. Your patterns emerge over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Privacy Callout ───────────────────────────────────── -->
+<section class="section-cta">
+  <div class="wrap">
+    <div class="nudge-privacy-callout reveal">
+      <span class="eyebrow">Privacy first</span>
+      <h2>Your tasks stay on your phone. Always.</h2>
+      <p>Nudge is 100% offline. We built no backend, no server, no database in the cloud. Your tasks, tags, and patterns are stored only in Room (Android's local database) on your device.</p>
+      <p>We don't collect your name. We don't collect your email. We don't collect your tasks. We collect nothing.</p>
+      <p>Not because we have to. Because we chose to build it that way.</p>
+      <a href="nudge-privacy.html" class="nudge-privacy-link">Read our full privacy policy →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download ──────────────────────────────────────────── -->
+<section class="section-cta" id="download">
+  <div class="wrap">
+    <div class="cta-card nudge-cta-card reveal">
+      <span class="eyebrow">Free to Download</span>
+      <h2>Free. No account. Ready in 10 seconds.</h2>
+      <p>Available on Android. iOS coming soon.</p>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn">
+        <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+        <img src="assets/google-play-badge.png" alt="Get it on Google Play" />
+      </a>
+      <div class="nudge-pills">
+        <span class="nudge-pill">✓ Free</span>
+        <span class="nudge-pill">✓ No account</span>
+        <span class="nudge-pill">✓ Works offline</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col-brand">
+        <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Apps</div>
+        <div class="footer-links">
+          <a href="habbits.html">Habbits ↗</a>
+          <a href="nudge.html">Nudge ↗</a>
+          <a href="index.html#apps">All Apps</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <div class="footer-links">
+          <a href="index.html#about">About</a>
+          <a href="mailto:contact@zenwinlabs.com">Contact</a>
+          <a href="nudge-privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get Nudge Free →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

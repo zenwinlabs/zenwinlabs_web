@@ -1,0 +1,272 @@
+<!--
+=============================================================
+  NUDGE WEBSITE — PRE-DEPLOY CHECKLIST
+=============================================================
+
+  [ ] Update "Last updated" date below (currently a placeholder)
+  [ ] Test all internal links between nudge.html, nudge-privacy.html, index.html
+=============================================================
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Nudge | ZenWinLabs</title>
+  <meta name="description" content="Nudge collects no data. Your tasks stay on your device. Full privacy policy.">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem('zwl-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+      document.documentElement.dataset.theme=t;
+    })();
+  </script>
+  <style>
+    :root {
+      --nudge-primary:       #7C6AF7;
+      --nudge-primary-light: #B8A9FF;
+      --nudge-primary-faint: #1E1B3A;
+      --nudge-primary-dim:   rgba(124,106,247,0.1);
+    }
+    body.nudge-page .eyebrow {
+      color: var(--nudge-primary-light);
+      background: var(--nudge-primary-dim);
+      border-color: rgba(124,106,247,0.25);
+    }
+    body.nudge-page .eyebrow-dot { background: var(--nudge-primary); }
+    body.nudge-page .app-hero {
+      background: radial-gradient(ellipse 50% 60% at 50% 0%, var(--nudge-primary-dim), transparent);
+    }
+    body.nudge-page .nudge-privacy-link,
+    body.nudge-page .legal-callout .eyebrow + h2,
+    body.nudge-page .footer-links a:hover { color: var(--nudge-primary-light); }
+
+    /* ── Legal prose layout ── */
+    .legal-hero { padding: 80px 0 8px; text-align: center; }
+    .legal-hero h1 {
+      font-family: var(--font-display); font-size: clamp(34px, 5.5vw, 48px);
+      font-weight: 700; letter-spacing: -0.035em; margin-top: 16px;
+    }
+    .legal-meta {
+      font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted);
+      line-height: 1.9; margin-top: 18px;
+    }
+    .legal-content {
+      max-width: 720px; margin: 0 auto; padding: 56px 0 90px;
+    }
+    .legal-callout {
+      background: var(--panel);
+      background-image: radial-gradient(ellipse 60% 80% at 50% -10%, rgba(124,106,247,0.14), transparent);
+      border: 1px solid rgba(124,106,247,0.24); border-radius: var(--r-lg);
+      padding: 36px 40px; margin-bottom: 48px;
+    }
+    .legal-callout h2 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+    .legal-callout p { font-size: 16px; line-height: 1.75; color: var(--text); font-weight: 300; }
+    .legal-callout p + p { margin-top: 14px; }
+
+    .legal-section { padding: 40px 0; border-top: 1px solid var(--border); }
+    .legal-section:first-of-type { border-top: none; }
+    .legal-section h2 {
+      font-family: var(--font-display); font-size: 22px; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .legal-section p {
+      font-size: 16px; line-height: 1.75; color: var(--text-muted); font-weight: 300;
+    }
+    .legal-section p + p { margin-top: 14px; }
+    .legal-section ul { margin: 14px 0 0 20px; }
+    .legal-section li {
+      font-size: 16px; line-height: 1.8; color: var(--text-muted); font-weight: 300;
+    }
+    .legal-section a { color: var(--nudge-primary-light); border-bottom: 1px solid rgba(124,106,247,0.4); }
+
+    .legal-table-wrap { overflow-x: auto; margin-top: 20px; }
+    .legal-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+    .legal-table th, .legal-table td {
+      text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);
+      font-size: 14px; font-weight: 300; color: var(--text-muted);
+    }
+    .legal-table th {
+      font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;
+      font-size: 11px; color: var(--text); font-weight: 500;
+    }
+  </style>
+</head>
+<body class="nudge-page">
+
+<div class="noise-overlay"></div>
+<div class="ambient-glow"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="nudge.html#features">Features</a>
+        <a href="nudge.html#download">Download</a>
+      </div>
+      <a href="nudge.html" class="nav-back">← Nudge</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<header class="app-hero legal-hero">
+  <div class="wrap">
+    <span class="eyebrow">Privacy Policy</span>
+    <h1>Nudge Privacy Policy</h1>
+    <p class="legal-meta">
+      Last updated: [INSERT DATE BEFORE DEPLOY]<br>
+      App: Nudge by ZenWinLabs<br>
+      Package: com.zenwinlabs.nudge
+    </p>
+  </div>
+</header>
+
+<!-- ── Content ───────────────────────────────────────────── -->
+<main>
+  <div class="wrap">
+    <div class="legal-content">
+
+      <div class="legal-callout reveal">
+        <h2>The short version</h2>
+        <p>Nudge collects no data. Zero. Nothing leaves your phone.</p>
+        <p>No analytics. No crash reporting. No advertising SDKs. No account. No email. No name. No location.</p>
+        <p>Your tasks are yours. They live in your phone's local storage and nowhere else. We have no servers that receive your data because we built no servers for this purpose.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>What data does Nudge collect?</h2>
+        <p>None.</p>
+        <p>Nudge does not collect, transmit, store, or process any personal data on any external server or third-party service.</p>
+        <p>The app operates entirely offline. All information you enter — tasks, tags, notes, reminders, patterns — is stored locally on your Android device using Android's Room database. This data never leaves your device.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>What permissions does Nudge use?</h2>
+        <div class="legal-table-wrap">
+          <table class="legal-table">
+            <thead>
+              <tr><th>Permission</th><th>Why it's needed</th><th>Data sent externally?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>POST_NOTIFICATIONS</td><td>To send you task reminders and the evening review prompt</td><td>No</td></tr>
+              <tr><td>SCHEDULE_EXACT_ALARM</td><td>To fire reminders at the exact time you set</td><td>No</td></tr>
+              <tr><td>RECEIVE_BOOT_COMPLETED</td><td>To reschedule your alarms after your phone restarts</td><td>No</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px;">That's all. Nudge does not request internet access, location, contacts, camera, microphone, or storage beyond its own app data.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Does Nudge use third-party SDKs or analytics?</h2>
+        <p>No third-party analytics, advertising, or tracking SDKs are included in Nudge.</p>
+        <p>The app uses the following open-source Android libraries, none of which collect or transmit user data:</p>
+        <ul>
+          <li>Room — local database (Google / Apache 2.0)</li>
+          <li>WorkManager — background job scheduling (Google / Apache 2.0)</li>
+          <li>Jetpack Compose — UI framework (Google / Apache 2.0)</li>
+          <li>Vico — chart rendering (Patryk Goworowski / Apache 2.0)</li>
+          <li>Lucide Icons — icon set (Lucide Contributors / ISC)</li>
+          <li>Konfetti — animation library (dionsegijn / MIT)</li>
+          <li>DM Sans & Fraunces — fonts via Google Fonts (Open Font License)</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Does Nudge share data with third parties?</h2>
+        <p>No. We have no data to share.</p>
+        <p>We do not sell, trade, rent, or transfer any user information to any third party, because we do not collect any user information.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Cloud backup and sync</h2>
+        <p>Nudge does not offer cloud sync or cloud backup in its current version.</p>
+        <p>If you back up your Android device using Google's backup system, Nudge's local data may be included in that device-level backup, subject to Google's own backup and privacy policies. This is controlled entirely by your Android device settings, not by Nudge or ZenWinLabs.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Data deletion</h2>
+        <p>To delete all data created by Nudge:</p>
+        <p><strong>Option 1 — Inside the app:</strong><br>Settings → Data → Clear all data. This permanently deletes all tasks, tags, and history.</p>
+        <p><strong>Option 2 — Android settings:</strong><br>Android Settings → Apps → Nudge → Storage → Clear Data</p>
+        <p>Uninstalling the app removes all data from your device.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Children's privacy</h2>
+        <p>Nudge is not directed at children under the age of 13. We do not knowingly collect personal information from children. Since we collect no personal information from anyone, this applies equally to all users regardless of age.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Changes to this policy</h2>
+        <p>If we ever add a feature that changes our data practices, we will update this page and change the "Last updated" date at the top. We will notify users of material changes through an in-app notice.</p>
+        <p>We do not foresee any reason to collect data. Our design philosophy is offline-first, privacy-by-default.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Contact</h2>
+        <p>Questions about this privacy policy?</p>
+        <p>
+          Email: <a href="mailto:contact@zenwinlabs.com">contact@zenwinlabs.com</a><br>
+          Website: <a href="https://zenwinlabs.com">https://zenwinlabs.com</a>
+        </p>
+        <p>ZenWinLabs<br>Bengaluru, Karnataka, India</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col-brand">
+        <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Apps</div>
+        <div class="footer-links">
+          <a href="habbits.html">Habbits ↗</a>
+          <a href="nudge.html">Nudge ↗</a>
+          <a href="index.html#apps">All Apps</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <div class="footer-links">
+          <a href="index.html#about">About</a>
+          <a href="mailto:contact@zenwinlabs.com">Contact</a>
+          <a href="nudge-privacy.html" aria-current="page">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <a href="nudge.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to Nudge</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
