@@ -5,7 +5,7 @@
 
   [ ] Replace all href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL
       Search for: YOUR_PLAY_STORE_URL_HERE
-      Files affected: nudge.html (hero + download section + footer)
+      Files affected: apps/nudge/index.html (hero + download section + footer)
 
   [ ] Replace placeholder images with real assets:
       assets/nudge/icon.png             512×512 app icon
@@ -16,12 +16,8 @@
       assets/nudge/feature-nlp.png      NLP input demo screenshot
       assets/google-play-badge.png      Google Play badge artwork (shared asset, does not exist yet)
 
-  [ ] If app is live on Play Store, update apps.json ("nudge" entry): set status
-      to "live" and add rating/reviews fields, so the homepage card drops the
-      "Coming Soon" badge.
-
-  [ ] Test all internal links between nudge.html, nudge-privacy.html, index.html
-  [ ] Verify footer Privacy Policy link on nudge.html points to nudge-privacy.html
+  [ ] Test all internal links between apps/nudge/index.html, apps/nudge/privacy/, index.html
+  [ ] Verify footer Privacy Policy link points to /apps/nudge/privacy/
 =============================================================
 -->
 <!DOCTYPE html>
@@ -31,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nudge — Add it. Do it. Done. | ZenWinLabs</title>
   <meta name="description" content="The fastest todo app for Android. Natural language input, smart reminders, focus mode, and daily review. No cloud. No account. Just done.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <script>
     (function(){
       var t=localStorage.getItem('zwl-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
@@ -160,17 +156,17 @@
 <!-- ── Nav ─────────────────────────────────────────────── -->
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
     <div class="nav-right">
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How it Works</a>
         <a href="#download">Download</a>
       </div>
-      <a href="index.html" class="nav-back">← All Apps</a>
+      <a href="/index.html" class="nav-back">← All Apps</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
-        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.79"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
     </div>
   </div>
@@ -184,7 +180,7 @@
     <div class="hero-content">
       <span class="eyebrow hero-eyebrow">
         <span class="eyebrow-dot"></span>
-        ZenWinLabs · Free · Android
+        ZenWinLabs · Android
       </span>
       <h1 class="hero-title">Add it.<br>Do it.<br>Done.</h1>
       <p class="lede hero-lede">
@@ -193,18 +189,17 @@
         close your day in 60 seconds.
       </p>
       <div class="hero-cta">
-        <a href="#download" class="btn">Get Nudge Free →</a>
+        <a href="#download" class="btn">Get Nudge →</a>
         <a href="#features" class="btn btn-ghost">See Features ↓</a>
       </div>
       <div class="trust-badges">
         <span>✓ 100% offline — your data never leaves your phone</span>
         <span>✓ No account needed</span>
-        <span>✓ Free forever</span>
       </div>
       <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" once app is published -->
       <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn nudge-hero-playstore">
         <!-- PLACEHOLDER: replace src with actual asset before deploy -->
-        <img src="assets/google-play-badge.png" alt="Get it on Google Play" />
+        <img src="/assets/google-play-badge.png" alt="Get it on Google Play" />
       </a>
     </div>
 
@@ -215,7 +210,7 @@
           <div class="device-notch"></div>
           <div class="device-screen">
             <!-- PLACEHOLDER: replace src with actual asset before deploy -->
-            <img src="assets/nudge/hero-screen.png" alt="Nudge home screen showing today's tasks grouped by Morning, Afternoon, and Evening, with one pinned Most Important Task">
+            <img src="/assets/nudge/hero-screen.png" alt="Nudge home screen showing today's tasks grouped by Morning, Afternoon, and Evening, with one pinned Most Important Task">
           </div>
           <div class="device-home"></div>
         </div>
@@ -309,7 +304,7 @@
       <p>Nudge is 100% offline. We built no backend, no server, no database in the cloud. Your tasks, tags, and patterns are stored only in Room (Android's local database) on your device.</p>
       <p>We don't collect your name. We don't collect your email. We don't collect your tasks. We collect nothing.</p>
       <p>Not because we have to. Because we chose to build it that way.</p>
-      <a href="nudge-privacy.html" class="nudge-privacy-link">Read our full privacy policy →</a>
+      <a href="/apps/nudge/privacy/" class="nudge-privacy-link">Read our full privacy policy →</a>
     </div>
   </div>
 </section>
@@ -318,16 +313,15 @@
 <section class="section-cta" id="download">
   <div class="wrap">
     <div class="cta-card nudge-cta-card reveal">
-      <span class="eyebrow">Free to Download</span>
-      <h2>Free. No account. Ready in 10 seconds.</h2>
+      <span class="eyebrow">Ready to Download</span>
+      <h2>No account. Ready in 10 seconds.</h2>
       <p>Available on Android. iOS coming soon.</p>
       <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
       <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn">
         <!-- PLACEHOLDER: replace src with actual asset before deploy -->
-        <img src="assets/google-play-badge.png" alt="Get it on Google Play" />
+        <img src="/assets/google-play-badge.png" alt="Get it on Google Play" />
       </a>
       <div class="nudge-pills">
-        <span class="nudge-pill">✓ Free</span>
         <span class="nudge-pill">✓ No account</span>
         <span class="nudge-pill">✓ Works offline</span>
       </div>
@@ -340,7 +334,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col-brand">
-        <a href="index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
         <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
         <div class="footer-social">
           <a href="#" class="footer-social-link" aria-label="Twitter / X">
@@ -354,28 +348,28 @@
       <div>
         <div class="footer-col-label">Apps</div>
         <div class="footer-links">
-          <a href="habbits.html">Habbits ↗</a>
-          <a href="nudge.html">Nudge ↗</a>
-          <a href="index.html#apps">All Apps</a>
+          <a href="/apps/habits/index.html">Habbits ↗</a>
+          <a href="/apps/nudge/index.html">Nudge ↗</a>
+          <a href="/index.html#apps">All Apps</a>
         </div>
       </div>
       <div>
         <div class="footer-col-label">Company</div>
         <div class="footer-links">
-          <a href="index.html#about">About</a>
+          <a href="/index.html#about">About</a>
           <a href="mailto:contact@zenwinlabs.com">Contact</a>
-          <a href="nudge-privacy.html">Privacy Policy</a>
+          <a href="/apps/nudge/privacy/">Privacy Policy</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
       <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
-      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get Nudge Free →</a>
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get Nudge →</a>
     </div>
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="/main.js"></script>
 </body>
 </html>

@@ -20,11 +20,11 @@
     "tagline": "The fastest todo app for Android. Natural language input, smart reminders, and a 60-second daily review.",
     "category": "Productivity",
     "platform": "Android",
-    "status": "coming_soon",
-    "url": "nudge.html",
+    "status": "live",
+    "url": "apps/nudge/index.html",
     "icon": "N",
     "accent": "#7C6AF7",
-    "privacy_policy_url": "nudge-privacy.html"
+    "privacy_policy_url": "/apps/nudge/privacy/"
   },
   {
     "id": "focusflow",
