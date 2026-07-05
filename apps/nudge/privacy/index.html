@@ -3,7 +3,6 @@
   NUDGE WEBSITE — PRE-DEPLOY CHECKLIST
 =============================================================
 
-  [ ] Update "Last updated" date below (currently a placeholder)
   [ ] Test all internal links between apps/nudge/index.html, apps/nudge/privacy/, index.html
 =============================================================
 -->
@@ -13,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Nudge | ZenWinLabs</title>
-  <meta name="description" content="Nudge collects no data. Your tasks stay on your device. Full privacy policy.">
+  <meta name="description" content="Nudge does not collect your tasks, name, email, or location. Read the full privacy policy.">
   <link rel="stylesheet" href="/style.css">
   <script>
     (function(){
@@ -124,7 +123,7 @@
     <span class="eyebrow">Privacy Policy</span>
     <h1>Nudge Privacy Policy</h1>
     <p class="legal-meta">
-      Last updated: [INSERT DATE BEFORE DEPLOY]<br>
+      Last updated: 6 July 2026<br>
       App: Nudge by ZenWinLabs<br>
       Package: com.zenwinlabs.nudge
     </p>
@@ -138,89 +137,72 @@
 
       <div class="legal-callout reveal">
         <h2>The short version</h2>
-        <p>Nudge collects no data. Zero. Nothing leaves your phone.</p>
-        <p>No analytics. No crash reporting. No advertising SDKs. No account. No email. No name. No location.</p>
-        <p>Your tasks are yours. They live in your phone's local storage and nowhere else. We have no servers that receive your data because we built no servers for this purpose.</p>
+        <p>Nudge does not collect your tasks, your name, your email, or your location. Everything you type stays on your phone.</p>
+        <p>We do use basic anonymous analytics (how many people open the app, which screens are visited) to help us improve Nudge. This data cannot be used to identify you personally.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>What data does Nudge collect?</h2>
-        <p>None.</p>
-        <p>Nudge does not collect, transmit, store, or process any personal data on any external server or third-party service.</p>
-        <p>The app operates entirely offline. All information you enter — tasks, tags, notes, reminders, patterns — is stored locally on your Android device using Android's Room database. This data never leaves your device.</p>
+        <h2>What stays on your phone</h2>
+        <p>Everything you do inside Nudge — your tasks, tags, reminders, patterns, and notes — is stored only on your device. It never gets sent to us or anyone else.</p>
+        <p>We have no account system. We don't know who you are.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>What permissions does Nudge use?</h2>
+        <h2>What we do collect</h2>
+        <p>We collect anonymous usage data — things like:</p>
+        <ul>
+          <li>How many times the app is opened</li>
+          <li>Which screens are visited</li>
+          <li>Crash reports (if the app crashes)</li>
+        </ul>
+        <p style="margin-top:14px;">This helps us understand what's working and fix what isn't. None of this data includes your tasks, your name, or anything that could identify you personally.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Permissions the app uses</h2>
+        <p>Nudge asks for a small number of permissions to do its job:</p>
         <div class="legal-table-wrap">
           <table class="legal-table">
             <thead>
-              <tr><th>Permission</th><th>Why it's needed</th><th>Data sent externally?</th></tr>
+              <tr><th>Permission</th><th>Why it's needed</th></tr>
             </thead>
             <tbody>
-              <tr><td>POST_NOTIFICATIONS</td><td>To send you task reminders and the evening review prompt</td><td>No</td></tr>
-              <tr><td>SCHEDULE_EXACT_ALARM</td><td>To fire reminders at the exact time you set</td><td>No</td></tr>
-              <tr><td>RECEIVE_BOOT_COMPLETED</td><td>To reschedule your alarms after your phone restarts</td><td>No</td></tr>
+              <tr><td>Notifications</td><td>So we can remind you about tasks at the time you set</td></tr>
+              <tr><td>Alarms</td><td>To make sure reminders fire at exactly the right time, even when your phone is in sleep mode</td></tr>
+              <tr><td>Run on startup</td><td>To restore your reminders if your phone restarts</td></tr>
             </tbody>
           </table>
         </div>
-        <p style="margin-top:20px;">That's all. Nudge does not request internet access, location, contacts, camera, microphone, or storage beyond its own app data.</p>
+        <p style="margin-top:20px;">Nudge does not access your contacts, location, camera, microphone, photos, or files.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Does Nudge use third-party SDKs or analytics?</h2>
-        <p>No third-party analytics, advertising, or tracking SDKs are included in Nudge.</p>
-        <p>The app uses the following open-source Android libraries, none of which collect or transmit user data:</p>
-        <ul>
-          <li>Room — local database (Google / Apache 2.0)</li>
-          <li>WorkManager — background job scheduling (Google / Apache 2.0)</li>
-          <li>Jetpack Compose — UI framework (Google / Apache 2.0)</li>
-          <li>Vico — chart rendering (Patryk Goworowski / Apache 2.0)</li>
-          <li>Lucide Icons — icon set (Lucide Contributors / ISC)</li>
-          <li>Konfetti — animation library (dionsegijn / MIT)</li>
-          <li>DM Sans & Fraunces — fonts via Google Fonts (Open Font License)</li>
-        </ul>
+        <h2>Do we share your data?</h2>
+        <p>We do not sell your data. Ever.</p>
+        <p>The anonymous analytics we collect may be processed by our analytics provider, but cannot be linked back to you as an individual.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Does Nudge share data with third parties?</h2>
-        <p>No. We have no data to share.</p>
-        <p>We do not sell, trade, rent, or transfer any user information to any third party, because we do not collect any user information.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>Cloud backup and sync</h2>
-        <p>Nudge does not offer cloud sync or cloud backup in its current version.</p>
-        <p>If you back up your Android device using Google's backup system, Nudge's local data may be included in that device-level backup, subject to Google's own backup and privacy policies. This is controlled entirely by your Android device settings, not by Nudge or ZenWinLabs.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>Data deletion</h2>
-        <p>To delete all data created by Nudge:</p>
-        <p><strong>Option 1 — Inside the app:</strong><br>Settings → Data → Clear all data. This permanently deletes all tasks, tags, and history.</p>
-        <p><strong>Option 2 — Android settings:</strong><br>Android Settings → Apps → Nudge → Storage → Clear Data</p>
-        <p>Uninstalling the app removes all data from your device.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>Children's privacy</h2>
-        <p>Nudge is not directed at children under the age of 13. We do not knowingly collect personal information from children. Since we collect no personal information from anyone, this applies equally to all users regardless of age.</p>
+        <h2>Deleting your data</h2>
+        <p>To delete everything Nudge has stored on your phone:</p>
+        <p><strong>Inside the app:</strong><br>Settings → Data → Clear all data</p>
+        <p><strong>Or from Android:</strong><br>Settings → Apps → Nudge → Storage → Clear Data</p>
+        <p>Uninstalling the app removes all local data from your device.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Changes to this policy</h2>
-        <p>If we ever add a feature that changes our data practices, we will update this page and change the "Last updated" date at the top. We will notify users of material changes through an in-app notice.</p>
-        <p>We do not foresee any reason to collect data. Our design philosophy is offline-first, privacy-by-default.</p>
+        <p>If anything here changes, we'll update this page and let you know via an in-app notice.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Contact</h2>
-        <p>Questions about this privacy policy?</p>
+        <p>Questions? We're happy to help.</p>
         <p>
-          Email: <a href="mailto:contact@zenwinlabs.com">contact@zenwinlabs.com</a><br>
-          Website: <a href="https://zenwinlabs.com">https://zenwinlabs.com</a>
+          Email: <a href="mailto:nudge+zenwinlabs@gmail.com">nudge+zenwinlabs@gmail.com</a><br>
+          Website: <a href="https://zenwinlabs.com/apps/nudge/">https://zenwinlabs.com/apps/nudge/</a>
         </p>
-        <p>ZenWinLabs<br>Bengaluru, Karnataka, India</p>
+        <p>ZenWinLabs</p>
       </div>
 
     </div>
