@@ -24,14 +24,16 @@ function initReveal() {
 }
 
 /* ── 3D Card Tilt ───────────────────────────────────────── */
-function initCardTilt() {
-  document.querySelectorAll('a.app-card').forEach(card => {
+function initTilt(selector, { maxTilt = 9, lift = 6 } = {}) {
+  document.querySelectorAll(selector).forEach(card => {
+    if (card.dataset.tiltBound) return;
+    card.dataset.tiltBound = '1';
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width  - 0.5;
       const y = (e.clientY - r.top)  / r.height - 0.5;
       card.style.transition = 'transform 0.08s ease, border-color 0.3s, box-shadow 0.4s';
-      card.style.transform = `perspective(700px) translateY(-6px) rotateX(${-y * 9}deg) rotateY(${x * 9}deg)`;
+      card.style.transform = `perspective(700px) translateY(-${lift}px) rotateX(${-y * maxTilt}deg) rotateY(${x * maxTilt}deg)`;
     });
     card.addEventListener('mouseleave', () => {
       card.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.4s';
@@ -146,7 +148,7 @@ async function renderAppGrid() {
   listEl.querySelectorAll('.app-card').forEach(el => obs.observe(el));
 
   // Wire tilt after cards are in DOM
-  initCardTilt();
+  initTilt('a.app-card');
   initMagnetic();
 }
 
@@ -182,6 +184,78 @@ function initTypewriter() {
   setTimeout(tick, 600);
 }
 
+/* ── Aurora Beam parallax (nudges the CSS-driven glow toward the cursor) ── */
+function initAurora() {
+  const el = document.querySelector('.aurora-beam');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  let raf = null, mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth  - 0.5) * 48;
+    my = (e.clientY / window.innerHeight - 0.5) * 48;
+    if (!raf) raf = requestAnimationFrame(() => {
+      el.style.setProperty('--mx', mx + 'px');
+      el.style.setProperty('--my', my + 'px');
+      raf = null;
+    });
+  });
+}
+
+/* ── Cursor Spotlight ────────────────────────────────────── */
+function initSpotlight() {
+  const zones = document.querySelectorAll('.hero, .section-apps');
+  if (!zones.length || window.matchMedia('(pointer: coarse)').matches) return;
+  const glow = document.createElement('div');
+  glow.className = 'cursor-spotlight';
+  document.body.appendChild(glow);
+
+  let raf = null, mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    let inZone = false;
+    zones.forEach(z => {
+      const r = z.getBoundingClientRect();
+      if (e.clientY >= r.top && e.clientY <= r.bottom) inZone = true;
+    });
+    glow.style.opacity = inZone ? '1' : '0';
+    mx = e.clientX; my = e.clientY;
+    if (!raf) raf = requestAnimationFrame(() => {
+      glow.style.transform = `translate(${mx}px, ${my}px)`;
+      raf = null;
+    });
+  });
+}
+
+/* ── Count-up Stats ──────────────────────────────────────── */
+function initCountUp() {
+  const targets = document.querySelectorAll('.about-metric-val, .rating-num');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      obs.unobserve(el);
+      const raw = el.textContent.trim();
+      const match = raw.match(/^([^\d]*)(\d+(?:\.\d+)?)(.*)$/);
+      if (!match) return;
+      const [, prefix, numStr, suffix] = match;
+      const isFloat = numStr.includes('.');
+      const target = parseFloat(numStr);
+      const duration = 900;
+      const start = performance.now();
+      function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = target * eased;
+        el.textContent = prefix + (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }, { threshold: 0.6 });
+  targets.forEach(el => obs.observe(el));
+}
+
 /* ── Waitlist Form ──────────────────────────────────────── */
 function initWaitlist() {
   const form = document.getElementById('waitlist-form');
@@ -206,4 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Magnetic on static buttons (hero CTA etc.)
   initMagnetic();
   initWaitlist();
+  initAurora();
+  initSpotlight();
+  initCountUp();
+  initTilt('.feature-card', { maxTilt: 6, lift: 4 });
+  initTilt('.faq-card',     { maxTilt: 5, lift: 3 });
+  initTilt('.mission-card', { maxTilt: 4, lift: 2 });
 });
