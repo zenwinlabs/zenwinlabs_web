@@ -1,21 +1,13 @@
-<!--
-=============================================================
-  NUDGE WEBSITE — PRE-DEPLOY CHECKLIST
-=============================================================
-
-  [ ] Test all internal links between apps/nudge/index.html, apps/nudge/privacy/, index.html
-=============================================================
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Nudge | ZenWinLabs</title>
-  <meta name="description" content="Nudge does not collect your tasks, name, email, or location. Read the full privacy policy.">
+  <title>MealMap Privacy Policy | ZenWinLabs</title>
+  <meta name="description" content="MealMap privacy policy. We collect no data. Everything stays on your device.">
   <link rel="stylesheet" href="/style.css">
   <style>
-    /* ── Legal prose layout ── */
+    /* ── Legal prose layout (matches apps/nudge/privacy/, default site accent) ── */
     .legal-hero { padding: 80px 0 8px; text-align: center; }
     .legal-hero h1 {
       font-family: var(--font-display); font-size: clamp(34px, 5.5vw, 48px);
@@ -30,8 +22,8 @@
     }
     .legal-callout {
       background-color: rgba(255,255,255,0.02);
-      background-image: radial-gradient(ellipse 60% 80% at 50% -10%, var(--accent-dim), transparent);
-      border: 1px solid rgba(167,139,250,0.24); border-radius: var(--r-lg);
+      background-image: radial-gradient(ellipse 60% 80% at 50% -10%, rgba(16,185,129,0.14), transparent);
+      border: 1px solid rgba(16,185,129,0.24); border-radius: var(--r-lg);
       padding: 36px 40px; margin-bottom: 48px;
     }
     .legal-callout h2 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 14px; }
@@ -64,6 +56,11 @@
       text-transform: uppercase; letter-spacing: 0.06em;
       font-size: 11.5px; color: var(--text); font-weight: 600;
     }
+
+    .legal-closing {
+      margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--border);
+      font-size: 15px; color: var(--text-muted); line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -77,10 +74,11 @@
     <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
     <div class="nav-right">
       <div class="nav-links">
-        <a href="/apps/nudge/index.html#features">Features</a>
-        <a href="/apps/nudge/index.html#download">Download</a>
+        <a href="/apps/mealmap/index.html#features">Features</a>
+        <a href="/apps/mealmap/index.html#how-it-works">How it Works</a>
+        <a href="/apps/mealmap/index.html#download">Download</a>
       </div>
-      <a href="/apps/nudge/index.html" class="nav-back">← Nudge</a>
+      <a href="/apps/mealmap/index.html" class="nav-back">← MealMap</a>
     </div>
   </div>
 </nav>
@@ -89,12 +87,8 @@
 <header class="app-hero legal-hero">
   <div class="wrap">
     <span class="eyebrow">Privacy Policy</span>
-    <h1>Nudge Privacy Policy</h1>
-    <p class="legal-meta">
-      Last updated: 6 July 2026<br>
-      App: Nudge by ZenWinLabs<br>
-      Package: com.zenwinlabs.nudge
-    </p>
+    <h1>MealMap Privacy Policy</h1>
+    <p class="legal-meta">ZenWinLabs · Last updated: July 2026</p>
   </div>
 </header>
 
@@ -105,73 +99,89 @@
 
       <div class="legal-callout reveal">
         <h2>The short version</h2>
-        <p>Nudge does not collect your tasks, your name, your email, or your location. Everything you type stays on your phone.</p>
-        <p>We do use basic anonymous analytics (how many people open the app, which screens are visited) to help us improve Nudge. This data cannot be used to identify you personally.</p>
+        <p>MealMap collects no personal data. Nothing you enter into the app — your meals, recipes, macro goals, grocery lists, or health preferences — ever leaves your device.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>What stays on your phone</h2>
-        <p>Everything you do inside Nudge — your tasks, tags, reminders, patterns, and notes — is stored only on your device. It never gets sent to us or anyone else.</p>
-        <p>We have no account system. We don't know who you are.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>What we do collect</h2>
-        <p>We collect anonymous usage data — things like:</p>
+        <h2>What we collect</h2>
+        <p>Nothing.</p>
+        <p>MealMap has no backend server. No database in the cloud. No analytics SDK. No crash reporter that phones home. No advertising network.</p>
+        <p>We do not collect:</p>
         <ul>
-          <li>How many times the app is opened</li>
-          <li>Which screens are visited</li>
-          <li>Crash reports (if the app crashes)</li>
+          <li>Your name or email address</li>
+          <li>Your meal plans or recipes</li>
+          <li>Your calorie or macro data</li>
+          <li>Your dietary preferences</li>
+          <li>Your location</li>
+          <li>Your device identifiers</li>
+          <li>Your usage patterns or behaviour inside the app</li>
         </ul>
-        <p style="margin-top:14px;">This helps us understand what's working and fix what isn't. None of this data includes your tasks, your name, or anything that could identify you personally.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Permissions the app uses</h2>
-        <p>Nudge asks for a small number of permissions to do its job:</p>
+        <h2>Where your data lives</h2>
+        <p>Everything you create in MealMap — recipes, meal plans, grocery lists, reminders, preferences — is stored exclusively in Room, Android's on-device local database, on your phone or tablet.</p>
+        <p>If you uninstall MealMap, that data is removed along with the app. We have no copy of it. No one does.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Recipe images</h2>
+        <p>When you add a meal without a photo, MealMap can optionally fetch a relevant food image from Unsplash (unsplash.com) using their public API. This request goes from your device directly to Unsplash's servers. We do not see, log, or store any information about this request.</p>
+        <p>If your device is offline, no request is made. The image is downloaded once and stored locally on your device for all future uses.</p>
+        <p>Unsplash's own privacy policy governs that interaction: <a href="https://unsplash.com/privacy" target="_blank" rel="noopener">unsplash.com/privacy</a></p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Notifications and reminders</h2>
+        <p>Meal reminders are scheduled locally on your device using Android's AlarmManager. No reminder data, timing, or meal information is sent anywhere. Reminders fire entirely on-device.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Permissions we request</h2>
         <div class="legal-table-wrap">
           <table class="legal-table">
             <thead>
-              <tr><th>Permission</th><th>Why it's needed</th></tr>
+              <tr><th>Permission</th><th>Why</th></tr>
             </thead>
             <tbody>
-              <tr><td>Notifications</td><td>So we can remind you about tasks at the time you set</td></tr>
-              <tr><td>Alarms</td><td>To make sure reminders fire at exactly the right time, even when your phone is in sleep mode</td></tr>
-              <tr><td>Run on startup</td><td>To restore your reminders if your phone restarts</td></tr>
+              <tr><td>POST_NOTIFICATIONS</td><td>To show meal reminders you configure</td></tr>
+              <tr><td>SCHEDULE_EXACT_ALARM</td><td>To fire reminders at the exact time you set</td></tr>
+              <tr><td>RECEIVE_BOOT_COMPLETED</td><td>To restore your reminders after a device restart</td></tr>
+              <tr><td>INTERNET</td><td>Only used to fetch Unsplash images when you add a meal without a photo</td></tr>
+              <tr><td>ACCESS_NETWORK_STATE</td><td>To check connectivity before attempting an Unsplash image fetch</td></tr>
             </tbody>
           </table>
         </div>
-        <p style="margin-top:20px;">Nudge does not access your contacts, location, camera, microphone, photos, or files.</p>
+        <p style="margin-top:20px;">We request only what the app needs to work. Nothing more.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Do we share your data?</h2>
-        <p>We do not sell your data. Ever.</p>
-        <p>The anonymous analytics we collect may be processed by our analytics provider, but cannot be linked back to you as an individual.</p>
+        <h2>Third-party services</h2>
+        <p>MealMap uses one external service:</p>
+        <p><strong>Unsplash (unsplash.com)</strong><br>Used to fetch food photography for meals that don't have a user-provided image. Your device makes a direct API request to Unsplash. We do not act as an intermediary and do not log these requests. Unsplash's privacy policy applies to their handling of the request.</p>
+        <p>That is the complete list.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Deleting your data</h2>
-        <p>To delete everything Nudge has stored on your phone:</p>
-        <p><strong>Inside the app:</strong><br>Settings → Data → Clear all data</p>
-        <p><strong>Or from Android:</strong><br>Settings → Apps → Nudge → Storage → Clear Data</p>
-        <p>Uninstalling the app removes all local data from your device.</p>
+        <h2>Children</h2>
+        <p>MealMap does not target children and does not knowingly collect any information from anyone.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Changes to this policy</h2>
-        <p>If anything here changes, we'll update this page and let you know via an in-app notice.</p>
+        <p>If we ever change how MealMap handles data, we will update this page and revise the date at the top. Given that we collect nothing, meaningful changes are unlikely.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Contact</h2>
-        <p>Questions? We're happy to help.</p>
+        <p>Questions about this policy or anything else:</p>
         <p>
-          Email: <a href="mailto:nudge+zenwinlabs@gmail.com">nudge+zenwinlabs@gmail.com</a><br>
-          Website: <a href="https://zenwinlabs.com/apps/nudge/">https://zenwinlabs.com/apps/nudge/</a>
+          Email: <a href="mailto:contact@zenwinlabs.com">contact@zenwinlabs.com</a><br>
+          Website: <a href="https://zenwinlabs.com">zenwinlabs.com</a>
         </p>
-        <p>ZenWinLabs</p>
       </div>
+
+      <p class="legal-closing">ZenWinLabs builds offline-first Android tools. We believe your personal data belongs to you — not us.</p>
 
     </div>
   </div>
@@ -194,27 +204,26 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-label">Apps</div>
+        <div class="footer-col-label">MealMap</div>
         <div class="footer-links">
-          <a href="/apps/habits/index.html">Habbits ↗</a>
-          <a href="/apps/nudge/index.html">Nudge ↗</a>
-          <a href="/apps/mealmap/index.html">MealMap ↗</a>
-          <a href="/apps/mockgps/index.html">MockGPS ↗</a>
-          <a href="/index.html#apps">All Apps</a>
+          <a href="/apps/mealmap/index.html#features">Features</a>
+          <a href="/apps/mealmap/index.html#how-it-works">How it Works</a>
+          <a href="/apps/mealmap/index.html#download">Download</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-label">Company</div>
+        <div class="footer-col-label">ZenWinLabs</div>
         <div class="footer-links">
+          <a href="/index.html">All Apps</a>
           <a href="/index.html#about">About</a>
           <a href="mailto:contact@zenwinlabs.com">Contact</a>
-          <a href="/apps/nudge/privacy/" aria-current="page">Privacy Policy</a>
+          <a href="/apps/mealmap/privacy/" aria-current="page">Privacy Policy</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
-      <a href="/apps/nudge/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to Nudge</a>
+      <a href="/apps/mealmap/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to MealMap</a>
     </div>
   </div>
 </footer>

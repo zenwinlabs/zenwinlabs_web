@@ -1,0 +1,378 @@
+<!--
+=============================================================
+  MEALMAP WEBSITE — PRE-DEPLOY CHECKLIST
+=============================================================
+
+  [ ] Replace all href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL
+      Search for: YOUR_PLAY_STORE_URL_HERE
+      Files affected: apps/mealmap/index.html (hero + download section + footer)
+
+  [ ] Replace placeholder images with real assets:
+      assets/mealmap/icon.png             512×512 app icon
+      assets/mealmap/hero-screen.png      Today / meal-plan screen screenshot (portrait)
+      assets/google-play-badge.png        Google Play badge artwork (shared asset, does not exist yet)
+
+  [ ] Test all internal links between apps/mealmap/index.html, apps/mealmap/privacy/, index.html
+  [ ] Verify footer Privacy Policy link points to /apps/mealmap/privacy/
+=============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MealMap — Cook once. Eat intentionally. | ZenWinLabs</title>
+  <meta name="description" content="Meal prep app for Android. Plan your week, track macros, and build your grocery list — all offline. No account. No cloud.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* ── Hero (reuses homepage .hero/.hero-wrap split layout) ── */
+    .hero.mealmap-hero { min-height: auto; padding: 96px 0 56px; }
+    /* .device-frame has no intrinsic width outside the 4-col screenshot grid it was built for */
+    .hero-visual .device-frame { width: 270px; }
+    .trust-badges {
+      display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 30px;
+    }
+    .trust-badges span {
+      font-size: 13px; color: var(--text-muted);
+    }
+    .mealmap-hero-playstore { display: inline-block; margin-top: 26px; }
+    .play-store-btn { display: inline-block; line-height: 0; }
+    .play-store-btn img { height: 54px; width: auto; }
+
+    /* ── Features (reuses .features-grid / .feature-card, 2-col override) ── */
+    .mealmap-features-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .mealmap-features-grid { grid-template-columns: 1fr; } }
+
+    /* ── How it works ── */
+    .mealmap-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px;
+    }
+    .mealmap-step {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 28px;
+    }
+    .mealmap-step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent-dim); color: var(--link);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      margin-bottom: 18px;
+    }
+    .mealmap-step h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .mealmap-step p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    @media (max-width: 760px) { .mealmap-steps { grid-template-columns: 1fr; } }
+
+    /* ── Privacy callout ── */
+    .mealmap-privacy-callout {
+      background: var(--panel);
+      background-image: radial-gradient(ellipse 60% 70% at 50% -10%, rgba(16,185,129,0.14), transparent);
+      border: 1px solid rgba(16,185,129,0.22); border-radius: var(--r-lg);
+      padding: 72px 56px; text-align: center;
+    }
+    .mealmap-privacy-callout h2 {
+      font-family: var(--font-display); font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .mealmap-privacy-callout p {
+      color: var(--text-muted); font-size: 15.5px; font-weight: 400;
+      line-height: 1.75; max-width: 56ch; margin: 0 auto 14px;
+    }
+    .mealmap-privacy-callout .mealmap-privacy-facts p { margin: 0 auto 4px; }
+    .mealmap-privacy-link {
+      display: inline-block; margin-top: 14px;
+      font-size: 13px; color: var(--link);
+      border-bottom: 1px solid rgba(167,139,250,0.4); padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .mealmap-privacy-link:hover { border-color: var(--link); }
+
+    /* ── Download section ── */
+    .mealmap-cta-card {
+      background-image: radial-gradient(120% 140% at 50% -20%, rgba(124,58,237,0.4), transparent 60%) !important;
+      border-color: rgba(167,139,250,0.25) !important;
+    }
+    .mealmap-pills {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px;
+    }
+    .mealmap-pill {
+      font-size: 13px; color: var(--text-muted);
+      border: 1px solid var(--border); background: var(--panel-hi);
+      padding: 6px 14px; border-radius: 20px;
+    }
+
+    /* ── CSS-drawn macro ring for the hero phone screen ── */
+    .mock-macro-ring {
+      width: 108px; height: 108px; border-radius: 50%; margin: 6px auto 4px; flex-shrink: 0;
+      background: conic-gradient(#10b981 0deg 150deg, #34d399 150deg 230deg, #6ee7b7 230deg 300deg, rgba(255,255,255,0.06) 300deg 360deg);
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .mock-macro-ring::before {
+      content: ''; position: absolute; inset: 9px; border-radius: 50%; background: #0b0713;
+    }
+    .mock-macro-center { position: relative; z-index: 1; text-align: center; }
+    .mock-macro-kcal { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: #eae8f0; }
+    .mock-macro-label { font-size: 8px; color: #55506a; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it Works</a>
+        <a href="#download">Download</a>
+      </div>
+      <a href="/index.html" class="nav-back">← All Apps</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<header class="hero mealmap-hero">
+  <div class="wrap hero-wrap">
+
+    <!-- Left: Text -->
+    <div class="hero-content">
+      <span class="eyebrow hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        ZenWinLabs · Android
+      </span>
+      <h1 class="hero-title">Cook once.<br>Eat intentionally.</h1>
+      <p class="lede hero-lede">
+        Meal prepping works. But between tracking macros, writing
+        shopping lists, and remembering what goes in the fridge —
+        most people give up before Sunday.
+      </p>
+      <p class="lede hero-lede" style="margin-top:14px;">
+        MealMap handles all of it. Plan your week, track your
+        nutrition, and walk into the grocery store knowing exactly
+        what to buy.
+      </p>
+      <div class="hero-cta">
+        <a href="#download" class="btn">Get MealMap →</a>
+        <a href="#features" class="btn btn-ghost">See Features ↓</a>
+      </div>
+      <div class="trust-badges">
+        <span>✓ 100% offline — your data never leaves your phone</span>
+        <span>✓ No account needed</span>
+      </div>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" once app is published -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn mealmap-hero-playstore">
+        <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+        <img src="/assets/google-play-badge.png" alt="Get it on Google Play" />
+      </a>
+    </div>
+
+    <!-- Right: Phone Mockup -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="device-frame">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <div class="app-mock-screen">
+              <div class="mock-screen-header">
+                <span class="mock-screen-title">Today</span>
+                <span class="mock-screen-badge">4 meals planned</span>
+              </div>
+              <div class="mock-macro-ring">
+                <div class="mock-macro-center">
+                  <div class="mock-macro-kcal">1,840</div>
+                  <div class="mock-macro-label">kcal</div>
+                </div>
+              </div>
+              <div class="mock-habit-row done">
+                <div class="mock-check-filled">✓</div>
+                <span class="mock-row-label">Breakfast · Oats &amp; berries</span>
+              </div>
+              <div class="mock-habit-row done">
+                <div class="mock-check-filled">✓</div>
+                <span class="mock-row-label">Lunch · Chicken bowl</span>
+              </div>
+              <div class="mock-habit-row">
+                <div class="mock-check-empty"></div>
+                <span class="mock-row-label">Dinner · Paneer curry</span>
+              </div>
+              <div class="mock-habit-row">
+                <div class="mock-check-empty"></div>
+                <span class="mock-row-label">Snack · Greek yogurt</span>
+              </div>
+            </div>
+          </div>
+          <div class="device-home"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ── Features ─────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <span class="eyebrow">What makes MealMap different</span>
+      <h2>Built for people who actually meal prep</h2>
+    </div>
+    <div class="features-grid mealmap-features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🗺</span>
+        <h3>Your week, mapped out.</h3>
+        <p>Add meals to any day. Breakfast, lunch, dinner, snacks. Your calorie and macro totals update as you plan. See exactly what you're eating before you eat it.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🤖</span>
+        <h3>Add any recipe in seconds with AI.</h3>
+        <p>Find a recipe anywhere — Instagram, YouTube, a blog. Paste it into ChatGPT or Gemini with our one-tap prompt. Paste the result back. MealMap fills in the title, ingredients, macros, steps, and storage instructions automatically.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">📊</span>
+        <h3>Know your numbers.</h3>
+        <p>Every meal shows calories, protein, carbs, and fat. Tap any segment of the macro ring to see how it fits your daily goal. Adjust servings and everything updates instantly.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🛒</span>
+        <h3>A grocery list that actually makes sense.</h3>
+        <p>MealMap builds your shopping list from your weekly plan. Fresh produce and pantry staples are grouped separately. Mark what you already have. Scale for 2 days or 30 — quantities adjust automatically.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🍽</span>
+        <h3>Scale any recipe to any serving.</h3>
+        <p>Every recipe stores quantities for a base serving count. Cooking for one today, four on Sunday? Slide the serving count and every ingredient scales with it.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">📅</span>
+        <h3>Copy your best days.</h3>
+        <p>Had a great nutrition day on Wednesday? Long press it and copy the entire meal plan to any other day of the month. Replace or merge — your choice.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🌿</span>
+        <h3>Personalised to how you eat.</h3>
+        <p>Vegetarian, eggetarian, or non-vegetarian — MealMap filters recipes to match. Select the proteins you actually eat and we skip the rest. Your explore feed shows only what's relevant to you.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🔔</span>
+        <h3>Reminders that keep you on track.</h3>
+        <p>Set a reminder for breakfast, lunch, dinner, or snacks independently. MealMap nudges you at the right time so meals don't slip past you on busy days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ──────────────────────────────────────── -->
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <h2>Three things. Every week.</h2>
+    </div>
+    <div class="mealmap-steps">
+      <div class="mealmap-step reveal">
+        <div class="mealmap-step-num">1</div>
+        <h3>Plan</h3>
+        <p>Add your meals for the week. Browse curated recipes or import any recipe from the internet using AI. Adjust servings, check your macros, and see your daily totals come together.</p>
+      </div>
+      <div class="mealmap-step reveal reveal-delay-1">
+        <div class="mealmap-step-num">2</div>
+        <h3>Prep</h3>
+        <p>MealMap builds your shopping list from your plan. Grouped by fresh and pantry items. Mark what you already own. Scale for however many days you're shopping for.</p>
+      </div>
+      <div class="mealmap-step reveal reveal-delay-2">
+        <div class="mealmap-step-num">3</div>
+        <h3>Track</h3>
+        <p>Open Insights to see how your week went — daily, weekly, and monthly. Tap any day to see exactly what you ate and how it tracked against your goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Privacy Callout ───────────────────────────────────── -->
+<section class="section-cta">
+  <div class="wrap">
+    <div class="mealmap-privacy-callout reveal">
+      <span class="eyebrow">Privacy first</span>
+      <h2>Your meals stay on your phone. Always.</h2>
+      <p>MealMap is 100% offline. We built no backend, no server, no database in the cloud. Your recipes, your meal plans, your grocery lists, and your nutrition data are stored only in Room — Android's local database — on your device.</p>
+      <div class="mealmap-privacy-facts">
+        <p>We don't collect your name.</p>
+        <p>We don't collect your meals.</p>
+        <p>We don't collect your health data.</p>
+        <p>We collect nothing.</p>
+      </div>
+      <p>Not because we have to. Because we chose to build it that way.</p>
+      <a href="/apps/mealmap/privacy/" class="mealmap-privacy-link">Read our full privacy policy →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download ──────────────────────────────────────────── -->
+<section class="section-cta" id="download">
+  <div class="wrap">
+    <div class="cta-card mealmap-cta-card reveal">
+      <span class="eyebrow">Ready to Download</span>
+      <h2>No account. Ready in 30 seconds.</h2>
+      <p>Available on Android.</p>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn">
+        <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+        <img src="/assets/google-play-badge.png" alt="Get it on Google Play" />
+      </a>
+      <div class="mealmap-pills">
+        <span class="mealmap-pill">✓ No account</span>
+        <span class="mealmap-pill">✓ Works offline</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col-brand">
+        <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Apps</div>
+        <div class="footer-links">
+          <a href="/apps/habits/index.html">Habbits ↗</a>
+          <a href="/apps/nudge/index.html">Nudge ↗</a>
+          <a href="/apps/mealmap/index.html">MealMap ↗</a>
+          <a href="/apps/mockgps/index.html">MockGPS ↗</a>
+          <a href="/index.html#apps">All Apps</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <div class="footer-links">
+          <a href="/index.html#about">About</a>
+          <a href="mailto:contact@zenwinlabs.com">Contact</a>
+          <a href="/apps/mealmap/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get MealMap →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

@@ -27,6 +27,18 @@
     "privacy_policy_url": "/apps/nudge/privacy/"
   },
   {
+    "id": "mealmap",
+    "name": "MealMap",
+    "tagline": "Plan your week, track macros, and build your grocery list — all offline. No account, no cloud.",
+    "category": "Nutrition",
+    "platform": "Android",
+    "status": "live",
+    "url": "apps/mealmap/index.html",
+    "icon": "🗺",
+    "accent": "#10B981",
+    "privacy_policy_url": "/apps/mealmap/privacy/"
+  },
+  {
     "id": "mockgps",
     "name": "MockGPS",
     "tagline": "Set a custom GPS location for testing, privacy, or just being somewhere else for a while.",
