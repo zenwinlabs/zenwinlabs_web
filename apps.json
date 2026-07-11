@@ -27,6 +27,18 @@
     "privacy_policy_url": "/apps/nudge/privacy/"
   },
   {
+    "id": "mockgps",
+    "name": "MockGPS",
+    "tagline": "Set a custom GPS location for testing, privacy, or just being somewhere else for a while.",
+    "category": "Utilities",
+    "platform": "Android",
+    "status": "live",
+    "url": "apps/mockgps/index.html",
+    "icon": "G",
+    "accent": "#22D3EE",
+    "privacy_policy_url": "/apps/mockgps/privacy/"
+  },
+  {
     "id": "focusflow",
     "name": "FocusFlow",
     "tagline": "Deep work timer with intelligent break scheduling and focus-session analytics for peak productivity.",

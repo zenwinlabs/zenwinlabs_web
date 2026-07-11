@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZenWinLabs — Apps That Make You Smarter</title>
   <meta name="description" content="ZenWinLabs builds focused Android apps for daily life — habits, focus, wellness, finance. Tools that make you measurably smarter, every day.">
   <link rel="stylesheet" href="style.css">
-  <!-- Prevent theme flash on load -->
-  <script>
-    (function(){
-      var t=localStorage.getItem('zwl-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
-      document.documentElement.dataset.theme=t;
-    })();
-  </script>
 </head>
 <body>
 
-<div class="aurora-beam"></div>
-<div class="noise-overlay"></div>
-<div class="ambient-glow"></div>
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
 
 <!-- ── Navigation ──────────────────────────────────────── -->
 <nav class="nav">
@@ -31,24 +23,6 @@
         <a href="#apps">Apps</a>
         <a href="#about">About</a>
       </div>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <!-- Moon: shown in dark mode -->
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-        </svg>
-        <!-- Sun: shown in light mode -->
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </button>
     </div>
   </div>
 </nav>
@@ -287,6 +261,7 @@
         <div class="footer-links">
           <a href="apps/habits/index.html">Habbits ↗</a>
           <a href="apps/nudge/index.html">Nudge ↗</a>
+          <a href="apps/mockgps/index.html">MockGPS ↗</a>
           <a href="#apps">All Apps</a>
           <a href="#waitlist">Get Notified</a>
         </div>

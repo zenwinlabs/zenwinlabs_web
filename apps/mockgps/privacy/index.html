@@ -1,21 +1,13 @@
-<!--
-=============================================================
-  NUDGE WEBSITE — PRE-DEPLOY CHECKLIST
-=============================================================
-
-  [ ] Test all internal links between apps/nudge/index.html, apps/nudge/privacy/, index.html
-=============================================================
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Nudge | ZenWinLabs</title>
-  <meta name="description" content="Nudge does not collect your tasks, name, email, or location. Read the full privacy policy.">
+  <title>Privacy Policy — MockGPS | ZenWinLabs</title>
+  <meta name="description" content="MockGPS does not collect your real location, name, email, or any personal information. Read the full privacy policy.">
   <link rel="stylesheet" href="/style.css">
   <style>
-    /* ── Legal prose layout ── */
+    /* ── Legal prose layout (matches apps/nudge/privacy/, default site accent) ── */
     .legal-hero { padding: 80px 0 8px; text-align: center; }
     .legal-hero h1 {
       font-family: var(--font-display); font-size: clamp(34px, 5.5vw, 48px);
@@ -48,22 +40,25 @@
       font-size: 16px; line-height: 1.75; color: var(--text-muted); font-weight: 400;
     }
     .legal-section p + p { margin-top: 14px; }
-    .legal-section ul { margin: 14px 0 0 20px; }
-    .legal-section li {
-      font-size: 16px; line-height: 1.8; color: var(--text-muted); font-weight: 400;
-    }
     .legal-section a { color: var(--link); border-bottom: 1px solid rgba(167,139,250,0.4); }
 
-    .legal-table-wrap { overflow-x: auto; margin-top: 20px; }
-    .legal-table { width: 100%; border-collapse: collapse; min-width: 480px; }
-    .legal-table th, .legal-table td {
-      text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border);
-      font-size: 14px; font-weight: 400; color: var(--text-muted);
+    /* ── Collect grid (Yes / No cards) ── */
+    .collect-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;
     }
-    .legal-table th {
-      text-transform: uppercase; letter-spacing: 0.06em;
-      font-size: 11.5px; color: var(--text); font-weight: 600;
+    .collect-card { background: var(--panel); border-radius: var(--r-md); padding: 22px 24px; }
+    .collect-card-yes { border: 1px solid rgba(167,139,250,0.3); }
+    .collect-card-no  { border: 1px solid rgba(255,107,107,0.3); }
+    .collect-card-heading { font-family: var(--font-display); font-weight: 600; font-size: 14px; margin-bottom: 14px; }
+    .collect-card-yes .collect-card-heading { color: var(--link); }
+    .collect-card-no  .collect-card-heading { color: #ff6b6b; }
+    .collect-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .collect-list li {
+      font-size: 14px; line-height: 1.55; color: var(--text-muted); font-weight: 400;
+      padding-left: 15px; position: relative;
     }
+    .collect-list li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+    @media (max-width: 600px) { .collect-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -77,10 +72,11 @@
     <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
     <div class="nav-right">
       <div class="nav-links">
-        <a href="/apps/nudge/index.html#features">Features</a>
-        <a href="/apps/nudge/index.html#download">Download</a>
+        <a href="/apps/mockgps/index.html#features">Features</a>
+        <a href="/apps/mockgps/index.html#how-it-works">How it Works</a>
+        <a href="/apps/mockgps/index.html#download">Download</a>
       </div>
-      <a href="/apps/nudge/index.html" class="nav-back">← Nudge</a>
+      <a href="/apps/mockgps/index.html" class="nav-back">← MockGPS</a>
     </div>
   </div>
 </nav>
@@ -89,11 +85,11 @@
 <header class="app-hero legal-hero">
   <div class="wrap">
     <span class="eyebrow">Privacy Policy</span>
-    <h1>Nudge Privacy Policy</h1>
+    <h1>MockGPS Privacy Policy</h1>
     <p class="legal-meta">
-      Last updated: 6 July 2026<br>
-      App: Nudge by ZenWinLabs<br>
-      Package: com.zenwinlabs.nudge
+      Last updated: [INSERT DATE BEFORE DEPLOY]<br>
+      App: MockGPS by ZenWinLabs<br>
+      Package: com.zenwinlabs.mockgps
     </p>
   </div>
 </header>
@@ -105,70 +101,64 @@
 
       <div class="legal-callout reveal">
         <h2>The short version</h2>
-        <p>Nudge does not collect your tasks, your name, your email, or your location. Everything you type stays on your phone.</p>
-        <p>We do use basic anonymous analytics (how many people open the app, which screens are visited) to help us improve Nudge. This data cannot be used to identify you personally.</p>
+        <p>MockGPS does not collect your real location, your name, your email, or any personal information. The location you choose to mock, and any locations you save, stay entirely on your device.</p>
+        <p>We do not run a server, and we have no way of seeing where you actually are or where you've told your phone you are.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>What stays on your phone</h2>
-        <p>Everything you do inside Nudge — your tasks, tags, reminders, patterns, and notes — is stored only on your device. It never gets sent to us or anyone else.</p>
-        <p>We have no account system. We don't know who you are.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>What we do collect</h2>
-        <p>We collect anonymous usage data — things like:</p>
-        <ul>
-          <li>How many times the app is opened</li>
-          <li>Which screens are visited</li>
-          <li>Crash reports (if the app crashes)</li>
-        </ul>
-        <p style="margin-top:14px;">This helps us understand what's working and fix what isn't. None of this data includes your tasks, your name, or anything that could identify you personally.</p>
-      </div>
-
-      <div class="legal-section reveal">
-        <h2>Permissions the app uses</h2>
-        <p>Nudge asks for a small number of permissions to do its job:</p>
-        <div class="legal-table-wrap">
-          <table class="legal-table">
-            <thead>
-              <tr><th>Permission</th><th>Why it's needed</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Notifications</td><td>So we can remind you about tasks at the time you set</td></tr>
-              <tr><td>Alarms</td><td>To make sure reminders fire at exactly the right time, even when your phone is in sleep mode</td></tr>
-              <tr><td>Run on startup</td><td>To restore your reminders if your phone restarts</td></tr>
-            </tbody>
-          </table>
+        <h2>What we collect</h2>
+        <div class="collect-grid">
+          <div class="collect-card collect-card-yes">
+            <div class="collect-card-heading">✓ What we collect</div>
+            <ul class="collect-list">
+              <li>Nothing. MockGPS does not send any data to us.</li>
+            </ul>
+          </div>
+          <div class="collect-card collect-card-no">
+            <div class="collect-card-heading">✗ What we never collect</div>
+            <ul class="collect-list">
+              <li>Your real GPS location</li>
+              <li>Any location you set or save inside the app</li>
+              <li>Your name or email</li>
+              <li>Any information that identifies you personally</li>
+              <li>Payment information</li>
+            </ul>
+          </div>
         </div>
-        <p style="margin-top:20px;">Nudge does not access your contacts, location, camera, microphone, photos, or files.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Do we share your data?</h2>
-        <p>We do not sell your data. Ever.</p>
-        <p>The anonymous analytics we collect may be processed by our analytics provider, but cannot be linked back to you as an individual.</p>
+        <h2>Your data stays on your device</h2>
+        <p>Every saved location, route, and setting inside MockGPS is stored locally on your device using Android's built-in database. We have no access to it. We cannot see it. We cannot delete it remotely.</p>
+        <p>If you uninstall the app, your data is gone. We don't have a copy — we never had one.</p>
       </div>
 
       <div class="legal-section reveal">
-        <h2>Deleting your data</h2>
-        <p>To delete everything Nudge has stored on your phone:</p>
-        <p><strong>Inside the app:</strong><br>Settings → Data → Clear all data</p>
-        <p><strong>Or from Android:</strong><br>Settings → Apps → Nudge → Storage → Clear Data</p>
-        <p>Uninstalling the app removes all local data from your device.</p>
+        <h2>Location permission</h2>
+        <p>MockGPS uses Android's built-in "mock location app" developer setting to provide a simulated location to other apps. This requires the location permission, but that permission is used only to register MockGPS as your device's active location source — never to read, log, or transmit your real location anywhere.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Third parties</h2>
+        <p>We do not sell your data. We do not share your data. We do not run ads. MockGPS has no analytics or crash-reporting service embedded in it — there is nothing for a third party to receive.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>Children's privacy</h2>
+        <p>MockGPS does not knowingly collect any data from children under 13. Since we collect no data at all, this is straightforward.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Changes to this policy</h2>
-        <p>If anything here changes, we'll update this page and let you know via an in-app notice.</p>
+        <p>If our privacy policy changes, we will update this page and the date at the top. Since we collect nothing, we don't expect this to change much.</p>
       </div>
 
       <div class="legal-section reveal">
         <h2>Contact</h2>
-        <p>Questions? We're happy to help.</p>
+        <p>Questions about this privacy policy?</p>
         <p>
-          Email: <a href="mailto:nudge+zenwinlabs@gmail.com">nudge+zenwinlabs@gmail.com</a><br>
-          Website: <a href="https://zenwinlabs.com/apps/nudge/">https://zenwinlabs.com/apps/nudge/</a>
+          Email: <a href="mailto:contact@zenwinlabs.com">contact@zenwinlabs.com</a><br>
+          Website: <a href="https://zenwinlabs.com">https://zenwinlabs.com</a>
         </p>
         <p>ZenWinLabs</p>
       </div>
@@ -194,26 +184,26 @@
         </div>
       </div>
       <div>
-        <div class="footer-col-label">Apps</div>
+        <div class="footer-col-label">MockGPS</div>
         <div class="footer-links">
-          <a href="/apps/habits/index.html">Habbits ↗</a>
-          <a href="/apps/nudge/index.html">Nudge ↗</a>
-          <a href="/apps/mockgps/index.html">MockGPS ↗</a>
-          <a href="/index.html#apps">All Apps</a>
+          <a href="/apps/mockgps/index.html#features">Features</a>
+          <a href="/apps/mockgps/index.html#how-it-works">How it Works</a>
+          <a href="/apps/mockgps/index.html#download">Download</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-label">Company</div>
+        <div class="footer-col-label">ZenWinLabs</div>
         <div class="footer-links">
+          <a href="/index.html">All Apps</a>
           <a href="/index.html#about">About</a>
           <a href="mailto:contact@zenwinlabs.com">Contact</a>
-          <a href="/apps/nudge/privacy/" aria-current="page">Privacy Policy</a>
+          <a href="/apps/mockgps/privacy/" aria-current="page">Privacy Policy</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
-      <a href="/apps/nudge/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to Nudge</a>
+      <a href="/apps/mockgps/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to MockGPS</a>
     </div>
   </div>
 </footer>

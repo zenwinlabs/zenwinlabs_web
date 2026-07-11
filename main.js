@@ -3,17 +3,6 @@
  * To add a new app: edit apps.json only. Nothing here changes.
  */
 
-/* ── Theme ──────────────────────────────────────────────── */
-function initTheme() {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('zwl-theme', next);
-  });
-}
-
 /* ── Scroll Reveal ──────────────────────────────────────── */
 function initReveal() {
   const obs = new IntersectionObserver(
@@ -71,12 +60,12 @@ function initCarousel() {
 
 /* ── App Grid Renderer ──────────────────────────────────── */
 const COLORS = {
-  '#3DDC97': { bg: 'linear-gradient(135deg,#3DDC97,#2aac74)', shadow: 'rgba(61,220,151,0.3)',  glow: 'rgba(61,220,151,0.08)'  },
-  '#7B6EF6': { bg: 'linear-gradient(135deg,#7B6EF6,#5a4ece)', shadow: 'rgba(123,110,246,0.3)', glow: 'rgba(123,110,246,0.08)' },
-  '#FF6B6B': { bg: 'linear-gradient(135deg,#FF6B6B,#cc4444)', shadow: 'rgba(255,107,107,0.3)', glow: 'rgba(255,107,107,0.08)' },
-  '#FFB84D': { bg: 'linear-gradient(135deg,#FFB84D,#cc8a1f)', shadow: 'rgba(255,184,77,0.3)',  glow: 'rgba(255,184,77,0.08)'  },
-  '#4DACF7': { bg: 'linear-gradient(135deg,#4DACF7,#2278c4)', shadow: 'rgba(77,172,247,0.3)',  glow: 'rgba(77,172,247,0.08)'  },
-  '#7C6AF7': { bg: 'linear-gradient(135deg,#7C6AF7,#5A4BD1)', shadow: 'rgba(124,106,247,0.3)', glow: 'rgba(124,106,247,0.08)' },
+  '#7B6EF6': { bg: 'linear-gradient(140deg,#a78bfa,#6d28d9)', shadow: 'rgba(124,58,237,0.4)',  glow: 'rgba(124,58,237,0.1)'  },
+  '#7C6AF7': { bg: 'linear-gradient(140deg,#7c9cff,#4338ca)', shadow: 'rgba(67,56,202,0.4)',   glow: 'rgba(67,56,202,0.08)' },
+  '#FF6B6B': { bg: 'linear-gradient(140deg,#c4b5fd,#7c3aed)', shadow: 'rgba(124,58,237,0.35)', glow: 'rgba(124,58,237,0.08)' },
+  '#FFB84D': { bg: 'linear-gradient(140deg,#d8b4fe,#9333ea)', shadow: 'rgba(147,51,234,0.35)', glow: 'rgba(147,51,234,0.08)' },
+  '#4DACF7': { bg: 'linear-gradient(140deg,#93c5fd,#4338ca)', shadow: 'rgba(67,56,202,0.35)',  glow: 'rgba(67,56,202,0.08)' },
+  '#22D3EE': { bg: 'linear-gradient(140deg,#67e8f9,#0e7490)', shadow: 'rgba(14,116,144,0.4)',   glow: 'rgba(14,116,144,0.08)' },
 };
 const STATUS = {
   live:        { label: 'LIVE',        cls: 'status-live' },
@@ -101,7 +90,7 @@ async function renderAppGrid() {
   }
 
   listEl.innerHTML = apps.map((app, i) => {
-    const c = COLORS[app.accent] || COLORS['#3DDC97'];
+    const c = COLORS[app.accent] || COLORS['#7B6EF6'];
     const s = STATUS[app.status] || { label: app.status.toUpperCase(), cls: '' };
     const hasPage = !!app.url;
     const delay  = (i * 0.08).toFixed(2);
@@ -122,19 +111,20 @@ async function renderAppGrid() {
       : `<span class="app-card-soon">Arriving ${app.roadmapDate || 'soon'}</span>`;
 
     const inner = `
-      <div class="app-card-header">
-        <div class="app-card-icon" style="--icon-bg:${c.bg};--icon-shadow:${c.shadow};">${app.icon||app.name[0]}</div>
-        <span class="status ${s.cls}">${badgeLabel}</span>
+      <div class="app-card-top" style="--card-glow:${c.glow};">
+        <div class="app-card-icon" style="--icon-bg:${c.bg};">${app.icon||app.name[0]}</div>
       </div>
       <div class="app-card-body">
-        <span class="app-card-category">${app.category||''}</span>
-        <h3 class="app-card-name">${app.name}</h3>
+        <div class="app-card-header">
+          <h3 class="app-card-name">${app.name}</h3>
+          <span class="status ${s.cls}">${badgeLabel}</span>
+        </div>
         <p class="app-card-tagline">${app.tagline}</p>
         ${rating}
-      </div>
-      <div class="app-card-footer">${footer}</div>`;
+        ${footer}
+      </div>`;
 
-    const attrs = `class="app-card${app.status === 'live' ? '' : ' app-card-disabled'} reveal" style="--delay:${delay}s;--card-glow:${c.glow};"`;
+    const attrs = `class="app-card${app.status === 'live' ? '' : ' app-card-disabled'} reveal" style="--delay:${delay}s;"`;
     return hasPage
       ? `<a href="${app.url}" ${attrs}>${inner}</a>`
       : `<div ${attrs}>${inner}</div>`;
@@ -146,10 +136,6 @@ async function renderAppGrid() {
     { threshold: 0.06, rootMargin: '0px 0px -56px 0px' }
   );
   listEl.querySelectorAll('.app-card').forEach(el => obs.observe(el));
-
-  // Wire tilt after cards are in DOM
-  initTilt('a.app-card');
-  initMagnetic();
 }
 
 /* ── Typewriter ─────────────────────────────────────────── */
@@ -184,44 +170,74 @@ function initTypewriter() {
   setTimeout(tick, 600);
 }
 
-/* ── Aurora Beam parallax (nudges the CSS-driven glow toward the cursor) ── */
-function initAurora() {
-  const el = document.querySelector('.aurora-beam');
-  if (!el) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-
-  let raf = null, mx = 0, my = 0;
-  window.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth  - 0.5) * 48;
-    my = (e.clientY / window.innerHeight - 0.5) * 48;
-    if (!raf) raf = requestAnimationFrame(() => {
-      el.style.setProperty('--mx', mx + 'px');
-      el.style.setProperty('--my', my + 'px');
-      raf = null;
-    });
-  });
+/* ── Crystal Field ───────────────────────────────────────
+   Floating violet "crystal" hexes drifting behind the hero,
+   with a subtle mouse-parallax across 3 depth layers.
+   ──────────────────────────────────────────────────────── */
+function hexToRgb(hex) {
+  let h = String(hex || '#c4b5fd').replace('#', '');
+  if (h.length === 3) h = h.split('').map(c => c + c).join('');
+  const n = parseInt(h, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
-/* ── Cursor Spotlight ────────────────────────────────────── */
-function initSpotlight() {
-  const zones = document.querySelectorAll('.hero, .section-apps');
-  if (!zones.length || window.matchMedia('(pointer: coarse)').matches) return;
-  const glow = document.createElement('div');
-  glow.className = 'cursor-spotlight';
-  document.body.appendChild(glow);
+function initCrystalField() {
+  const root = document.querySelector('[data-crystal-field]');
+  if (!root) return;
 
-  let raf = null, mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    let inZone = false;
-    zones.forEach(z => {
-      const r = z.getBoundingClientRect();
-      if (e.clientY >= r.top && e.clientY <= r.bottom) inZone = true;
-    });
-    glow.style.opacity = inZone ? '1' : '0';
-    mx = e.clientX; my = e.clientY;
-    if (!raf) raf = requestAnimationFrame(() => {
-      glow.style.transform = `translate(${mx}px, ${my}px)`;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const count = 250;
+  const color = '#c4b5fd';
+  const [r, g, b] = hexToRgb(color);
+  const [dr, dg, db] = hexToRgb('#6d28d9');
+  const depths = [1.6, 3.2, 5.4];
+  const anims = ['zw-float-a', 'zw-float-b', 'zw-float-c'];
+
+  const layers = depths.map(d => {
+    const l = document.createElement('div');
+    l.className = 'crystal-layer';
+    l.dataset.depth = d;
+    root.appendChild(l);
+    return l;
+  });
+
+  for (let i = 0; i < count; i++) {
+    const layer = layers[i % 3];
+    const size = 7 + Math.random() * 17;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const rot = Math.random() * 360;
+    const dur = 7 + Math.random() * 10;
+    const delay = -Math.random() * 14;
+    const s = 0.55 + Math.random() * 0.45;
+    const top = `rgba(${r},${g},${b},${(0.7 * s).toFixed(2)})`;
+    const right = `rgba(${dr},${dg},${db},${(0.6 * s).toFixed(2)})`;
+    const left = `rgba(${Math.round((r + dr) / 2)},${Math.round((g + dg) / 2)},${Math.round((b + db) / 2)},${(0.6 * s).toFixed(2)})`;
+
+    const c = document.createElement('div');
+    c.className = 'crystal';
+    c.style.cssText =
+      `left:${x.toFixed(2)}%; top:${y.toFixed(2)}%; width:${size.toFixed(1)}px; height:${size.toFixed(1)}px;` +
+      `background:conic-gradient(from -30deg at 50% 50%, ${top} 0deg 60deg, ${right} 60deg 180deg, ${left} 180deg 300deg, ${top} 300deg 360deg);` +
+      `border:0.5px solid rgba(${r},${g},${b},${(0.5 * s).toFixed(2)});` +
+      `transform:rotate(${rot.toFixed(0)}deg);` +
+      (reducedMotion ? '' : `animation:${anims[i % 3]} ${dur.toFixed(1)}s ease-in-out ${delay.toFixed(1)}s infinite;`);
+    layer.appendChild(c);
+  }
+
+  if (reducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
+
+  let raf = null;
+  window.addEventListener('mousemove', e => {
+    const w = window.innerWidth, h = window.innerHeight;
+    const mx = (e.clientX - w / 2) / (w / 2);
+    const my = (e.clientY - h / 2) / (h / 2);
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      layers.forEach(l => {
+        const d = parseFloat(l.dataset.depth) || 1;
+        l.style.transform = `translate3d(${(-mx * d * 8).toFixed(2)}px, ${(-my * d * 8).toFixed(2)}px, 0)`;
+      });
       raf = null;
     });
   });
@@ -272,18 +288,17 @@ function initWaitlist() {
 
 /* ── Boot ───────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
   initReveal();
   initCarousel();
   initTypewriter();
-  renderAppGrid();   // tilt + magnetic wired inside after render
-  // Magnetic on static buttons (hero CTA etc.)
+  renderAppGrid();
   initMagnetic();
   initWaitlist();
-  initAurora();
-  initSpotlight();
+  initCrystalField();
   initCountUp();
+  initTilt('a.app-card',    { maxTilt: 7, lift: 5 });
   initTilt('.feature-card', { maxTilt: 6, lift: 4 });
   initTilt('.faq-card',     { maxTilt: 5, lift: 3 });
   initTilt('.mission-card', { maxTilt: 4, lift: 2 });
+  initTilt('.review-card',  { maxTilt: 5, lift: 3 });
 });
