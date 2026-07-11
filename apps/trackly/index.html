@@ -1,0 +1,443 @@
+<!--
+=============================================================
+  TRACKLY WEBSITE — PRE-DEPLOY CHECKLIST
+=============================================================
+
+  [ ] Replace all href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL
+      Search for: YOUR_PLAY_STORE_URL_HERE
+      Files affected: apps/trackly/index.html (hero + pro + download section + footer)
+
+  [ ] Replace placeholder images with real assets:
+      assets/trackly/icon.png             512×512 app icon
+      assets/trackly/hero-screen.png      Subscription dashboard screenshot (portrait)
+      assets/google-play-badge.png        Google Play badge artwork (shared asset)
+
+  [ ] Test all internal links between apps/trackly/index.html, apps/trackly/privacy/, index.html
+      Verify footer Privacy Policy link points to /apps/trackly/privacy/
+=============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trackly — Know what you pay</title>
+  <meta name="description" content="Track every subscription in one place. Get reminded before renewals. No bank access. No account. No ads. Android app.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* ── Hero (reuses homepage .hero/.hero-wrap split layout) ── */
+    .hero.trackly-hero { min-height: auto; padding: 96px 0 56px; }
+    .hero-visual .device-frame { width: 270px; }
+    .trackly-hero-playstore { display: inline-block; margin-top: 26px; }
+    .play-store-btn { display: inline-block; line-height: 0; }
+    .play-store-btn img { height: 54px; width: auto; }
+    .trackly-hero-support { margin-top: 14px; font-size: 13px; color: var(--text-muted); }
+
+    /* ── Trust bar ── */
+    .trust-bar {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px;
+    }
+    .trust-bar span {
+      font-size: 13px; color: var(--text-muted);
+      border: 1px solid var(--border); background: var(--panel);
+      padding: 7px 14px; border-radius: 20px;
+    }
+
+    /* ── Problem section ── */
+    .trackly-problem {
+      background: var(--panel);
+      background-image: radial-gradient(ellipse 60% 70% at 50% -10%, rgba(251,191,36,0.14), transparent);
+      border: 1px solid rgba(251,191,36,0.22); border-radius: var(--r-lg);
+      padding: 64px 56px;
+    }
+    .trackly-problem h2 {
+      font-family: var(--font-display); font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px; max-width: 22ch;
+    }
+    .trackly-problem p {
+      color: var(--text-muted); font-size: 15.5px; font-weight: 400;
+      line-height: 1.75; max-width: 62ch;
+    }
+    .trackly-problem p + p { margin-top: 14px; }
+    @media (max-width: 640px) { .trackly-problem { padding: 44px 26px; } }
+
+    /* ── Features (2-col override) ── */
+    .trackly-features-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .trackly-features-grid { grid-template-columns: 1fr; } }
+
+    /* ── Pro section ── */
+    .trackly-pro-card {
+      background-color: rgba(255,255,255,0.02);
+      background-image: radial-gradient(120% 140% at 50% -20%, rgba(180,83,9,0.35), transparent 60%);
+      border: 1px solid rgba(251,191,36,0.25); border-radius: 28px;
+      padding: 64px 56px; text-align: center;
+    }
+    .trackly-pro-card h2 {
+      font-family: var(--font-display); font-size: clamp(26px, 5vw, 42px);
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .trackly-pro-card > p {
+      color: var(--text-muted); font-size: 16px; max-width: 56ch; margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+    .trackly-price {
+      font-family: var(--font-display); font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700; color: #fcd34d; margin-bottom: 8px;
+    }
+    .trackly-price-note {
+      font-size: 12.5px; color: var(--text-dim); margin-bottom: 30px;
+    }
+    .trackly-pro-lists {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 40px;
+      max-width: 640px; margin: 0 auto 34px; text-align: left;
+    }
+    .trackly-pro-lists ul { list-style: none; }
+    .trackly-pro-lists li {
+      font-size: 14.5px; color: var(--text-muted); line-height: 1.6;
+      padding-left: 24px; position: relative; margin-bottom: 12px;
+    }
+    .trackly-pro-lists li::before {
+      content: '✓'; position: absolute; left: 0; top: 0;
+      color: #fbbf24; font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      .trackly-pro-card { padding: 44px 24px; }
+      .trackly-pro-lists { grid-template-columns: 1fr; }
+    }
+
+    /* ── Privacy callout ── */
+    .trackly-privacy-callout {
+      background: var(--panel);
+      background-image: radial-gradient(ellipse 60% 70% at 50% -10%, rgba(251,191,36,0.14), transparent);
+      border: 1px solid rgba(251,191,36,0.22); border-radius: var(--r-lg);
+      padding: 72px 56px; text-align: center;
+    }
+    .trackly-privacy-callout h2 {
+      font-family: var(--font-display); font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .trackly-privacy-callout p {
+      color: var(--text-muted); font-size: 15.5px; font-weight: 400;
+      line-height: 1.75; max-width: 56ch; margin: 0 auto 14px;
+    }
+    .trackly-privacy-link {
+      display: inline-block; margin-top: 14px;
+      font-size: 13px; color: var(--link);
+      border-bottom: 1px solid rgba(167,139,250,0.4); padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .trackly-privacy-link:hover { border-color: var(--link); }
+
+    /* ── Download section ── */
+    .trackly-cta-card {
+      background-image: radial-gradient(120% 140% at 50% -20%, rgba(180,83,9,0.4), transparent 60%) !important;
+      border-color: rgba(251,191,36,0.25) !important;
+    }
+    .trackly-pills {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px;
+    }
+    .trackly-pill {
+      font-size: 13px; color: var(--text-muted);
+      border: 1px solid var(--border); background: var(--panel-hi);
+      padding: 6px 14px; border-radius: 20px;
+    }
+
+    /* ── Subscription list mock for hero phone screen ── */
+    .mock-total-card {
+      background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 10px; padding: 10px 12px; margin-bottom: 2px; flex-shrink: 0;
+    }
+    .mock-total-label { font-size: 8px; color: #a9a3b6; text-transform: uppercase; letter-spacing: 0.06em; }
+    .mock-total-val { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: #fcd34d; margin-top: 2px; }
+    .mock-sub-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 7px 9px;
+      background: rgba(255,255,255,0.025);
+      border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);
+      flex-shrink: 0;
+    }
+    .mock-sub-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .mock-sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .mock-sub-price { font-size: 10px; color: #e2ddec; font-weight: 600; white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pro">Pro</a>
+        <a href="#download">Download</a>
+      </div>
+      <a href="/index.html" class="nav-back">← All Apps</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<header class="hero trackly-hero">
+  <div class="wrap hero-wrap">
+
+    <!-- Left: Text -->
+    <div class="hero-content">
+      <span class="eyebrow hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        ZenWinLabs · Android
+      </span>
+      <h1 class="hero-title">Know what<br>you pay.</h1>
+      <p class="lede hero-lede">
+        Trackly tracks every subscription you have — streaming, apps,
+        memberships, utilities — in one place. No bank access. No
+        account. Just clarity.
+      </p>
+      <div class="hero-cta">
+        <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" once app is published -->
+        <a href="YOUR_PLAY_STORE_URL_HERE" class="btn">Get it on Google Play →</a>
+        <a href="#features" class="btn btn-ghost">See Features ↓</a>
+      </div>
+      <p class="trackly-hero-support">Free to download · One-time Pro unlock · No subscription required</p>
+      <div class="trust-bar">
+        <span>🔒 No bank access</span>
+        <span>📵 No account needed</span>
+        <span>📵 No ads, ever</span>
+        <span>📱 Fully offline</span>
+      </div>
+    </div>
+
+    <!-- Right: Phone Mockup -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="device-frame">
+        <div class="device-shell">
+          <div class="device-notch"></div>
+          <div class="device-screen">
+            <div class="app-mock-screen">
+              <div class="mock-screen-header">
+                <span class="mock-screen-title">Subscriptions</span>
+                <span class="mock-screen-badge">8 active</span>
+              </div>
+              <div class="mock-total-card">
+                <div class="mock-total-label">Monthly total</div>
+                <div class="mock-total-val">₹4,820</div>
+              </div>
+              <div class="mock-sub-row">
+                <div class="mock-sub-left">
+                  <span class="mock-sub-dot" style="background:#e50914;"></span>
+                  <span class="mock-row-label">Netflix</span>
+                </div>
+                <span class="mock-sub-price">₹649/mo</span>
+              </div>
+              <div class="mock-sub-row">
+                <div class="mock-sub-left">
+                  <span class="mock-sub-dot" style="background:#1db954;"></span>
+                  <span class="mock-row-label">Spotify</span>
+                </div>
+                <span class="mock-sub-price">₹119/mo</span>
+              </div>
+              <div class="mock-sub-row">
+                <div class="mock-sub-left">
+                  <span class="mock-sub-dot" style="background:#fa0f00;"></span>
+                  <span class="mock-row-label">Adobe CC</span>
+                </div>
+                <span class="mock-sub-price">₹1,675/mo</span>
+              </div>
+              <div class="mock-sub-row">
+                <div class="mock-sub-left">
+                  <span class="mock-sub-dot" style="background:#fbbf24;"></span>
+                  <span class="mock-row-label">Gym membership</span>
+                </div>
+                <span class="mock-sub-price">₹1,800/mo</span>
+              </div>
+            </div>
+          </div>
+          <div class="device-home"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ── Problem ────────────────────────────────────────────── -->
+<section class="section">
+  <div class="wrap">
+    <div class="trackly-problem reveal">
+      <span class="eyebrow">Why Trackly exists</span>
+      <h2>You're probably paying for things you've forgotten about.</h2>
+      <p>The average person has 8 subscriptions. They think they're spending ₹2,000 a month. They're actually spending ₹5,000. Auto-pay makes it easy to forget. Price increases go unnoticed. Annual renewals arrive as surprises.</p>
+      <p>Trackly fixes this. Open the app and instantly see everything — what you're paying, what's due soon, and what you should probably cancel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <span class="eyebrow">What Trackly does</span>
+      <h2>Everything you need. Nothing you don't.</h2>
+    </div>
+    <div class="features-grid trackly-features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">💳</span>
+        <h3>Every subscription in one place</h3>
+        <p>Add any recurring payment in under 30 seconds. Choose from 50+ popular services with brand icons, or add your own. Netflix, Spotify, Adobe, gym membership, rent — if it recurs, track it.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🔔</span>
+        <h3>Reminders that actually work</h3>
+        <p>Set a cascade of reminders for each subscription — 7 days before, 3 days, 1 day, on the day, or 1 hour before. Never be blindsided by a charge again. Customise each subscription independently.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">📊</span>
+        <h3>See the full picture</h3>
+        <p>Monthly total. Annual total. Category breakdown — how much goes to entertainment vs productivity vs utilities. A 12-month cash flow view that shows exactly when annual renewals stack up. No spreadsheet required.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🌐</span>
+        <h3>Built for the world</h3>
+        <p>Add subscriptions in any currency. Set your base currency and Trackly converts everything for your totals. Correct number formatting per locale — ₹1,00,000 for Indian users, $100,000 for US users. Supports 150+ currencies.</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">👥</span>
+        <h3>Shared subscriptions, tracked right</h3>
+        <p>Splitting Netflix with family? Sharing Spotify with friends? Mark it as shared, enter the number of people, and Trackly tracks only your share — in every total, every calculation.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🕒</span>
+        <h3>Price change history</h3>
+        <p>When you update a subscription's price, Trackly logs the change. See exactly when prices went up and by how much. No more wondering why your total feels higher than it used to.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">⏸</span>
+        <h3>Full subscription lifecycle</h3>
+        <p>Track status — Active, Trial, Paused, or Cancelled. Set trial end dates with countdown reminders. Pause a subscription and see how much you're saving. Keep a clean history of everything.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🎨</span>
+        <h3>Looks great, feels native</h3>
+        <p>Light, Dark, and AMOLED modes. Five accent colour options. Haptic feedback on every interaction. Trackly is built with Jetpack Compose and Material 3 — it feels like it belongs on your phone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pro ──────────────────────────────────────────────── -->
+<section class="section-cta" id="pro">
+  <div class="wrap">
+    <div class="trackly-pro-card reveal">
+      <span class="eyebrow">Trackly Pro</span>
+      <h2>One payment. Everything unlocked. Forever.</h2>
+      <p>No monthly fee. No subscription to track your subscriptions. Pay once and get the full app — unlimited subscriptions, analytics, reminders, Drive backup, home screen widget, and all themes.</p>
+      <div class="trackly-price">₹499 lifetime · or ₹149/year</div>
+      <div class="trackly-price-note">Pricing shown in INR. Local currency pricing applies on Google Play.</div>
+      <div class="trackly-pro-lists">
+        <ul>
+          <li>Unlimited subscriptions</li>
+          <li>Full analytics screen</li>
+          <li>12-month cash flow view</li>
+          <li>All 5 reminder options per subscription</li>
+          <li>Multi-currency conversion</li>
+        </ul>
+        <ul>
+          <li>Google Drive backup</li>
+          <li>Home screen widget</li>
+          <li>Shared subscription tracking</li>
+          <li>All themes and accent colours</li>
+          <li>CSV export</li>
+        </ul>
+      </div>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" once app is published -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn">Get Trackly Pro →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Privacy Callout ───────────────────────────────────── -->
+<section class="section-cta">
+  <div class="wrap">
+    <div class="trackly-privacy-callout reveal">
+      <span class="eyebrow">Privacy</span>
+      <h2>Your data never leaves your device.</h2>
+      <p>Trackly is built on one rule: we don't need your data to build a great app. There is no account. No login. No server that stores your subscriptions. Everything lives in a database on your phone.</p>
+      <p>If you choose to back up, your data goes to your own Google Drive account — encrypted, in a folder only Trackly can access. We never see it.</p>
+      <p>No analytics. No crash reporting that includes personal data. No third-party SDKs that phone home. Just an app that does what it says.</p>
+      <a href="/apps/trackly/privacy/" class="trackly-privacy-link">Read the full Privacy Policy →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download ──────────────────────────────────────────── -->
+<section class="section-cta" id="download">
+  <div class="wrap">
+    <div class="cta-card trackly-cta-card reveal">
+      <span class="eyebrow">Ready to Download</span>
+      <h2>Take back control of your subscriptions.</h2>
+      <p>Download Trackly and know exactly what you pay.</p>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="play-store-btn">
+        <!-- PLACEHOLDER: replace src with actual asset before deploy -->
+        <img src="/assets/google-play-badge.png" alt="Get it on Google Play" />
+      </a>
+      <div class="trackly-pills">
+        <span class="trackly-pill">✓ Android 8.0 and above</span>
+        <span class="trackly-pill">✓ Free to download</span>
+        <span class="trackly-pill">✓ Pro upgrade available</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col-brand">
+        <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Apps</div>
+        <div class="footer-links">
+          <a href="/apps/habits/index.html">Habbits ↗</a>
+          <a href="/apps/nudge/index.html">Nudge ↗</a>
+          <a href="/apps/mealmap/index.html">MealMap ↗</a>
+          <a href="/apps/mockgps/index.html">MockGPS ↗</a>
+          <a href="/apps/trackly/index.html">Trackly ↗</a>
+          <a href="/index.html#apps">All Apps</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <div class="footer-links">
+          <a href="/index.html#about">About</a>
+          <a href="mailto:support@zenwinlabs.com">Contact</a>
+          <a href="/apps/trackly/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <!-- TODO: Update href="YOUR_PLAY_STORE_URL_HERE" with actual Play Store URL -->
+      <a href="YOUR_PLAY_STORE_URL_HERE" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get Trackly →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

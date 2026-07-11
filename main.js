@@ -67,6 +67,7 @@ const COLORS = {
   '#4DACF7': { bg: 'linear-gradient(140deg,#93c5fd,#4338ca)', shadow: 'rgba(67,56,202,0.35)',  glow: 'rgba(67,56,202,0.08)' },
   '#22D3EE': { bg: 'linear-gradient(140deg,#67e8f9,#0e7490)', shadow: 'rgba(14,116,144,0.4)',   glow: 'rgba(14,116,144,0.08)' },
   '#10B981': { bg: 'linear-gradient(140deg,#6ee7b7,#047857)', shadow: 'rgba(4,120,87,0.4)',     glow: 'rgba(4,120,87,0.08)'  },
+  '#FBBF24': { bg: 'linear-gradient(140deg,#fde68a,#b45309)', shadow: 'rgba(180,83,9,0.4)',     glow: 'rgba(180,83,9,0.08)'  },
 };
 const STATUS = {
   live:        { label: 'LIVE',        cls: 'status-live' },

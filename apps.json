@@ -51,6 +51,18 @@
     "privacy_policy_url": "/apps/mockgps/privacy/"
   },
   {
+    "id": "trackly",
+    "name": "Trackly",
+    "tagline": "Track every subscription in one place. Get reminded before renewals. No bank access, no account.",
+    "category": "Finance",
+    "platform": "Android",
+    "status": "live",
+    "url": "apps/trackly/index.html",
+    "icon": "T",
+    "accent": "#FBBF24",
+    "privacy_policy_url": "/apps/trackly/privacy/"
+  },
+  {
     "id": "focusflow",
     "name": "FocusFlow",
     "tagline": "Deep work timer with intelligent break scheduling and focus-session analytics for peak productivity.",
