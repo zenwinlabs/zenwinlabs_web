@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetWorth Privacy Policy | ZenWinLabs</title>
+  <meta name="description" content="NetWorth privacy policy. No banks connected, no accounts, no cloud. Your financial data stays on your device.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* ── Legal prose layout (matches apps/trackly/privacy/, teal accent) ── */
+    .legal-hero { padding: 80px 0 8px; text-align: center; }
+    .legal-hero h1 {
+      font-family: var(--font-display); font-size: clamp(34px, 5.5vw, 48px);
+      font-weight: 700; letter-spacing: -0.03em; margin-top: 16px;
+    }
+    .legal-meta {
+      font-size: 13.5px; color: var(--text-muted);
+      line-height: 1.9; margin-top: 18px;
+    }
+    .legal-content {
+      max-width: 720px; margin: 0 auto; padding: 56px 0 90px;
+    }
+    .legal-callout {
+      background-color: rgba(255,255,255,0.02);
+      background-image: radial-gradient(ellipse 60% 80% at 50% -10%, rgba(0,208,158,0.14), transparent);
+      border: 1px solid rgba(0,208,158,0.24); border-radius: var(--r-lg);
+      padding: 36px 40px; margin-bottom: 48px;
+    }
+    .legal-callout h2 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+    .legal-callout p { font-size: 16px; line-height: 1.75; color: var(--text); font-weight: 400; }
+    .legal-callout p + p { margin-top: 14px; }
+
+    .legal-section { padding: 40px 0; border-top: 1px solid var(--border); }
+    .legal-section:first-of-type { border-top: none; }
+    .legal-section h2 {
+      font-family: var(--font-display); font-size: 22px; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .legal-section p {
+      font-size: 16px; line-height: 1.75; color: var(--text-muted); font-weight: 400;
+    }
+    .legal-section p + p { margin-top: 14px; }
+    .legal-section ul { margin: 14px 0 0 20px; }
+    .legal-section li {
+      font-size: 16px; line-height: 1.8; color: var(--text-muted); font-weight: 400;
+    }
+    .legal-section a { color: var(--link); border-bottom: 1px solid rgba(167,139,250,0.4); }
+
+    .legal-closing {
+      margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--border);
+      font-size: 15px; color: var(--text-muted); line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/apps/networth/index.html#features">Features</a>
+        <a href="/apps/networth/index.html#reports">Reports</a>
+        <a href="/apps/networth/index.html#download">Download</a>
+      </div>
+      <a href="/apps/networth/index.html" class="nav-back">← NetWorth</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<header class="app-hero legal-hero">
+  <div class="wrap">
+    <span class="eyebrow">Privacy Policy</span>
+    <h1>NetWorth Privacy Policy</h1>
+    <p class="legal-meta">
+      Effective date: July 1, 2026 · Last updated: July 1, 2026<br>
+      Published by: ZenWinLabs
+    </p>
+  </div>
+</header>
+
+<!-- ── Content ───────────────────────────────────────────── -->
+<main>
+  <div class="wrap">
+    <div class="legal-content">
+
+      <div class="legal-callout reveal">
+        <h2>1. The short version</h2>
+        <p>NetWorth does not collect any data about you. It cannot. The app has no internet connection, no backend servers, no user accounts, and no way to transmit any information anywhere. Everything you enter stays on your device.</p>
+        <p>The rest of this policy explains this in more detail and covers your data rights.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>2. Who we are</h2>
+        <p>NetWorth is an Android application published by ZenWinLabs. You can contact us at:</p>
+        <p>
+          Email: <a href="mailto:dassatya1995@gmail.com">dassatya1995@gmail.com</a><br>
+          Website: zenwinlabs.com
+        </p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>3. What data NetWorth stores</h2>
+        <p>NetWorth stores the following data locally on your device only:</p>
+        <ul>
+          <li>Asset names, categories, institutions, and log history (values and dates you enter)</li>
+          <li>Debt names, categories, lenders, and payment history (values and dates you enter)</li>
+          <li>Goal names, target amounts, deadlines, and linked asset configuration</li>
+          <li>App preferences (currency, theme, number format, notification settings)</li>
+          <li>Biometric lock settings (on/off, timeout) — managed entirely by Android's BiometricPrompt API</li>
+        </ul>
+        <p>This data is stored in a local database on your device using Android's Room persistence library. It is not encrypted at the database level by default, but it is protected by Android's standard app sandboxing — no other app can access it.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>4. What data NetWorth does NOT collect</h2>
+        <p>NetWorth does not collect, transmit, store remotely, or share:</p>
+        <ul>
+          <li>Your name, email address, or any identifying information</li>
+          <li>Your financial data or any data you enter into the app</li>
+          <li>Your location</li>
+          <li>Device identifiers (IMEI, advertising ID, or similar)</li>
+          <li>Usage analytics or behavioural data</li>
+          <li>Crash reports or diagnostic data</li>
+          <li>Any data whatsoever</li>
+        </ul>
+        <p>This is not a policy choice that can be reversed in a future update — it is a consequence of how the app is built. There is no server to send data to.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>5. Internet permissions</h2>
+        <p>NetWorth does not request internet permission in its Android manifest. The app is physically incapable of making network requests.</p>
+        <p>The only external system the app communicates with is the Google Play Store for app delivery and updates — this is handled by the Play Store app on your device, not by NetWorth itself.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>6. Third-party SDKs and libraries</h2>
+        <p>NetWorth does not include any third-party analytics SDKs, advertising SDKs, or crash reporting libraries. The app's dependencies are limited to:</p>
+        <ul>
+          <li>Jetpack libraries (Compose, Room, WorkManager, DataStore) — Google's Android development libraries, used locally for app functionality</li>
+          <li>Vico — an open-source charting library for Compose, used locally for graph rendering</li>
+          <li>Inter typeface — served from the app's bundled assets, no external font requests</li>
+        </ul>
+        <p>None of these libraries transmit data externally.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>7. Notifications</h2>
+        <p>If you enable notifications in Settings, NetWorth uses Android's local notification system (NotificationManager) to send reminders. These are:</p>
+        <ul>
+          <li>Monthly balance update reminders</li>
+          <li>Goal milestone alerts (25%, 50%, 75%, 100% of a goal reached)</li>
+          <li>EMI due date reminders</li>
+        </ul>
+        <p>All notifications are generated on your device. No notification service, push provider, or external server is involved.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>8. Biometric authentication</h2>
+        <p>If you enable app lock, NetWorth uses Android's BiometricPrompt API. This means:</p>
+        <ul>
+          <li>Biometric authentication (fingerprint, face) is handled entirely by Android and your device hardware</li>
+          <li>NetWorth never has access to your biometric data</li>
+          <li>NetWorth only receives a pass/fail authentication result from the Android system</li>
+        </ul>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>9. Data backup and export</h2>
+        <p>NetWorth offers a manual backup and export feature. If you use this:</p>
+        <ul>
+          <li>Your data is exported to a file on your device (CSV or JSON format)</li>
+          <li>You choose where to save or share this file (local storage, email, cloud drive)</li>
+          <li>ZenWinLabs has no involvement in, access to, or knowledge of this file or its destination</li>
+        </ul>
+        <p>This is entirely under your control.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>10. Google Play</h2>
+        <p>NetWorth is distributed via the Google Play Store. Google may collect certain information as part of the Play Store experience, including installation analytics and crash reports from the Play Store's own systems. This is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> and is separate from NetWorth's own data practices.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>11. Children's privacy</h2>
+        <p>NetWorth does not knowingly collect any data from anyone, including children. As the app collects no data at all, there are no special provisions required for users under 13 (or the applicable age in your jurisdiction).</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>12. Data retention and deletion</h2>
+        <p>Because all data is stored locally on your device:</p>
+        <ul>
+          <li>Deleting the app removes all NetWorth data from your device permanently</li>
+          <li>Using "Clear all data" in Settings removes all app data without uninstalling</li>
+          <li>There is no server-side data to request deletion of</li>
+        </ul>
+        <p>ZenWinLabs holds no copies of your data and has nothing to delete on your behalf.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>13. Your rights</h2>
+        <p>Since we hold no data about you, conventional data subject rights (access, correction, deletion, portability) are all exercised directly on your own device. Specifically:</p>
+        <ul>
+          <li><strong>Right to access:</strong> Your data is in the app. You can view all of it at any time.</li>
+          <li><strong>Right to correction:</strong> You can edit or delete any entry in the app at any time.</li>
+          <li><strong>Right to deletion:</strong> Delete the app or use "Clear all data" in Settings.</li>
+          <li><strong>Right to portability:</strong> Export your full data as CSV or JSON from Settings at any time.</li>
+        </ul>
+        <p>If you have questions about your rights or wish to contact us regardless, reach us at <a href="mailto:dassatya1995@gmail.com">dassatya1995@gmail.com</a>.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>14. Security</h2>
+        <p>NetWorth protects your data through:</p>
+        <ul>
+          <li>Android's app sandboxing (no other app can read NetWorth's local database)</li>
+          <li>Optional biometric / PIN lock on the app itself</li>
+          <li>No external transmission of data (nothing to intercept)</li>
+        </ul>
+        <p>We recommend enabling app lock if you share your device with others.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>15. Changes to this policy</h2>
+        <p>If we make changes to this privacy policy, we will update the "Last updated" date at the top of this page and, where appropriate, notify users via an in-app notice on the next app launch.</p>
+        <p>Given that the app collects no data, material changes to this policy are unlikely.</p>
+      </div>
+
+      <div class="legal-section reveal">
+        <h2>16. Contact</h2>
+        <p>Questions about this policy or NetWorth's data practices:</p>
+        <p>
+          ZenWinLabs<br>
+          Email: <a href="mailto:dassatya1995@gmail.com">dassatya1995@gmail.com</a><br>
+          Website: zenwinlabs.com
+        </p>
+      </div>
+
+      <p class="legal-closing">This privacy policy applies to the NetWorth Android application published on the Google Play Store by ZenWinLabs.</p>
+
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col-brand">
+        <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+        <p class="footer-tagline">Building focused Android tools<br>for daily habits and productivity.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">NetWorth</div>
+        <div class="footer-links">
+          <a href="/apps/networth/index.html#features">Features</a>
+          <a href="/apps/networth/index.html#reports">Reports</a>
+          <a href="/apps/networth/index.html#download">Download</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">ZenWinLabs</div>
+        <div class="footer-links">
+          <a href="/index.html">All Apps</a>
+          <a href="/index.html#about">About</a>
+          <a href="/apps/networth/support/">Support</a>
+          <a href="/apps/networth/privacy/" aria-current="page">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+      <a href="/apps/networth/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">← Back to NetWorth</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

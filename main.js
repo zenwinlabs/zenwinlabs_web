@@ -114,7 +114,10 @@ async function renderAppGrid() {
 
     const inner = `
       <div class="app-card-top" style="--card-glow:${c.glow};">
-        <div class="app-card-icon" style="--icon-bg:${c.bg};">${app.icon||app.name[0]}</div>
+        <div class="app-card-icon" style="--icon-bg:${c.bg};">
+          <span class="app-card-icon-fallback">${app.icon||app.name[0]}</span>
+          <img class="app-card-icon-img" src="assets/${app.id}/icon.png" alt="" loading="lazy" onerror="this.style.display='none';">
+        </div>
       </div>
       <div class="app-card-body">
         <div class="app-card-header">
