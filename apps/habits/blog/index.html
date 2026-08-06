@@ -10,46 +10,25 @@
   <meta property="og:title" content="Habits Blog — Guides to Building Better Habits">
   <meta property="og:description" content="Science-backed guides on how to build habits that stick and stay consistent.">
   <meta property="og:url" content="https://zenwinlabs.com/apps/habits/blog/">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/blog.css">
+  <script>(function(){try{var t=localStorage.getItem('zw-blog-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
-<body>
+<body data-app="habits" data-app-name="Habits" data-app-url="https://play.google.com/store/apps/details?id=com.zenwinlabs.habbit">
 
-<div class="page-glow"></div>
-<div class="crystal-field" data-crystal-field></div>
-
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="/apps/habits/index.html">The App</a>
-        <a href="/apps/habits/blog/">Blog</a>
-      </div>
-      <a href="/apps/habits/index.html" class="nav-back">← Habits</a>
-    </div>
-  </div>
-</nav>
-
-<header class="blog-hero">
-  <div class="wrap">
-    <span class="eyebrow"><span class="eyebrow-dot"></span>Habits Blog</span>
+<section class="blog-hero">
+  <div class="blog-narrow">
+    <span class="eyebrow">Habits Blog</span>
     <h1>Build better habits, one day at a time</h1>
-    <p class="lede">Practical, science-backed guides on how to build habits that stick, break the ones that don't, and stay consistent long enough to see results.</p>
+    <p class="lede">Practical, science-backed guides on how to build habits that stick, break the ones that don't, and stay consistent long enough to see real results.</p>
   </div>
-</header>
+</section>
 
-<main class="wrap blog-article">
-  <div class="blog-grid" id="blog-list" data-posts="posts.json" data-base="/apps/habits/blog/"></div>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap footer-bottom" style="border:none;margin:0;padding:0;">
-    <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
-    <a href="/apps/habits/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get Habits →</a>
+<section class="blog-list-wrap">
+  <div class="blog-wrap">
+    <div class="blog-grid" id="blog-list" data-posts="posts.json" data-base="/apps/habits/blog/"></div>
   </div>
-</footer>
+</section>
 
-<script src="/main.js"></script>
 <script src="/blog.js"></script>
 </body>
 </html>

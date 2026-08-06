@@ -3,19 +3,20 @@
   ════════════════════════════════════════════════════════════════
   ZenWinLabs — BLOG POST (DETAIL) TEMPLATE  (one folder per post)
   ════════════════════════════════════════════════════════════════
-  HOW TO USE:
-    1. Copy to:  /apps/<app>/blog/<post-slug>/index.html
-    2. Replace every {{PLACEHOLDER}}. Keep the slug in the URL, <title>,
-       <link rel=canonical>, og:url and the JSON-LD "@id"/"url" in sync.
-    3. Write the article inside <div class="blog-body"> using <h2>, <h3>,
-       <p>, <ul>, <blockquote>. Keep ONE <h1> (the .blog-title).
-    4. For images use the <figure class="blog-figure" data-desc="...">
-       pattern — if the image file is missing, a labelled placeholder shows
-       the description; drop the real file at the src path to replace it.
-    5. Add a matching entry to the app's posts.json so it appears in the list.
-  SEO checklist: unique title (<60 chars) + meta description (<160), the
-  primary keyword in the H1 + first paragraph + one H2, internal link to the
-  app page, and the BlogPosting JSON-LD filled in.
+  Shared look + behaviour come from /blog.css and /blog.js. The top bar,
+  theme toggle and footer are injected by blog.js from the <body> data-*
+  attributes — do not hand-write them here.
+  TO USE:
+    1. Copy to /apps/<app>/blog/<slug>/index.html and replace every {{PLACEHOLDER}}.
+    2. Keep the slug identical in the URL, <title>, canonical, og:url and JSON-LD.
+    3. Write the article inside <div class="blog-body"> using <h2>/<h3>/<p>/<ul>/
+       <blockquote>. Keep exactly ONE <h1> (the .blog-title).
+    4. Images: <figure class="blog-figure" data-desc="..."> shows a labelled
+       placeholder until the real file exists at the src path.
+    5. Add a matching entry to the app's posts.json.
+  SEO: unique <title> (<60 chars) + meta description (<160), primary keyword in
+  the H1, first paragraph and one H2, an internal link to the app page, the app
+  Play Store CTA, and filled-in BlogPosting + FAQPage JSON-LD.
   ════════════════════════════════════════════════════════════════
 -->
 <html lang="en">
@@ -31,7 +32,8 @@
   <meta property="og:url" content="https://zenwinlabs.com/apps/{{app}}/blog/{{slug}}/">
   <meta property="og:image" content="https://zenwinlabs.com/assets/{{app}}/blog/{{slug}}/cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/blog.css">
+  <script>(function(){try{var t=localStorage.getItem('zw-blog-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,35 +42,16 @@
     "description": "{{Meta description}}",
     "image": "https://zenwinlabs.com/assets/{{app}}/blog/{{slug}}/cover.jpg",
     "author": { "@type": "Organization", "name": "ZenWinLabs" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "ZenWinLabs",
-      "url": "https://zenwinlabs.com/"
-    },
+    "publisher": { "@type": "Organization", "name": "ZenWinLabs", "url": "https://zenwinlabs.com/" },
     "datePublished": "{{YYYY-MM-DD}}",
     "dateModified": "{{YYYY-MM-DD}}",
     "mainEntityOfPage": "https://zenwinlabs.com/apps/{{app}}/blog/{{slug}}/"
   }
   </script>
 </head>
-<body>
+<body data-app="{{app}}" data-app-name="{{APP NAME}}" data-app-url="{{PLAY_STORE_URL}}">
 
 <div class="reading-progress"></div>
-<div class="page-glow"></div>
-<div class="crystal-field" data-crystal-field></div>
-
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="/apps/{{app}}/index.html">The App</a>
-        <a href="/apps/{{app}}/blog/">Blog</a>
-      </div>
-      <a href="/apps/{{app}}/blog/" class="nav-back">← All posts</a>
-    </div>
-  </div>
-</nav>
 
 <article class="blog-article">
   <div class="blog-narrow">
@@ -81,7 +64,7 @@
     </nav>
 
     <header class="blog-article-header">
-      <span class="blog-eyebrow-tag">{{Category / tag}}</span>
+      <span class="blog-eyebrow-tag">{{Category}}</span>
       <h1 class="blog-title">{{Post title}}</h1>
       <p class="blog-dek">{{One-sentence subheading that expands the title.}}</p>
       <div class="blog-meta">
@@ -104,12 +87,15 @@
       <h2>{{First section heading}}</h2>
       <p>{{Body…}}</p>
 
-      <!-- In-article app CTA — reuse anywhere mid-article and again near the end -->
+      <!-- In-article app CTA — reuse mid-article and again near the end -->
       <div class="blog-cta">
         <div class="blog-cta-icon">{{H}}</div>
-        <h3>{{Turn this into a daily habit with {{APP NAME}}}}</h3>
+        <h3>{{CTA heading}}</h3>
         <p>{{One line on how the app helps with what this article is about.}}</p>
-        <a href="{{PLAY_STORE_URL}}" class="btn btn-playstore btn-lg" target="_blank" rel="noopener">Download on Play Store</a>
+        <a href="{{PLAY_STORE_URL}}" class="btn-playstore" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z"/><path d="M14.208 12l3.495 3.495-9.549 5.388A1 1 0 017.6 20.6L14.208 12z"/><path d="M20.1 10.342a1 1 0 010 3.316l-2.397 1.353L14.208 12l3.495-3.495 2.397 1.837z"/><path d="M8.154 3.117l9.549 5.388L14.208 12 7.6 3.4a1 1 0 01.554-.283z"/></svg>
+          Download on Play Store
+        </a>
       </div>
 
       <h2>{{Next section heading}}</h2>
@@ -131,14 +117,6 @@
   </section>
 </article>
 
-<footer class="site-footer">
-  <div class="wrap footer-bottom" style="border:none;margin:0;padding:0;">
-    <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
-    <a href="{{PLAY_STORE_URL}}" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;" target="_blank" rel="noopener">Get {{APP NAME}} →</a>
-  </div>
-</footer>
-
-<script src="/main.js"></script>
 <script src="/blog.js"></script>
 </body>
 </html>

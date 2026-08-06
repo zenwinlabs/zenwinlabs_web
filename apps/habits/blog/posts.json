@@ -1,5 +1,38 @@
 [
   {
+    "slug": "atomic-habits",
+    "title": "What Atomic Habits Teaches About Building Better Habits",
+    "excerpt": "The book behind the modern habit movement — and the thinking behind our app. The four laws, the 1% idea, identity-based habits and the two-minute rule, in plain language.",
+    "tag": "Foundations",
+    "date": "2026-08-09",
+    "readingTime": "9 min read",
+    "image": "/assets/habits/blog/atomic-habits/cover.jpg",
+    "imageAlt": "A habit tracker on a phone beside a notebook and coffee",
+    "imageDesc": "A copy of Atomic Habits on a desk beside a phone showing a habit tracker and coffee, warm inviting reading scene"
+  },
+  {
+    "slug": "why-streaks-work",
+    "title": "Why Streaks Work: The Psychology of Not Breaking the Chain",
+    "excerpt": "A row of checkmarks shouldn't be motivating — so why does watching a streak grow make it so much easier to show up? The psychology, and how to use it without burning out.",
+    "tag": "Habit Science",
+    "date": "2026-08-08",
+    "readingTime": "7 min read",
+    "image": "/assets/habits/blog/why-streaks-work/cover.jpg",
+    "imageAlt": "A long row of checkmarks showing an unbroken habit streak",
+    "imageDesc": "A calendar or app screen with a long satisfying row of green checkmarks and a flame streak icon"
+  },
+  {
+    "slug": "habit-stacking",
+    "title": "Habit Stacking: Build New Habits Onto Ones You Already Have",
+    "excerpt": "The most reliable trigger for a new habit isn't a reminder or willpower — it's a habit you already have. Here's the simple formula, with examples you can copy today.",
+    "tag": "Habit Building",
+    "date": "2026-08-07",
+    "readingTime": "7 min read",
+    "image": "/assets/habits/blog/habit-stacking/cover.jpg",
+    "imageAlt": "A morning coffee beside a phone showing a habit checklist",
+    "imageDesc": "Overhead shot of a morning routine, coffee cup beside a phone showing a habit checklist"
+  },
+  {
     "slug": "how-to-build-a-habit-that-sticks",
     "title": "How to Build a Habit That Actually Sticks",
     "excerpt": "Most habits fail in the first two weeks. Here's a simple, science-backed system for building a daily habit that lasts — start tiny, anchor it, track it, and never break the chain.",
