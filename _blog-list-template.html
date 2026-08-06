@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════════════════════════
+  ZenWinLabs — BLOG LIST TEMPLATE  (one per app)
+  ════════════════════════════════════════════════════════════════
+  HOW TO USE FOR A NEW APP:
+    1. Copy this file to:  /apps/<app>/blog/index.html
+    2. Replace every {{PLACEHOLDER}} below.
+    3. Create /apps/<app>/blog/posts.json  (see the Habits example).
+    4. Add each post folder from _blog-post-template.html.
+  The card list renders itself from posts.json via /blog.js — you never
+  edit this file again when you publish a new post; just update posts.json.
+  ════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{APP NAME}} Blog — Guides & Tips | ZenWinLabs</title>
+  <meta name="description" content="{{One-line description of this app's blog for search engines, ~150 chars.}}">
+  <link rel="canonical" href="https://zenwinlabs.com/apps/{{app}}/blog/">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/apps/{{app}}/index.html">The App</a>
+        <a href="/apps/{{app}}/blog/">Blog</a>
+      </div>
+      <a href="/apps/{{app}}/index.html" class="nav-back">← {{APP NAME}}</a>
+    </div>
+  </div>
+</nav>
+
+<header class="blog-hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="eyebrow-dot"></span>{{APP NAME}} Blog</span>
+    <h1>{{Blog headline — e.g. Better habits, explained}}</h1>
+    <p class="lede">{{One or two sentences on what readers get here.}}</p>
+  </div>
+</header>
+
+<main class="wrap blog-article">
+  <!-- Cards render here from posts.json. data-base is the URL prefix for each post slug. -->
+  <div class="blog-grid" id="blog-list" data-posts="posts.json" data-base="/apps/{{app}}/blog/"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom" style="border:none;margin:0;padding:0;">
+    <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+    <a href="/apps/{{app}}/index.html" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;">Get {{APP NAME}} →</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+<script src="/blog.js"></script>
+</body>
+</html>

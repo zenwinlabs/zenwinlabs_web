@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════════════════════════
+  ZenWinLabs — BLOG POST (DETAIL) TEMPLATE  (one folder per post)
+  ════════════════════════════════════════════════════════════════
+  HOW TO USE:
+    1. Copy to:  /apps/<app>/blog/<post-slug>/index.html
+    2. Replace every {{PLACEHOLDER}}. Keep the slug in the URL, <title>,
+       <link rel=canonical>, og:url and the JSON-LD "@id"/"url" in sync.
+    3. Write the article inside <div class="blog-body"> using <h2>, <h3>,
+       <p>, <ul>, <blockquote>. Keep ONE <h1> (the .blog-title).
+    4. For images use the <figure class="blog-figure" data-desc="...">
+       pattern — if the image file is missing, a labelled placeholder shows
+       the description; drop the real file at the src path to replace it.
+    5. Add a matching entry to the app's posts.json so it appears in the list.
+  SEO checklist: unique title (<60 chars) + meta description (<160), the
+  primary keyword in the H1 + first paragraph + one H2, internal link to the
+  app page, and the BlogPosting JSON-LD filled in.
+  ════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{Post title — under 60 characters}} | {{APP NAME}}</title>
+  <meta name="description" content="{{Meta description with the primary keyword, 140–160 chars.}}">
+  <link rel="canonical" href="https://zenwinlabs.com/apps/{{app}}/blog/{{slug}}/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{Post title}}">
+  <meta property="og:description" content="{{Meta description}}">
+  <meta property="og:url" content="https://zenwinlabs.com/apps/{{app}}/blog/{{slug}}/">
+  <meta property="og:image" content="https://zenwinlabs.com/assets/{{app}}/blog/{{slug}}/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{Post title}}",
+    "description": "{{Meta description}}",
+    "image": "https://zenwinlabs.com/assets/{{app}}/blog/{{slug}}/cover.jpg",
+    "author": { "@type": "Organization", "name": "ZenWinLabs" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ZenWinLabs",
+      "url": "https://zenwinlabs.com/"
+    },
+    "datePublished": "{{YYYY-MM-DD}}",
+    "dateModified": "{{YYYY-MM-DD}}",
+    "mainEntityOfPage": "https://zenwinlabs.com/apps/{{app}}/blog/{{slug}}/"
+  }
+  </script>
+</head>
+<body>
+
+<div class="reading-progress"></div>
+<div class="page-glow"></div>
+<div class="crystal-field" data-crystal-field></div>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="/index.html" class="nav-logo"><span class="dot"></span>zenwinlabs</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/apps/{{app}}/index.html">The App</a>
+        <a href="/apps/{{app}}/blog/">Blog</a>
+      </div>
+      <a href="/apps/{{app}}/blog/" class="nav-back">← All posts</a>
+    </div>
+  </div>
+</nav>
+
+<article class="blog-article">
+  <div class="blog-narrow">
+
+    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a><span class="sep">/</span>
+      <a href="/apps/{{app}}/index.html">{{APP NAME}}</a><span class="sep">/</span>
+      <a href="/apps/{{app}}/blog/">Blog</a><span class="sep">/</span>
+      <span>{{Short title}}</span>
+    </nav>
+
+    <header class="blog-article-header">
+      <span class="blog-eyebrow-tag">{{Category / tag}}</span>
+      <h1 class="blog-title">{{Post title}}</h1>
+      <p class="blog-dek">{{One-sentence subheading that expands the title.}}</p>
+      <div class="blog-meta">
+        <span>By ZenWinLabs</span><span class="dot-sep"></span>
+        <span>{{Month DD, YYYY}}</span><span class="dot-sep"></span>
+        <span>{{X}} min read</span>
+      </div>
+    </header>
+
+    <figure class="blog-figure" data-desc="{{Describe the cover image you want here.}}">
+      <img src="/assets/{{app}}/blog/{{slug}}/cover.jpg" alt="{{Descriptive alt text}}"
+           onerror="this.closest('.blog-figure').classList.add('img-missing')">
+      <figcaption>{{Optional caption.}}</figcaption>
+    </figure>
+
+    <div class="blog-body">
+
+      <p>{{Opening paragraph — include the primary keyword naturally in the first sentence.}}</p>
+
+      <h2>{{First section heading}}</h2>
+      <p>{{Body…}}</p>
+
+      <!-- In-article app CTA — reuse anywhere mid-article and again near the end -->
+      <div class="blog-cta">
+        <div class="blog-cta-icon">{{H}}</div>
+        <h3>{{Turn this into a daily habit with {{APP NAME}}}}</h3>
+        <p>{{One line on how the app helps with what this article is about.}}</p>
+        <a href="{{PLAY_STORE_URL}}" class="btn btn-playstore btn-lg" target="_blank" rel="noopener">Download on Play Store</a>
+      </div>
+
+      <h2>{{Next section heading}}</h2>
+      <p>{{Body…}}</p>
+
+    </div>
+
+    <div class="blog-tags">
+      <span class="blog-tag">{{tag one}}</span>
+      <span class="blog-tag">{{tag two}}</span>
+    </div>
+  </div>
+
+  <section class="blog-related">
+    <div class="blog-narrow">
+      <h2>Keep reading</h2>
+      <div class="blog-grid" id="blog-list" data-posts="/apps/{{app}}/blog/posts.json" data-base="/apps/{{app}}/blog/"></div>
+    </div>
+  </section>
+</article>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom" style="border:none;margin:0;padding:0;">
+    <span class="footer-copy">© 2026 ZenWinLabs — Shipping for the world.</span>
+    <a href="{{PLAY_STORE_URL}}" class="btn btn-ghost" style="font-size:12px;padding:8px 16px;" target="_blank" rel="noopener">Get {{APP NAME}} →</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+<script src="/blog.js"></script>
+</body>
+</html>
